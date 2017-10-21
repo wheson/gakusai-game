@@ -18,6 +18,8 @@ var JUMP_SPEED = 8;
 var GRAVITY = 0.3;
 var blocks = DisplayElement();
 
+var playerName = {};
+
 /*
  * メインシーン
  */
@@ -58,9 +60,16 @@ phina.define("TitleScene", {
 
     init: function (options) {
         this.superInit();
+        this.backgroundColor = '#185674';
+        this.gameTitle = Label("ゲーム");
+        this.gameTitle.addChildTo(this);
+        this.gameTitle.x = 50;
+        this.gameTitle.y = 50;
+        this.gameTitle.fill = 'black';
+        this.gameTitle.fontSize = 15;
     },
 
-    onclick: function (){
+    onclick: function () {
         this.exit();
     }
 });
@@ -80,20 +89,18 @@ phina.define("GameScene", {
         this.bg.width = SCREEN_WIDTH;
         // block
         blocks.addChildTo(this);
-        block0 = RectangleShape({
-            text: "aaa"
-        }).addChildTo(blocks);
+        block0 = RectangleShape().addChildTo(blocks);
         block0.setPosition(380, 440);
         block0.setSize(50, 20);
         block0.fill = 'red';
-        block1 = RectangleShape().addChildTo(blocks);
-        block1.setPosition(380, 350);
+        block1 = Block().addChildTo(blocks);
+        block1.setPosition(500, 350);
         block1.setSize(50, 20);
-        block2 = RectangleShape().addChildTo(blocks);
-        block2.setPosition(250, 330);
+        block2 = Block().addChildTo(blocks);
+        block2.setPosition(250, 130);
         block2.setSize(50, 20);
-        block3 = RectangleShape().addChildTo(blocks);
-        block3.setPosition(100, 400);
+        block3 = Block().addChildTo(blocks);
+        block3.setPosition(100, 40);
         block3.setSize(50, 20);
 
         // player
@@ -180,7 +187,7 @@ phina.define("Tomapiyo", {
         this.COLLISION.strokeWidth = 0;
         if (DEBUG) this.COLLISION.strokeWidth = 1;
         this.COLLISION.y = 6;
-        this.COLLISION.setSize(42, 50);
+        this.COLLISION.setSize(10, 50);
 
         this.falling = false;
 
@@ -334,12 +341,11 @@ phina.define("Block", {
         this.superInit();
     },
 
-    addBlock: function () {
-
-    },
-
-    deleteBlock: function () {
-
+    update: function(){
+        this.y+=2;
+        if(this.y > SCREEN_HEIGHT) {
+            this.y = 0;
+        }
     },
 
 
@@ -360,7 +366,6 @@ phina.main(function () {
     app.enableStats();
 
     app.replaceScene(SceneSequence());
-
     // 実行
     app.run();
 });
