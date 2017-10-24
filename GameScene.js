@@ -5,12 +5,13 @@ phina.define("GameScene", {
     // 初期化
     init: function (options) {
         // super init
-        this.superInit(options);
+        this.superInit({'width': SCREEN_WIDTH, 'height': SCREEN_HEIGHT});
 
         // 背景
         this.bg = Sprite("bg").addChildTo(this);
         this.bg.origin.set(0, 0); // 左上基準に変更
         this.bg.width = SCREEN_WIDTH;
+        this.bg.height = SCREEN_HEIGHT;
         // block
         blocks.addChildTo(this);
         block0 = RectangleShape().addChildTo(blocks);
