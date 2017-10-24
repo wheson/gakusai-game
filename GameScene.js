@@ -29,6 +29,13 @@ phina.define("GameScene", {
 
         // player
         this.tomapiko = Tomapiko().addChildTo(this);
+		
+		
+		// 画面端当たり判定オブジェクト
+		this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2).setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+		//this.limit.alpha = 0;
+		this.limit.fill = "transparent";
+		this.limit.stroke = "red";
 
         // how to operate
         this.label1 = Label("矢印キーで移動とジャンプ あるいは クリックで横移動，スペースでジャンプ");
