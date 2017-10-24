@@ -11,9 +11,38 @@
     <script src='http://cdn.rawgit.com/phi-jp/phina.js/v0.2.0/build/phina.js'></script>
 
     <!-- メイン処理 -->
-    <script src='main.js'></script>
-  </head>
-  <body>
+    <script>
+        // グローバルに展開
+        phina.globalize();
 
-  </body>
+        // 定数
+        var ASSETS = {
+            image: {
+                bg: "http://jsrun.it/assets/a/G/5/Y/aG5YD.png",
+                tomapiko: 'http://cdn.rawgit.com/phi-jp/phina.js/v0.2.0/assets/images/tomapiko_ss.png',
+            },
+        };
+        var SCREEN_WIDTH = 800; // スクリーン幅
+        var SCREEN_HEIGHT = 465; // スクリーン高さ
+
+        var DEBUG = true;
+
+        var WALK_SPEED = 4;
+        var JUMP_SPEED = 8;
+        var GRAVITY = 0.3;
+        var blocks = DisplayElement();
+
+        var playerName = {};
+    </script>
+    <script src='Tomapiko.js'></script>
+    <script src='TitleScene.js'></script>
+    <script src='ResultScene.js'></script>
+    <script src='GameScene.js'></script>
+    <script src='SceneSequence.js'></script>
+    <script src='main.js'></script>
+</head>
+
+<body>
+
+</body>
 </html>
