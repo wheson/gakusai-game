@@ -32,7 +32,7 @@ phina.define("GameScene", {
 		
 		
 		// 画面端当たり判定オブジェクト
-		this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2).setSize(100,SCREEN_HEIGHT-10);
+		this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2).setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
 		//this.limit.alpha = 0;
 		this.limit.fill = "transparent";
 		this.limit.stroke = "red";
