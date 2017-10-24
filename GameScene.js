@@ -86,7 +86,18 @@ phina.define("GameScene", {
             this.frameTime.text = this.frame;
         }
 
-        if(this.tomapiko)
+        if(this.tomapiko.top <= this.limit.top){
+			console.log("top limit");
+		}
+        if(this.tomapiko.bottom >= this.limit.bottom){
+			console.log("bottom limit");
+		}
+        if(this.tomapiko.left <= this.limit.left){
+			console.log("left limit");
+		}
+        if(this.tomapiko.right >= this.limit.right){
+			console.log("right limit");
+		}
 
         if (this.endFlag) {
             exit();
