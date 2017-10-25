@@ -6,17 +6,17 @@ phina.define("SceneSequence", {
     init: function () {
         this.superInit({
             scenes: [
-        // A
+
                 {
-                    label: "タイトル", // ラベル。参照用
-                    className: "TitleScene", // シーンAのクラス名
+                    label: "タイトル",
+                    className: "TitleScene",
                     nextlabel: "ゲーム"
         },
-        // B
+
                 {
                     label: "ゲーム",
                     className: "GameScene",
-                    nextLabel: "終了" // シーン終了時に次に遷移するシーンのラベル
+                    nextLabel: "終了"
         },
                 {
                     label: "終了",

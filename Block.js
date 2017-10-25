@@ -11,7 +11,4 @@ phina.define("Block", {
             this.y = 0;
         }
     },
-
-
-
 });
