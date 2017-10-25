@@ -12,7 +12,11 @@ phina.define("GameScene", {
         this.bg.origin.set(0, 0); // 左上基準に変更
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
-        // block
+
+        this.enemyGroup = DisplayElement().addChildTo(this);
+        var enemy = Enemy({x:100,y:500,width:100,height:100}).addChildTo(this.enemyGroup);
+        enemy.fill = "red";
+/*        // block
         blocks.addChildTo(this);
         block0 = RectangleShape().addChildTo(blocks);
         block0.setPosition(380, 440);
@@ -27,7 +31,7 @@ phina.define("GameScene", {
         block3 = Block().addChildTo(blocks);
         block3.setPosition(100, 40);
         block3.setSize(50, 20);
-
+*/
         // player
         this.tomapiko = Tomapiko().addChildTo(this);
 		
@@ -85,7 +89,16 @@ phina.define("GameScene", {
             this.frame++;
             this.frameTime.text = this.frame;
         }
-
+        this.enemyGroup.children.each(function(elem) {
+          if (elem.top==SCREEN_HEIGHT) {
+            elem.remove();
+          }
+        });
+        //if(this.enemyGroup.children.length == 0){
+        if(this.frame%100==0){
+            var enemy = Enemy({x:Random.randint(0, SCREEN_WIDTH),y:000,width:100,height:100}).addChildTo(this.enemyGroup);
+            enemy.fill = "green";
+        }
         if(this.tomapiko.top <= this.limit.top){
 			console.log("top limit");
 		}

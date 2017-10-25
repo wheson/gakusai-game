@@ -67,12 +67,12 @@ phina.define("Tomapiko", {
          * else velocity.y = -JUMP_SPEED; */
 
         this.physical.velocity.y = -JUMP_SPEED;
-
+/*
         col = this.getColRect(phina.geom.Vector2(0, -1));
         blocks.children.some(function (block) {
             if (block.hitTestElement(col) === false) return;
             this.physical.velocity.y = 0;
-        }, this);
+        }, this);*/
 
     },
 
@@ -82,13 +82,13 @@ phina.define("Tomapiko", {
 
         this.physical.velocity.x = -WALK_SPEED;
         this.scaleX = 1;
-
+/*
         col = this.getColRect(phina.geom.Vector2(-1, 0));
         blocks.children.some(function (block) {
             if (block.hitTestElement(col) === false) return;
             if (DEBUG) console.log("tomapiko's left hit block's right");
             this.physical.velocity.x = 0;
-        }, this);
+        }, this);*/
 
     },
 
@@ -98,13 +98,13 @@ phina.define("Tomapiko", {
 
         this.physical.velocity.x = WALK_SPEED;
         this.scaleX = -1;
-
+/*
         col = this.getColRect(phina.geom.Vector2(1, 0));
         blocks.children.some(function (block) {
             if (block.hitTestElement(col) === false) return;
             if (DEBUG) console.log("tomapiko's right hit block's left");
             this.physical.velocity.x = 0;
-        }, this);
+        }, this);*/
 
     },
 
@@ -116,7 +116,7 @@ phina.define("Tomapiko", {
         this.falling = true;
 
         col = this.getColRect(phina.geom.Vector2(0, 1));
-        blocks.children.some(function (block) {
+/*        blocks.children.some(function (block) {
             if (block.hitTestElement(col) == false) return;
 
             // going up (just after jump)
@@ -139,7 +139,7 @@ phina.define("Tomapiko", {
             }
 
         }, this);
-
+*/
         //console.log(this.y + this.COLLISION.bottom);
         if (DEBUG)
             if (this.falling) console.log("falling");
