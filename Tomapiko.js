@@ -31,17 +31,23 @@ phina.define("Tomapiko", {
     },
 
     update: function (dir) {
-        this.frame++;
-        this.checkFalling();
+        if (this.startFlag) {
+            this.frame++;
+            this.checkFalling();
+        }
     },
 
     move: function (dir) {
 
-        if (dir.x > 0) this.goRight();
-        else if (dir.x < 0) this.goLeft();
+        if (dir.x > 0 && this.x <= SCREEN_WIDTH) this.goRight();
+        else if (dir.x < 0 && this.x >= 0) this.goLeft();
         else this.physical.velocity.x = 0;
 
         if (dir.y < 0) this.jump();
+
+        if (this.y <= 0) {
+            this.physical.velocity.y = 0;
+        }
 
         if (this.falling === false && dir.x === 0) {
             this.frameIndex = this.FRAME_INDEX_STAY;
@@ -61,18 +67,19 @@ phina.define("Tomapiko", {
     },
 
     jump: function () {
+        //コメントアウトで無限ジャンプ
         //if (this.falling === true) return;
 
         /* if(collide) velocity.y = 0;
          * else velocity.y = -JUMP_SPEED; */
 
         this.physical.velocity.y = -JUMP_SPEED;
-/*
-        col = this.getColRect(phina.geom.Vector2(0, -1));
-        blocks.children.some(function (block) {
-            if (block.hitTestElement(col) === false) return;
-            this.physical.velocity.y = 0;
-        }, this);*/
+        /*
+                col = this.getColRect(phina.geom.Vector2(0, -1));
+                blocks.children.some(function (block) {
+                    if (block.hitTestElement(col) === false) return;
+                    this.physical.velocity.y = 0;
+                }, this);*/
 
     },
 
@@ -82,13 +89,13 @@ phina.define("Tomapiko", {
 
         this.physical.velocity.x = -WALK_SPEED;
         this.scaleX = 1;
-/*
-        col = this.getColRect(phina.geom.Vector2(-1, 0));
-        blocks.children.some(function (block) {
-            if (block.hitTestElement(col) === false) return;
-            if (DEBUG) console.log("tomapiko's left hit block's right");
-            this.physical.velocity.x = 0;
-        }, this);*/
+        /*
+                col = this.getColRect(phina.geom.Vector2(-1, 0));
+                blocks.children.some(function (block) {
+                    if (block.hitTestElement(col) === false) return;
+                    if (DEBUG) console.log("tomapiko's left hit block's right");
+                    this.physical.velocity.x = 0;
+                }, this);*/
 
     },
 
@@ -98,13 +105,13 @@ phina.define("Tomapiko", {
 
         this.physical.velocity.x = WALK_SPEED;
         this.scaleX = -1;
-/*
-        col = this.getColRect(phina.geom.Vector2(1, 0));
-        blocks.children.some(function (block) {
-            if (block.hitTestElement(col) === false) return;
-            if (DEBUG) console.log("tomapiko's right hit block's left");
-            this.physical.velocity.x = 0;
-        }, this);*/
+        /*
+                col = this.getColRect(phina.geom.Vector2(1, 0));
+                blocks.children.some(function (block) {
+                    if (block.hitTestElement(col) === false) return;
+                    if (DEBUG) console.log("tomapiko's right hit block's left");
+                    this.physical.velocity.x = 0;
+                }, this);*/
 
     },
 
@@ -115,31 +122,37 @@ phina.define("Tomapiko", {
         this.physical.gravity.y = GRAVITY;
         this.falling = true;
 
-        col = this.getColRect(phina.geom.Vector2(0, 1));
-/*        blocks.children.some(function (block) {
-            if (block.hitTestElement(col) == false) return;
+        if (this.y >= SCREEN_HEIGHT) {
+            this.physical.velocity.y = 0;
+            this.physical.gravity.y = 0;
+            this.falling = false;
+        }
+        /*
+                col = this.getColRect(phina.geom.Vector2(0, 1));
+                blocks.children.some(function (block) {
+                    if (block.hitTestElement(col) == false) return;
 
-            // going up (just after jump)
-            if (this.physical.velocity.y < 0) {
-                if (DEBUG) console.log("tomapiko's top hit block's bottom");
-                // めり込む少し手前にワープ (少し := GRAVITY/2)
-                // (this.y + this.col.top) := block.bottom + GRAVITY / 2
-                this.y = -this.COLLISION.top + block.bottom + GRAVITY / 2;
-                this.physical.velocity.y = 0;
-            }
+                    // going up (just after jump)
+                    if (this.physical.velocity.y < 0) {
+                        if (DEBUG) console.log("tomapiko's top hit block's bottom");
+                        // めり込む少し手前にワープ (少し := GRAVITY/2)
+                        // (this.y + this.col.top) := block.bottom + GRAVITY / 2
+                        this.y = -this.COLLISION.top + block.bottom + GRAVITY / 2;
+                        this.physical.velocity.y = 0;
+                    }
 
-            // going down
-            else {
-                if (DEBUG) console.log("tomapiko's bottom hit block's top");
-                // (this.y + this.col.bottom) := block.top - GRAVITY / 2
-                this.y = -this.COLLISION.bottom + block.top - GRAVITY / 2;
-                this.physical.velocity.y = 0;
-                this.physical.gravity.y = 0;
-                this.falling = false;
-            }
+                    // going down
+                    else {
+                        if (DEBUG) console.log("tomapiko's bottom hit block's top");
+                        // (this.y + this.col.bottom) := block.top - GRAVITY / 2
+                        this.y = -this.COLLISION.bottom + block.top - GRAVITY / 2;
+                        this.physical.velocity.y = 0;
+                        this.physical.gravity.y = 0;
+                        this.falling = false;
+                    }
 
-        }, this);
-*/
+                }, this);
+        */
         //console.log(this.y + this.COLLISION.bottom);
         if (DEBUG)
             if (this.falling) console.log("falling");

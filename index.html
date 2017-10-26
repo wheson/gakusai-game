@@ -1,7 +1,8 @@
 <!doctype html>
 
 <html>
-  <head>
+
+<head>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,9 +31,20 @@
         var WALK_SPEED = 4;
         var JUMP_SPEED = 8;
         var GRAVITY = 0.3;
+
+        //方向定数
+        var DOWN = 0;
+        var UP = 1;
+        var RIGHT = 2;
+        var LEFT = 3;
+
+        //色配列
+        var enemyColors = ["red", "green", "blue", "pink"];
+
         //var blocks = DisplayElement();
 
         var playerName = {};
+
     </script>
     <script src='Tomapiko.js'></script>
     <script src='Enemy.js'></script>
@@ -47,4 +59,5 @@
 <body>
 
 </body>
+
 </html>

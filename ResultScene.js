@@ -2,7 +2,10 @@ phina.define("ResultScene", {
     superClass: 'DisplayScene',
 
     init: function (options) {
-        this.superInit({'width': SCREEN_WIDTH, 'height': SCREEN_HEIGHT});
+        this.superInit({
+            'width': SCREEN_WIDTH,
+            'height': SCREEN_HEIGHT
+        });
         this.backgroundColor = '#185674';
         this.gameTitle = Label("終了");
         this.gameTitle.addChildTo(this);
