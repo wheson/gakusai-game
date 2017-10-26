@@ -13,7 +13,6 @@ phina.define("Tomapiko", {
 
     init: function () {
         this.superInit('tomapiko', 64, 64);
-        this.setPosition(this.START_X, this.START_Y);
         this.frame = 0;
         this.frameIndex = 0;
         //this.physical.gravity.set(0, 0.1);

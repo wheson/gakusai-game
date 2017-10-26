@@ -26,7 +26,7 @@ phina.define("GameScene", {
         enemy.fill = "red";
 
         // player
-        this.tomapiko = Tomapiko().addChildTo(this);
+        this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(),this.gridY.center()-64);
 
 
         // 画面端当たり判定オブジェクト
