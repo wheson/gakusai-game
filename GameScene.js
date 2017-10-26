@@ -17,14 +17,7 @@ phina.define("GameScene", {
         this.bg.height = SCREEN_HEIGHT;
 
         this.enemyGroup = DisplayElement().addChildTo(this);
-        var enemy = Enemy({
-            x: 100,
-            y: 500,
-            width: 100,
-            height: 100
-        }).addChildTo(this.enemyGroup);
-        enemy.fill = "red";
-
+       
         // player
         this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(),this.gridY.center()-64);
 
