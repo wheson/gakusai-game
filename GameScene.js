@@ -108,17 +108,18 @@ phina.define("GameScene", {
 		var self = this; // 関数のスコープに入るのでthisを預けておく
 		
 		// トマピコの当たり判定を計算して専用の矩形を作る
-		var tomapikoCollision = Rect(this.tomapiko.x + this.tomapiko
-		.COLLISION.x, this.tomapiko.y + this.tomapiko.COLLISION.y, this.tomapiko.COLLISION.width, this.tomapiko.COLLISION.height);
+		var tomapikoCollision = Circle(this.tomapiko.x,this.tomapiko.y,this.tomapiko.COLLISION.radius);
 		
 		// トマピコが敵と当たったらendFlagを立てる
 		this.enemyGroup.children.each(function(elm){
-			var enemyCollision = Rect(elm.x, elm.y, elm.width, elm.height); // 同じく敵の当たり判定を取り出す
-			if(Collision.testRectRect(tomapikoCollision, enemyCollision)){
+			var enemyCollision = Circle(elm.x, elm.y, elm.width/2); // 同じく敵の当たり判定を取り出す
+			if(Collision.testCircleCircle(tomapikoCollision, enemyCollision)){
 				self.endFlag = true;
 				console.log(self.tomapiko.COLLISION);
 			}
+			console.log(self.endFlag);
 		});
+		
         // トマピコが外枠に触れた時console.logに出力
         if (this.tomapiko.top <= this.limit.top) {
             console.log("top limit");

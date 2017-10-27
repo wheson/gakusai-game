@@ -17,13 +17,11 @@ phina.define("Tomapiko", {
         this.frameIndex = 0;
         //this.physical.gravity.set(0, 0.1);
 
-        this.COLLISION = RectangleShape().addChildTo(this);
+        this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'red';
-        this.COLLISION.strokeWidth = 0;
-        if (DEBUG) this.COLLISION.strokeWidth = 1;
-        //this.COLLISION.y = 6;
-        this.COLLISION.setSize(10, 50);
+        this.COLLISION.strokeWidth = 2;
+        this.COLLISION.radius = 20;
 
         this.falling = false;
 
@@ -31,6 +29,7 @@ phina.define("Tomapiko", {
 
     update: function (dir) {
         if (this.startFlag) {
+			console.log(this.x,this.y);
             this.frame++;
             this.checkFalling();
         }
