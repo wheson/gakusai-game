@@ -51,6 +51,13 @@ phina.define("GameScene", {
         this.frameTime.fill = 'black';
         this.frameTime.fontSize = 15;
         this.frameTime.setPosition(this.gridX.span(14), this.gridY.span(2));
+
+        this.score = 0;
+        this.displayScore = Label("0").addChildTo(this);
+        this.displayScore.fill = 'black';
+        this.displayScore.fontSize = 15;
+        this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
+
         this.startFlag = false;
         this.endFlag = false;
     },
@@ -71,6 +78,8 @@ phina.define("GameScene", {
         if (this.startFlag) {
             this.frame++;
             this.frameTime.text = this.frame;
+            this.score++;
+            this.displayScore.text = this.score;
             this.tomapiko.startFlag = true;
         } else {
             return;

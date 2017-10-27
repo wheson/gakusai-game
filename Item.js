@@ -27,7 +27,7 @@ phina.define("Item", {
 
 		this.COLLISION = CircleShape().addChildTo(this);
 		this.COLLISION.fill = 'transparent';
-        this.COLLISION.stroke = 'cyan';
+        this.COLLISION.stroke = 'yellow';
         this.COLLISION.strokeWidth = 2;
         this.COLLISION.radius = this.width/2;
 
