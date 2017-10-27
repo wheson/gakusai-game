@@ -33,7 +33,7 @@ phina.define("GameScene", {
         this.limit.stroke = "red";
 
         // how to operate
-        this.label1 = Label("矢印キーで移動とジャンプ あるいは クリックで横移動，スペースでジャンプ");
+        this.label1 = Label("←→キーで移動, ↑キーまたはスペースでジャンプ");
         this.label1.addChildTo(this);
         this.label2 = Label("ジャンプでゲームスタート");
         this.label2.addChildTo(this);
