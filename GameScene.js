@@ -78,7 +78,6 @@ phina.define("GameScene", {
         if (this.startFlag) {
             this.frame++;
             this.frameTime.text = this.frame;
-            this.score++;
             this.displayScore.text = this.score;
             this.tomapiko.startFlag = true;
         } else {
@@ -156,6 +155,16 @@ phina.define("GameScene", {
 			console.log(self.endFlag);
 		});
 		
+        // トマピコがアイテムと当たったらthis.scoreにアイテムの持つscoreを追加する
+		this.itemGroup.children.each(function(elm){
+			var itemCollision = Circle(elm.x, elm.y, elm.width/2); // 同じく敵の当たり判定を取り出す
+			if(Collision.testCircleCircle(tomapikoCollision, itemCollision)){
+                self.score += elm.getScore();
+                console.log("item hit!");
+                elm.remove();
+			}
+		});
+
         // トマピコが外枠に触れた時console.logに出力
         if (this.tomapiko.top <= this.limit.top) {
             console.log("top limit");

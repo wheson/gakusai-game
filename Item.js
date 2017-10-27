@@ -31,6 +31,9 @@ phina.define("Item", {
         this.COLLISION.strokeWidth = 2;
         this.COLLISION.radius = this.width/2;
 
+        //アイテムの持つscore値
+        this.score = 200;
+
     },
 
     update: function () {
@@ -49,4 +52,8 @@ phina.define("Item", {
     getColor: function () {
         return this.color;
     },
+
+    getScore: function(){
+        return this.score;
+    }
 })
