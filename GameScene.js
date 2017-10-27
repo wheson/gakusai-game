@@ -16,8 +16,12 @@ phina.define("GameScene", {
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
 
+        //敵の管理
         this.enemyGroup = DisplayElement().addChildTo(this);
-       
+
+        //アイテムの管理
+        this.itemGroup = DisplayElement().addChildTo(this);
+
         // トマピコ
         this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(),this.gridY.center()-64);
 		FrameAnimation("tomapikoSS").attachTo(this.tomapiko).gotoAndPlay("start");
@@ -98,11 +102,34 @@ phina.define("GameScene", {
             }
         });
 
+        // 画面に存在する全てのアイテムに対して
+        this.itemGroup.children.each(function (elm) {
+            // 敵の移動方向で分岐してそれぞれについて画面から見えなくなったら敵をグループから削除する
+            switch (elm.direction) {
+                case UP:
+                    if (elm.bottom === 0) elm.remove();
+                case DOWN:
+                    if (elm.top === SCREEN_HEIGHT) elm.remove();
+                case RIGHT:
+                    if (elm.left === SCREEN_WIDTH) elm.remove();
+                case LEFT:
+                    if (elm.right === 0) elm.remove();
+            }
+        });
+
+
         // 指定フレーム毎に
         if (this.frame % 30 == 0) {
             // 敵をランダムな方向に動くように出現させる
             var enemy = Enemy(Random.randint(0, 3)).addChildTo(this.enemyGroup);
             enemy.fill = enemy.getColor();
+        }
+
+        //指定フレームごとに
+        if (this.frame % 100 == 0) {
+            // アイテムをランダムな方向に動くように出現させる
+            var item = Item(Random.randint(0, 3)).addChildTo(this.itemGroup);
+            item.fill = item.getColor();
         }
 		
 		var self = this; // 関数のスコープに入るのでthisを預けておく
