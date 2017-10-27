@@ -18,9 +18,9 @@ phina.define("GameScene", {
 
         this.enemyGroup = DisplayElement().addChildTo(this);
        
-        // player
+        // トマピコ
         this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(),this.gridY.center()-64);
-
+		FrameAnimation("tomapikoSS").attachTo(this.tomapiko).gotoAndPlay("start");
 
         // 画面端当たり判定オブジェクト
         this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).setSize(SCREEN_WIDTH, SCREEN_HEIGHT);

@@ -11,7 +11,6 @@ phina.define("Tomapiko", {
 
     init: function () {
         this.superInit('tomapiko', 64, 64);
-        this.frame = 0;
         this.frameIndex = 0;
         //this.physical.gravity.set(0, 0.1);
 
@@ -31,14 +30,6 @@ phina.define("Tomapiko", {
 			console.log(this.x,this.y);
             this.checkFalling();
         }
-		// 4フレームに1回羽ばたきモーションが変化する
-		if(this.frame % 4 == 0){
-            if (this.frameIndex == this.FRAME_INDEX_JUMPING_1)
-                this.frameIndex = this.FRAME_INDEX_JUMPING_2;
-            else this.frameIndex = this.FRAME_INDEX_JUMPING_1;
-        }
-		// フレームを動かす
-		this.frame++;
     },
 
     move: function (dir) {
