@@ -5,21 +5,21 @@ phina.main(function () {
         width: SCREEN_WIDTH, // 画面幅
         height: SCREEN_HEIGHT, // 画面高さ
         assets: ASSETS, // アセット読み込み
-		scenes: [
-			{
-				label: "title",
-				className: "TitleScene",
-				nextLabel: "game"
+        scenes: [
+            {
+                label: "title",
+                className: "TitleScene",
+                nextLabel: "game"
 			},
-			{
-				label: "game",
-				className: "GameScene",
-				nextLabel: "result"
+            {
+                label: "game",
+                className: "GameScene",
+                nextLabel: "result"
 			},
-			{
-				label: "result",
-				className: "ResultScene",
-				nextLabel: "title"
+            {
+                label: "result",
+                className: "ResultScene",
+                nextLabel: "title"
 			}
 		],
     });

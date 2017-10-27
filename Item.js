@@ -23,13 +23,13 @@ phina.define("Item", {
         this.color = enemyColors[this.direction];
 
         //大きさを指定
-        this.setSize(20,20);
+        this.setSize(20, 20);
 
-		this.COLLISION = CircleShape().addChildTo(this);
-		this.COLLISION.fill = 'transparent';
+        this.COLLISION = CircleShape().addChildTo(this);
+        this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'yellow';
         this.COLLISION.strokeWidth = 2;
-        this.COLLISION.radius = this.width/2;
+        this.COLLISION.radius = this.width / 2;
 
         //アイテムの持つscore値
         this.score = 200;
@@ -53,7 +53,7 @@ phina.define("Item", {
         return this.color;
     },
 
-    getScore: function(){
+    getScore: function () {
         return this.score;
     }
 })

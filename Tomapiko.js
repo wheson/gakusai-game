@@ -25,9 +25,9 @@ phina.define("Tomapiko", {
     },
 
     update: function (dir) {
-		// スタートするまでは動かないでほしいので、動きに関する部分はstartFlagが立つまで何もしない
+        // スタートするまでは動かないでほしいので、動きに関する部分はstartFlagが立つまで何もしない
         if (this.startFlag) {
-			console.log(this.x,this.y);
+            console.log(this.x, this.y);
             this.checkFalling();
         }
     },

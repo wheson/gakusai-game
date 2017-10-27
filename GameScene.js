@@ -23,8 +23,8 @@ phina.define("GameScene", {
         this.itemGroup = DisplayElement().addChildTo(this);
 
         // トマピコ
-        this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(),this.gridY.center()-64);
-		FrameAnimation("tomapikoSS").attachTo(this.tomapiko).gotoAndPlay("start");
+        this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
+        FrameAnimation("tomapikoSS").attachTo(this.tomapiko).gotoAndPlay("start");
 
         // 画面端当たり判定オブジェクト
         this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -139,31 +139,31 @@ phina.define("GameScene", {
             var item = Item(Random.randint(0, 3)).addChildTo(this.itemGroup);
             item.fill = item.getColor();
         }
-		
-		var self = this; // 関数のスコープに入るのでthisを預けておく
-		
-		// トマピコの当たり判定を計算して専用の矩形を作る
-		var tomapikoCollision = Circle(this.tomapiko.x,this.tomapiko.y,this.tomapiko.COLLISION.radius);
-		
-		// トマピコが敵と当たったらendFlagを立てる
-		this.enemyGroup.children.each(function(elm){
-			var enemyCollision = Circle(elm.x, elm.y, elm.width/2); // 同じく敵の当たり判定を取り出す
-			if(Collision.testCircleCircle(tomapikoCollision, enemyCollision)){
-				self.endFlag = true;
-				console.log(self.tomapiko.COLLISION);
-			}
-			console.log(self.endFlag);
-		});
-		
+
+        var self = this; // 関数のスコープに入るのでthisを預けておく
+
+        // トマピコの当たり判定を計算して専用の矩形を作る
+        var tomapikoCollision = Circle(this.tomapiko.x, this.tomapiko.y, this.tomapiko.COLLISION.radius);
+
+        // トマピコが敵と当たったらendFlagを立てる
+        this.enemyGroup.children.each(function (elm) {
+            var enemyCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
+            if (Collision.testCircleCircle(tomapikoCollision, enemyCollision)) {
+                self.endFlag = true;
+                console.log(self.tomapiko.COLLISION);
+            }
+            console.log(self.endFlag);
+        });
+
         // トマピコがアイテムと当たったらthis.scoreにアイテムの持つscoreを追加する
-		this.itemGroup.children.each(function(elm){
-			var itemCollision = Circle(elm.x, elm.y, elm.width/2); // 同じく敵の当たり判定を取り出す
-			if(Collision.testCircleCircle(tomapikoCollision, itemCollision)){
+        this.itemGroup.children.each(function (elm) {
+            var itemCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
+            if (Collision.testCircleCircle(tomapikoCollision, itemCollision)) {
                 self.score += elm.getScore();
                 console.log("item hit!");
                 elm.remove();
-			}
-		});
+            }
+        });
 
         // トマピコが外枠に触れた時console.logに出力
         if (this.tomapiko.top <= this.limit.top) {

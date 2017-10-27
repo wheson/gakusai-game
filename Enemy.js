@@ -21,12 +21,12 @@ phina.define("Enemy", {
 
         // 方向で色を変更
         this.color = enemyColors[this.direction];
-		
-		this.COLLISION = CircleShape().addChildTo(this);
-		this.COLLISION.fill = 'transparent';
+
+        this.COLLISION = CircleShape().addChildTo(this);
+        this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'cyan';
         this.COLLISION.strokeWidth = 2;
-        this.COLLISION.radius = this.width/2;
+        this.COLLISION.radius = this.width / 2;
 
     },
 
