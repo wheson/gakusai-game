@@ -8,20 +8,20 @@ phina.define("SceneSequence", {
             scenes: [
 
                 {
-                    label: "タイトル",
+                    label: "title",
                     className: "TitleScene",
-                    nextlabel: "ゲーム"
+                    nextlabel: "game"
         },
 
                 {
-                    label: "ゲーム",
+                    label: "game",
                     className: "GameScene",
-                    nextLabel: "終了"
+                    nextLabel: "result"
         },
                 {
-                    label: "終了",
+                    label: "result",
                     className: "ResultScene",
-                    nextlabel: "タイトル"
+                    nextlabel: "title"
                 }
 
       ]
