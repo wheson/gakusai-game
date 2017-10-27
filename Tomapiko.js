@@ -8,8 +8,6 @@ phina.define("Tomapiko", {
     FRAME_INDEX_JUMPING_1: 1,
     FRAME_INDEX_JUMPING_2: 2,
 
-    START_X: 400,
-    START_Y: 400,
 
     init: function () {
         this.superInit('tomapiko', 64, 64);
@@ -28,11 +26,19 @@ phina.define("Tomapiko", {
     },
 
     update: function (dir) {
+		// スタートするまでは動かないでほしいので、動きに関する部分はstartFlagが立つまで何もしない
         if (this.startFlag) {
 			console.log(this.x,this.y);
-            this.frame++;
             this.checkFalling();
         }
+		// 4フレームに1回羽ばたきモーションが変化する
+		if(this.frame % 4 == 0){
+            if (this.frameIndex == this.FRAME_INDEX_JUMPING_1)
+                this.frameIndex = this.FRAME_INDEX_JUMPING_2;
+            else this.frameIndex = this.FRAME_INDEX_JUMPING_1;
+        }
+		// フレームを動かす
+		this.frame++;
     },
 
     move: function (dir) {
@@ -51,17 +57,6 @@ phina.define("Tomapiko", {
             this.frameIndex = this.FRAME_INDEX_STAY;
         }
 
-        if (this.frame % 4 !== 0) return;
-
-        if (this.falling) {
-            if (this.frameIndex == this.FRAME_INDEX_JUMPING_1)
-                this.frameIndex = this.FRAME_INDEX_JUMPING_2;
-            else this.frameIndex = this.FRAME_INDEX_JUMPING_1;
-        } else if (dir.x !== 0) {
-            if (this.frameIndex == this.FRAME_INDEX_WALKING_1)
-                this.frameIndex = this.FRAME_INDEX_WALKING_2;
-            else this.frameIndex = this.FRAME_INDEX_WALKING_1;
-        }
     },
 
     jump: function () {
