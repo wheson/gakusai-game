@@ -84,17 +84,17 @@ phina.define("GameScene", {
         this.tomapiko.move(dir);
 
         // 画面に存在する全ての敵に対して
-        this.enemyGroup.children.each(function (elem) {
+        this.enemyGroup.children.each(function (elm) {
             // 敵の移動方向で分岐してそれぞれについて画面から見えなくなったら敵をグループから削除する
-            switch (elem.direction) {
+            switch (elm.direction) {
                 case UP:
-                    if (elem.bottom === 0) elem.remove();
+                    if (elm.bottom === 0) elm.remove();
                 case DOWN:
-                    if (elem.top === SCREEN_HEIGHT) elem.remove();
+                    if (elm.top === SCREEN_HEIGHT) elm.remove();
                 case RIGHT:
-                    if (elem.left === SCREEN_WIDTH) elem.remove();
+                    if (elm.left === SCREEN_WIDTH) elm.remove();
                 case LEFT:
-                    if (elem.right === 0) elem.remove();
+                    if (elm.right === 0) elm.remove();
             }
         });
 
@@ -104,7 +104,21 @@ phina.define("GameScene", {
             var enemy = Enemy(Random.randint(0, 3)).addChildTo(this.enemyGroup);
             enemy.fill = enemy.getColor();
         }
-
+		
+		var self = this; // 関数のスコープに入るのでthisを預けておく
+		
+		// トマピコの当たり判定を計算して専用の矩形を作る
+		var tomapikoCollision = Rect(this.tomapiko.x + this.tomapiko
+		.COLLISION.x, this.tomapiko.y + this.tomapiko.COLLISION.y, this.tomapiko.COLLISION.width, this.tomapiko.COLLISION.height);
+		
+		// トマピコが敵と当たったらendFlagを立てる
+		this.enemyGroup.children.each(function(elm){
+			var enemyCollision = Rect(elm.x, elm.y, elm.width, elm.height); // 同じく敵の当たり判定を取り出す
+			if(Collision.testRectRect(tomapikoCollision, enemyCollision)){
+				self.endFlag = true;
+				console.log(self.tomapiko.COLLISION);
+			}
+		});
         // トマピコが外枠に触れた時console.logに出力
         if (this.tomapiko.top <= this.limit.top) {
             console.log("top limit");
@@ -121,7 +135,7 @@ phina.define("GameScene", {
 
         // endFlagが立っていれば終了して次のシーンに移動する
         if (this.endFlag) {
-            exit();
+            this.exit();
         }
     },
 

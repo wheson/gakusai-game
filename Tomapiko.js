@@ -22,7 +22,7 @@ phina.define("Tomapiko", {
         this.COLLISION.stroke = 'red';
         this.COLLISION.strokeWidth = 0;
         if (DEBUG) this.COLLISION.strokeWidth = 1;
-        this.COLLISION.y = 6;
+        //this.COLLISION.y = 6;
         this.COLLISION.setSize(10, 50);
 
         this.falling = false;
