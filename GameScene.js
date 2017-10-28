@@ -112,7 +112,7 @@ phina.define("GameScene", {
 
         // 画面に存在する全てのアイテムに対して
         this.itemGroup.children.each(function (elm) {
-            // 敵の移動方向で分岐してそれぞれについて画面から見えなくなったら敵をグループから削除する
+            // アイテムの移動方向で分岐してそれぞれについて画面から見えなくなったらアイテムをグループから削除する
             switch (elm.direction) {
                 case UP:
                     if (elm.bottom === 0) elm.remove();
