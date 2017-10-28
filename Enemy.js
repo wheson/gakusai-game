@@ -1,6 +1,6 @@
 phina.define("Enemy", {
     superClass: "Sprite",
-    init: function (dir, level) {
+    init: function (dir, level, x, y) {
         this.superInit("enemy" + Random.randint(0,3),32,32);
 		this.width = 64;
 		this.height = 64;
@@ -14,20 +14,20 @@ phina.define("Enemy", {
 		
         // 方向によって出現位置を設定
         if (this.direction === UP) {
-            this.x = Random.randint(0, SCREEN_WIDTH);
+            this.x = x;
             this.y = SCREEN_HEIGHT;
 			animation.gotoAndPlay("UP");
         } else if (this.direction === DOWN) {
-            this.x = Random.randint(0, SCREEN_WIDTH);
+            this.x = x;
             this.y = 0;
 			animation.gotoAndPlay("DOWN");
         } else if (this.direction === RIGHT) {
             this.x = 0;
-            this.y = Random.randint(0, SCREEN_HEIGHT);
+            this.y = y;
 			animation.gotoAndPlay("RIGHT");
         } else if (this.direction === LEFT) {
             this.x = SCREEN_WIDTH;
-            this.y = Random.randint(0, SCREEN_HEIGHT);
+            this.y = y;
 			animation.gotoAndPlay("LEFT");
         }
 
