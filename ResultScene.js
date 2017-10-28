@@ -26,6 +26,8 @@ phina.define("ResultScene", {
         label.setInteractive(true);
         label.width = 400;
         label.height = 80;
+		
+		input.focus();
         label.onpointstart = function () {
             input.focus();
         };
