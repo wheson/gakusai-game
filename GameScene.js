@@ -129,9 +129,14 @@ phina.define("GameScene", {
 
 
         // 指定フレーム毎に
-        if (this.frame % 30 == 0) {
+        if (this.frame % Math.max((50 - this.level), 30) == 0) {
             // 敵をランダムな方向に動くように出現させる
-            var enemy = Enemy(Random.randint(0, 3), this.level).addChildTo(this.enemyGroup);
+            if(this.level < 10 )
+                var enemy = Enemy(Random.randint(0, 1), this.level / 3).addChildTo(this.enemyGroup);
+            else if(this.level < 20)
+                var enemy = Enemy(Random.randint(2, 3), this.level / 3).addChildTo(this.enemyGroup);
+            else
+                var enemy = Enemy(Random.randint(0, 3), this.level / 3).addChildTo(this.enemyGroup);
         }
 
         //指定フレームごとに
@@ -140,7 +145,7 @@ phina.define("GameScene", {
             var item = Item(Random.randint(0, 3)).addChildTo(this.itemGroup);
         }
 
-        if (this.frame % 200 == 0) {
+        if (this.frame % 100 == 0) {
             this.level++;
         }
 
