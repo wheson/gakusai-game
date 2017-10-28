@@ -1,7 +1,7 @@
 phina.define("Item", {
-    superClass: "RectangleShape",
+    superClass: "Sprite",
     init: function (dir) {
-        this.superInit();
+        this.superInit("item" + Random.randint(0,3),24,24);
         this.direction = dir;
 
         // 方向によって出現位置を設定
@@ -24,7 +24,7 @@ phina.define("Item", {
         this.fill = this.color;
 
         //大きさを指定
-        this.setSize(20, 20);
+       this.setSize(20, 20);
 
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
