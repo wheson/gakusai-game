@@ -1,13 +1,13 @@
 phina.define("Enemy", {
     superClass: "Sprite",
-    init: function (dir) {
+    init: function (dir, level) {
         this.superInit("enemy" + Random.randint(0,3),32,32);
 		this.width = 64;
 		this.height = 64;
 		
         this.direction = dir;
 		
-        this.level = 0;
+        this.level = level;
 
         var animation = FrameAnimation("enemySS").attachTo(this);
 		animation.fit = false;

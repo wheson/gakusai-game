@@ -19,6 +19,9 @@ phina.define("GameScene", {
         //敵の管理
         this.enemyGroup = DisplayElement().addChildTo(this);
 
+        //ゲームのレベル
+        this.level = 0;
+
         //アイテムの管理
         this.itemGroup = DisplayElement().addChildTo(this);
 
@@ -128,13 +131,17 @@ phina.define("GameScene", {
         // 指定フレーム毎に
         if (this.frame % 30 == 0) {
             // 敵をランダムな方向に動くように出現させる
-            var enemy = Enemy(Random.randint(0, 3)).addChildTo(this.enemyGroup);
+            var enemy = Enemy(Random.randint(0, 3), this.level).addChildTo(this.enemyGroup);
         }
 
         //指定フレームごとに
         if (this.frame % 100 == 0) {
             // アイテムをランダムな方向に動くように出現させる
             var item = Item(Random.randint(0, 3)).addChildTo(this.itemGroup);
+        }
+
+        if (this.frame % 200 == 0) {
+            this.level++;
         }
 
         var self = this; // 関数のスコープに入るのでthisを預けておく
@@ -155,28 +162,30 @@ phina.define("GameScene", {
             var itemCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
             if (Collision.testCircleCircle(tomapikoCollision, itemCollision)) {
                 self.score += elm.getScore();
-                if(DEBUG)console.log("item hit!");
+                if (DEBUG) console.log("item hit!");
                 elm.remove();
             }
         });
 
         // トマピコが外枠に触れた時console.logに出力
         if (this.tomapiko.top <= this.limit.top) {
-            if(DEBUG)console.log("top limit");
+            if (DEBUG) console.log("top limit");
         }
         if (this.tomapiko.bottom >= this.limit.bottom) {
-            if(DEBUG)console.log("bottom limit");
+            if (DEBUG) console.log("bottom limit");
         }
         if (this.tomapiko.left <= this.limit.left) {
-            if(DEBUG)console.log("left limit");
+            if (DEBUG) console.log("left limit");
         }
         if (this.tomapiko.right >= this.limit.right) {
-            if(DEBUG)console.log("right limit");
+            if (DEBUG) console.log("right limit");
         }
 
         // endFlagが立っていれば終了して次のシーンに移動する
         if (this.endFlag) {
-            this.exit("result", {score: this.socre});
+            this.exit("result", {
+                score: this.socre
+            });
         }
     },
 
