@@ -21,6 +21,7 @@ phina.define("Item", {
 
         // 方向で色を変更
         this.color = enemyColors[this.direction];
+        this.fill = this.color;
 
         //大きさを指定
         this.setSize(20, 20);
@@ -47,10 +48,6 @@ phina.define("Item", {
             this.x--;
         }
 
-    },
-
-    getColor: function () {
-        return this.color;
     },
 
     getScore: function () {

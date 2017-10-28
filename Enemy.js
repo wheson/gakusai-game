@@ -21,6 +21,7 @@ phina.define("Enemy", {
 
         // 方向で色を変更
         this.color = enemyColors[this.direction];
+        this.fill = this.color;
 
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
@@ -41,9 +42,5 @@ phina.define("Enemy", {
             this.x--;
         }
 
-    },
-
-    getColor: function () {
-        return this.color;
     },
 })

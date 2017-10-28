@@ -130,14 +130,12 @@ phina.define("GameScene", {
         if (this.frame % 30 == 0) {
             // 敵をランダムな方向に動くように出現させる
             var enemy = Enemy(Random.randint(0, 3)).addChildTo(this.enemyGroup);
-            enemy.fill = enemy.getColor();
         }
 
         //指定フレームごとに
         if (this.frame % 100 == 0) {
             // アイテムをランダムな方向に動くように出現させる
             var item = Item(Random.randint(0, 3)).addChildTo(this.itemGroup);
-            item.fill = item.getColor();
         }
 
         var self = this; // 関数のスコープに入るのでthisを預けておく
