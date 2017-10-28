@@ -7,6 +7,8 @@ phina.define("Enemy", {
 		
         this.direction = dir;
 		
+        this.level = 0;
+
         var animation = FrameAnimation("enemySS").attachTo(this);
 		animation.fit = false;
 		
@@ -44,13 +46,13 @@ phina.define("Enemy", {
 
     update: function () {
         if (this.direction === UP) {
-            this.y--;
+            this.y -= 1 + this.level * 0.2;
         } else if (this.direction === DOWN) {
-            this.y++;
+            this.y += 1 + this.level * 0.2;
         } else if (this.direction === RIGHT) {
-            this.x++;
+            this.x += 1 + this.level * 0.2;
         } else if (this.direction === LEFT) {
-            this.x--;
+            this.x -= 1 + this.level * 0.2;
         }
 
     },
