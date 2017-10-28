@@ -21,6 +21,10 @@
             image: {
                 bg: "http://jsrun.it/assets/a/G/5/Y/aG5YD.png",
                 tomapiko: 'http://cdn.rawgit.com/phi-jp/phina.js/v0.2.0/assets/images/tomapiko_ss.png',
+				enemy0: "https://cdn.rawgit.com/wheson/gakusai-game/bbfeb92c/image/sample041.png",
+				enemy1: "https://cdn.rawgit.com/wheson/gakusai-game/bbfeb92c/image/sample042.png",
+				enemy2: "https://cdn.rawgit.com/wheson/gakusai-game/bbfeb92c/image/sample043.png",
+				enemy3: "https://cdn.rawgit.com/wheson/gakusai-game/bbfeb92c/image/sample044.png",
             },
             spritesheet: {
                 tomapikoSS: {
@@ -34,6 +38,36 @@
                         start: {
                             frames: [1, 2],
                             next: "start",
+                            frequency: 4,
+                        },
+                    },
+                },
+                enemySS: {
+                    frame: {
+                        width: 32,
+                        height: 32,
+                        cols: 3,
+                        rows: 4,
+                    },
+                    animations: {
+                        UP: {
+                            frames: [9,10,11],
+                            next: "UP",
+                            frequency: 4,
+                        },
+                        DOWN: {
+                            frames: [0,1,2],
+                            next: "DOWN",
+                            frequency: 4,
+                        },
+                        RIGHT: {
+                            frames: [6,7,8],
+                            next: "RIGHT",
+                            frequency: 4,
+                        },
+                        LEFT: {
+                            frames: [3,4,5],
+                            next: "LEFT",
                             frequency: 4,
                         },
                     },

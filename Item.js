@@ -29,13 +29,14 @@ phina.define("Item", {
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'yellow';
-        this.COLLISION.strokeWidth = 2;
+		this.COLLISION.strokeWidth = 0;
+        if(DEBUG)this.COLLISION.strokeWidth = 2;
         this.COLLISION.radius = this.width / 2;
 
         //アイテムの持つscore値
         this.score = 200;
-
-    },
+		
+	},
 
     update: function () {
         if (this.direction === UP) {

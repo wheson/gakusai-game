@@ -11,23 +11,23 @@ phina.define("Tomapiko", {
 
     init: function () {
         this.superInit('tomapiko', 64, 64);
-        this.frameIndex = 0;
+        FrameAnimation("tomapikoSS").attachTo(this).gotoAndPlay("start");
         //this.physical.gravity.set(0, 0.1);
 
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'red';
-        this.COLLISION.strokeWidth = 2;
-        this.COLLISION.radius = 20;
+		this.COLLISION.strokeWidth = 0;
+        if(DEBUG)this.COLLISION.strokeWidth = 2;
+        this.COLLISION.radius = 15;
 
         this.falling = false;
-
     },
 
     update: function (dir) {
         // スタートするまでは動かないでほしいので、動きに関する部分はstartFlagが立つまで何もしない
         if (this.startFlag) {
-            console.log(this.x, this.y);
+            if(DEBUG)console.log(this.x, this.y);
             this.checkFalling();
         }
     },
@@ -137,9 +137,6 @@ phina.define("Tomapiko", {
 
                 }, this);
         */
-        //console.log(this.y + this.COLLISION.bottom);
-        if (DEBUG)
-            if (this.falling) console.log("falling");
 
     },
 

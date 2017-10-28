@@ -24,7 +24,6 @@ phina.define("GameScene", {
 
         // トマピコ
         this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
-        FrameAnimation("tomapikoSS").attachTo(this.tomapiko).gotoAndPlay("start");
 
         // 画面端当たり判定オブジェクト
         this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -148,9 +147,7 @@ phina.define("GameScene", {
             var enemyCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
             if (Collision.testCircleCircle(tomapikoCollision, enemyCollision)) {
                 self.endFlag = true;
-                console.log(self.tomapiko.COLLISION);
             }
-            console.log(self.endFlag);
         });
 
         // トマピコがアイテムと当たったらthis.scoreにアイテムの持つscoreを追加する
@@ -158,23 +155,23 @@ phina.define("GameScene", {
             var itemCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
             if (Collision.testCircleCircle(tomapikoCollision, itemCollision)) {
                 self.score += elm.getScore();
-                console.log("item hit!");
+                if(DEBUG)console.log("item hit!");
                 elm.remove();
             }
         });
 
         // トマピコが外枠に触れた時console.logに出力
         if (this.tomapiko.top <= this.limit.top) {
-            console.log("top limit");
+            if(DEBUG)console.log("top limit");
         }
         if (this.tomapiko.bottom >= this.limit.bottom) {
-            console.log("bottom limit");
+            if(DEBUG)console.log("bottom limit");
         }
         if (this.tomapiko.left <= this.limit.left) {
-            console.log("left limit");
+            if(DEBUG)console.log("left limit");
         }
         if (this.tomapiko.right >= this.limit.right) {
-            console.log("right limit");
+            if(DEBUG)console.log("right limit");
         }
 
         // endFlagが立っていれば終了して次のシーンに移動する
