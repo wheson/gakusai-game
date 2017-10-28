@@ -7,3 +7,7 @@ h1 {
   font-size: 23px;
   font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
 }
+
+#input {
+  opacity: 0;
+}

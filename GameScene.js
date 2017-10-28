@@ -179,7 +179,7 @@ phina.define("GameScene", {
 
         // endFlagが立っていれば終了して次のシーンに移動する
         if (this.endFlag) {
-            this.exit();
+            this.exit("result", {score: this.socre});
         }
     },
 

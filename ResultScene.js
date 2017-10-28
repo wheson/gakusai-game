@@ -13,9 +13,26 @@ phina.define("ResultScene", {
         this.gameTitle.y = 50;
         this.gameTitle.fill = 'black';
         this.gameTitle.fontSize = 15;
-    },
 
+        var input = document.querySelector('#input');
+        input.oninput = function () {
+            label.text = input.value;
+        };
+
+        var label = Label('名前を入力してね').addChildTo(this);
+        label.x = this.gridX.center();
+        label.y = this.gridY.center();
+        label.fontSize = 64;
+        label.setInteractive(true);
+        label.width = 400;
+        label.height = 80;
+        label.onpointstart = function () {
+            input.focus();
+        };
+    },
+/*
     onclick: function () {
         this.exit();
     }
+*/
 });
