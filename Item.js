@@ -1,7 +1,7 @@
 phina.define("Item", {
     superClass: "Sprite",
-    init: function (dir) {
-        this.superInit("item" + Random.randint(0,3),24,24);
+    init: function (dir, itemNum) {
+        this.superInit("item" + String(itemNum),24,24);
         this.direction = dir;
 
         // 方向によって出現位置を設定
@@ -19,10 +19,6 @@ phina.define("Item", {
             this.y = Random.randint(0, SCREEN_HEIGHT);
         }
 
-        // 方向で色を変更
-        this.color = enemyColors[this.direction];
-        this.fill = this.color;
-
         //大きさを指定
        this.setSize(20, 20);
 
@@ -33,20 +29,32 @@ phina.define("Item", {
         if(DEBUG)this.COLLISION.strokeWidth = 2;
         this.COLLISION.radius = this.width / 2;
 
-        //アイテムの持つscore値
-        this.score = 200;
+        if(itemNum === 0){
+            this.score = 100;
+            this.speedLevel = 0;
+        }else if(itemNum === 1){
+            this.score = 200;
+            this.speedLevel = 1;
+        }else if(itemNum === 2){
+            this.score = 500;
+            this.speedLevel = 5;
+        }else if(itemNum === 3){
+            this.score = 1000;
+            this.speedLevel = 10;
+        }
+
 		
 	},
 
     update: function () {
         if (this.direction === UP) {
-            this.y--;
+            this.y -= 1 + this.speedLevel * 0.5;
         } else if (this.direction === DOWN) {
-            this.y++;
+            this.y += 1 + this.speedLevel * 0.5;;
         } else if (this.direction === RIGHT) {
-            this.x++;
+            this.x += 1 + this.speedLevel * 0.5;;
         } else if (this.direction === LEFT) {
-            this.x--;
+            this.x -= 1 + this.speedLevel * 0.5;;
         }
 
     },
