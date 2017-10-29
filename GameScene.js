@@ -299,6 +299,7 @@ phina.define("GameScene", {
                 self.scoreCount += elm.getScore();
                 if (DEBUG) console.log("item hit!");
                 elm.remove();
+                SoundManager.play("get");
             }
         });
 
