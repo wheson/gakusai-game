@@ -1,7 +1,7 @@
 phina.define("Enemy", {
     superClass: "Sprite",
-    init: function (dir, level, x, y) {
-        this.superInit("enemy" + Random.randint(0,3),32,32);
+    init: function (dir, enemyNum, x, y) {
+        this.superInit("enemy" + String(enemyNum),32,32);
 		this.width = 64;
 		this.height = 64;
 		
