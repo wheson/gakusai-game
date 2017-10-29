@@ -49,24 +49,28 @@ phina.define("GameScene", {
         this.frame = -1;
 
         this.time = -1;
-        this.displayTime = Label("0").addChildTo(this);
+        this.displayTime = Label().addChildTo(this);
         this.displayTime.fill = 'black';
         this.displayTime.fontSize = 15;
         this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
 
         this.score = 0;
-        this.displayScore = Label("0").addChildTo(this);
+        this.displayScore = Label().addChildTo(this);
         this.displayScore.fill = 'black';
         this.displayScore.fontSize = 15;
         this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
         //ゲームのレベル
         this.level = 0;
-        this.displayLevel = Label("0").addChildTo(this);
+        this.displayLevel = Label().addChildTo(this);
         this.displayLevel.fill = 'black';
         this.displayLevel.fontSize = 15;
         this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
 
+		this.displayTime.text = "time: " + 0;
+		this.displayScore.text = "score: " + 0;
+		this.displayLevel.text = "level: " + 0;
+		
         //敵の出現頻度をまとめた配列
         this.frequencyGroup = [100, 90, 80, 70, 60, 50, 40, 30]; //frequency[0] ~ [7]
         this.frequency = this.frequencyGroup[0];
@@ -77,7 +81,6 @@ phina.define("GameScene", {
         this.startFlag = false;
         this.endFlag = false;
 
-        //SoundManager.playMusic("bgm1");
     },
 
     // 更新
@@ -148,16 +151,21 @@ phina.define("GameScene", {
             switch (elm.direction) {
                 case UP:
                     if (elm.bottom === 0) elm.remove();
+					break;
                 case DOWN:
                     if (elm.top === SCREEN_HEIGHT) elm.remove();
+					break;
                 case RIGHT:
                     if (elm.left === SCREEN_WIDTH) elm.remove();
+					break;
                 case LEFT:
                     if (elm.right === 0) elm.remove();
+					break;
             }
         });
 
 
+		// 敵
         // 指定フレーム毎に
         if (this.frame % this.frequency === 0) {
             // 敵をランダムな方向に動くように出現させる
@@ -264,6 +272,7 @@ phina.define("GameScene", {
             }
         }
 
+		// アイテム
         //指定フレームごとに
         if (this.frame % 100 == 0 && this.frame !== 0) {
             // アイテムをランダムな方向に動くように出現させる
@@ -312,21 +321,6 @@ phina.define("GameScene", {
                 SoundManager.play("get");
             }
         });
-
-        // トマピコが外枠に触れた時console.logに出力
-        if (this.tomapiko.top <= this.limit.top) {
-            if (DEBUG) console.log("top limit");
-        }
-        if (this.tomapiko.bottom >= this.limit.bottom) {
-            if (DEBUG) console.log("bottom limit");
-        }
-        if (this.tomapiko.left <= this.limit.left) {
-            if (DEBUG) console.log("left limit");
-        }
-        if (this.tomapiko.right >= this.limit.right) {
-            if (DEBUG) console.log("right limit");
-        }
-
     },
 
 });
