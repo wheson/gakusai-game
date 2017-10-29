@@ -1,7 +1,7 @@
 phina.main(function () {
     // アプリケーションを生成
     var app = GameApp({
-        startLabel: 'game', // MainScene から開始
+        startLabel: 'title', // MainScene から開始
         width: SCREEN_WIDTH, // 画面幅
         height: SCREEN_HEIGHT, // 画面高さ
         assets: ASSETS, // アセット読み込み
