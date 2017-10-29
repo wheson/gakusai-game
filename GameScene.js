@@ -16,12 +16,11 @@ phina.define("GameScene", {
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
 
-        //敵の管理
-        this.enemyGroup = DisplayElement().addChildTo(this);
-
-
         //アイテムの管理
         this.itemGroup = DisplayElement().addChildTo(this);
+
+        //敵の管理
+        this.enemyGroup = DisplayElement().addChildTo(this);
 
         // トマピコ
         this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
