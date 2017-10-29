@@ -96,7 +96,16 @@ phina.define("Enemy", {
             }
             this.speed += 0.01;
         } else if (this.enemyNum === 3) {
-
+            if (this.direction === UP) {
+                this.y -= this.speed;
+            } else if (this.direction === DOWN) {
+                this.y += this.speed;
+            } else if (this.direction === RIGHT) {
+                this.x += this.speed;
+            } else if (this.direction === LEFT) {
+                this.x -= this.speed;
+            }
+            this.speed += 0.5;
         }
 
         this.time++;

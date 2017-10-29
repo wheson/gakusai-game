@@ -66,7 +66,8 @@ phina.define("GameScene", {
         this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
 
         //敵の出現頻度をまとめた配列
-        this.frequency = [100, 90, 80, 70, 60, 50, 40, 30]; //frequency[0] ~ [7]
+        this.frequencyGroup = [100, 90, 80, 70, 60, 50, 40, 30]; //frequency[0] ~ [7]
+        this.frequency = this.frequencyGroup[0];
 
         //次にレベルの変わるスコア
         this.changeLevel = 1000;
@@ -134,7 +135,7 @@ phina.define("GameScene", {
 
 
         // 指定フレーム毎に
-        if (this.frame % this.frequency[this.level] === 0) {
+        if (this.frame % this.frequency === 0) {
             // 敵をランダムな方向に動くように出現させる
             if (this.level === 0)
                 var enemy = Enemy(Random.randint(0, 1), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
@@ -174,6 +175,8 @@ phina.define("GameScene", {
         // scoreがchangeLevelに格納された値を越えたらlevelを上げる
         if (this.score >= this.changeLevel) {
             this.level++;
+            // 出現頻度を更新
+            this.frequency = this.frequencyGroup[Math.min(this.frequencyGroup.length - 1, this.level)];
             this.changeLevel += 1000;
         }
 
