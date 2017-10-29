@@ -42,7 +42,16 @@ phina.define("TitleScene", {
 	},
 	
 	delayExit: function(){
+		var changeTime = 2000;
+		
+		var mask = RectangleShape().setSize(SCREEN_WIDTH,SCREEN_HEIGHT).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2).addChildTo(this);
+		mask.fill = "white";
+		mask.alpha = 0;
+		mask.strokeWidth = 0;
+		mask.tweener.to({alpha:1},changeTime,"easeInCubic");
+		
 		var self = this;
-		setTimeout(function(){self.exit();},1000);
+		setTimeout(function(){self.exit();},changeTime);
+		
 	},
 });
