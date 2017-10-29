@@ -18,16 +18,31 @@ phina.define("TitleScene", {
         this.gameTitle.y = this.gridY.center();
         this.gameTitle.fill = 'black';
         this.gameTitle.fontSize = 30;
+		
+        Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
+		
+		for(var i=0;i<4;i++){
+			var enemy = Enemy(3,i).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(10));
+			enemy.update = null;
+			
+			var item = Item(i,65+15*i).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12));
+			item.update = null;
+		}
 
         SoundManager.playMusic("bgm");
     },
 
 	
     onclick: function () {
-        this.exit();
+		this.delayExit();
     },
 	
 	onkeydown: function(){
-		this.exit();
-	}
+		this.delayExit();
+	},
+	
+	delayExit: function(){
+		var self = this;
+		setTimeout(function(){self.exit();},1000);
+	},
 });
