@@ -1,11 +1,11 @@
 phina.define("Item", {
     superClass: "Sprite",
-    init: function (dir, itemNum) {
-        if(itemNum <= 65){
+    init: function (dir, randomNum) {
+        if(randomNum <= 65){
             this.itemNum = 0;
-        }else if(itemNum <= 85){
+        }else if(randomNum <= 85){
             this.itemNum = 1;
-        }else if(itemNum <= 95){
+        }else if(randomNum <= 95){
             this.itemNum = 2;
         }else{
             this.itemNum = 3;
