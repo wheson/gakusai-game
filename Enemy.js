@@ -36,10 +36,6 @@ phina.define("Enemy", {
             this.animation.gotoAndPlay("LEFT");
         }
 
-        // 方向で色を変更
-        //this.color = enemyColors[this.direction];
-        //this.fill = this.color;
-
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'yellow';
@@ -51,6 +47,8 @@ phina.define("Enemy", {
 
     update: function () {
         if (this.enemyNum === 0) {
+			// 白いお化け
+			// 出現した向きに一定速度で直進する
             if (this.direction === UP) {
                 this.y -= this.speed;
             } else if (this.direction === DOWN) {
@@ -61,6 +59,8 @@ phina.define("Enemy", {
                 this.x -= this.speed;
             }
         } else if (this.enemyNum === 1) {
+			// 青いお化け
+			// 出現した向きに加速度0.1で直進する
             if (this.direction === UP) {
                 this.y -= this.speed;
             } else if (this.direction === DOWN) {
@@ -72,6 +72,9 @@ phina.define("Enemy", {
             }
             this.speed += 0.1;
         } else if (this.enemyNum === 2) {
+			// 黒いお化け
+			// 200フレーム経過で方向転換する
+			// 加速度0.01
             if (this.direction === UP) {
                 this.y -= this.speed;
             } else if (this.direction === DOWN) {
@@ -83,7 +86,11 @@ phina.define("Enemy", {
             }
 
             if (this.time % 200 === 0) {
-                this.direction = Random.randint(0, 3);
+				var newDirection;
+				do{
+					newDirection = Random.randint(0, 3);
+				while(this.direction === newDirection);
+                this.direction = newDirection;
                 if (this.direction === UP) {
                     this.animation.gotoAndPlay("UP");
                 } else if (this.direction === DOWN) {
@@ -96,6 +103,8 @@ phina.define("Enemy", {
             }
             this.speed += 0.01;
         } else if (this.enemyNum === 3) {
+			// 紫のお化け
+			// 加速度0.5で直進する
             if (this.direction === UP) {
                 this.y -= this.speed;
             } else if (this.direction === DOWN) {
