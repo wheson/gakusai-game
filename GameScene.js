@@ -74,6 +74,8 @@ phina.define("GameScene", {
 
         this.startFlag = false;
         this.endFlag = false;
+
+        //SoundManager.playMusic("bgm1");
     },
 
     // 更新
@@ -83,7 +85,9 @@ phina.define("GameScene", {
 			// トマピコが画面から出たら終わる
 			if(this.tomapiko.bottom > SCREEN_HEIGHT){
 				this.exit("result", {
-					score: this.socre
+                    frame: this.frame,
+					score: this.score,
+                    level: this.level,
 				});
 			}else{
 				var tx = this.tomapiko.x;
@@ -104,9 +108,9 @@ phina.define("GameScene", {
         // startFlagが立っていなければreturnする
         if (this.startFlag) {
             this.frame++;
-            this.frameTime.text = this.frame;
-            this.displayScore.text = this.score;
-            this.displayLevel.text = this.level;
+            this.frameTime.text = "time: " + this.frame;
+            this.displayScore.text = "score: " + this.score;
+            this.displayLevel.text = "level: " + this.level;
             this.tomapiko.startFlag = true;
         } else {
             return;
@@ -296,7 +300,6 @@ phina.define("GameScene", {
             var itemCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
             if (Collision.testCircleCircle(tomapikoCollision, itemCollision)) {
                 self.score += elm.getScore();
-                self.scoreCount += elm.getScore();
                 if (DEBUG) console.log("item hit!");
                 elm.remove();
                 SoundManager.play("get");

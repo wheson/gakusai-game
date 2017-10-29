@@ -14,6 +14,30 @@ phina.define("ResultScene", {
         this.gameTitle.fill = 'black';
         this.gameTitle.fontSize = 15;
 
+        // frame
+        this.frame = options.frame;
+        this.frameTime = Label("0").addChildTo(this);
+        this.frameTime.fill = 'black';
+        this.frameTime.fontSize = 15;
+        this.frameTime.setPosition(this.gridX.span(14), this.gridY.span(2));
+
+        this.score = options.score;
+        this.displayScore = Label("0").addChildTo(this);
+        this.displayScore.fill = 'black';
+        this.displayScore.fontSize = 15;
+        this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
+
+        //ゲームのレベル
+        this.level = options.level;
+        this.displayLevel = Label("0").addChildTo(this);
+        this.displayLevel.fill = 'black';
+        this.displayLevel.fontSize = 15;
+        this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
+
+        this.frameTime.text = "time: " + this.frame;
+        this.displayScore.text = "score: " + this.score;
+        this.displayLevel.text = "level: " + this.level;
+
         var input = document.querySelector('#input');
         input.oninput = function () {
             label.text = input.value;
@@ -26,15 +50,15 @@ phina.define("ResultScene", {
         label.setInteractive(true);
         label.width = 400;
         label.height = 80;
-		
-		input.focus();
+
+        input.focus();
         label.onpointstart = function () {
             input.focus();
         };
     },
-/*
-    onclick: function () {
-        this.exit();
-    }
-*/
+    /*
+        onclick: function () {
+            this.exit();
+        }
+    */
 });
