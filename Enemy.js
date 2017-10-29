@@ -11,28 +11,29 @@ phina.define("Enemy", {
         this.level = level;
         this.speed = 1 + this.level * 0.4;
 
-        this.time = 0;
+        this.time = 1;
 
-        var animation = FrameAnimation("enemySS").attachTo(this);
-        animation.fit = false;
+        //var animation = FrameAnimation("enemySS").attachTo(this);
+        this.animation = FrameAnimation("enemySS").attachTo(this);
+        this.animation.fit = false;
 
         // 方向によって出現位置を設定
         if (this.direction === UP) {
             this.x = x;
             this.y = SCREEN_HEIGHT;
-            animation.gotoAndPlay("UP");
+            this.animation.gotoAndPlay("UP");
         } else if (this.direction === DOWN) {
             this.x = x;
             this.y = 0;
-            animation.gotoAndPlay("DOWN");
+            this.animation.gotoAndPlay("DOWN");
         } else if (this.direction === RIGHT) {
             this.x = 0;
             this.y = y;
-            animation.gotoAndPlay("RIGHT");
+            this.animation.gotoAndPlay("RIGHT");
         } else if (this.direction === LEFT) {
             this.x = SCREEN_WIDTH;
             this.y = y;
-            animation.gotoAndPlay("LEFT");
+            this.animation.gotoAndPlay("LEFT");
         }
 
         // 方向で色を変更
@@ -71,7 +72,28 @@ phina.define("Enemy", {
             }
             this.speed += 0.1;
         } else if (this.enemyNum === 2) {
+            if (this.direction === UP) {
+                this.y -= this.speed;
+            } else if (this.direction === DOWN) {
+                this.y += this.speed;
+            } else if (this.direction === RIGHT) {
+                this.x += this.speed;
+            } else if (this.direction === LEFT) {
+                this.x -= this.speed;
+            }
 
+            if (this.time % 200 === 0) {
+                this.direction = Random.randint(0, 3);
+                if (this.direction === UP) {
+                    this.animation.gotoAndPlay("UP");
+                } else if (this.direction === DOWN) {
+                    this.animation.gotoAndPlay("DOWN");
+                } else if (this.direction === RIGHT) {
+                    this.animation.gotoAndPlay("RIGHT");
+                } else if (this.direction === LEFT) {
+                    this.animation.gotoAndPlay("LEFT");
+                }
+            }
         } else if (this.enemyNum === 3) {
 
         }

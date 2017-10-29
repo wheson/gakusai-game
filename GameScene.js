@@ -59,7 +59,7 @@ phina.define("GameScene", {
         this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
         //ゲームのレベル
-        this.level = 0 ;
+        this.level = 0;
         this.displayLevel = Label("0").addChildTo(this);
         this.displayLevel.fill = 'black';
         this.displayLevel.fontSize = 15;
