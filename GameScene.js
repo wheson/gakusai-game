@@ -80,11 +80,14 @@ phina.define("GameScene", {
 
         this.startFlag = false;
         this.endFlag = false;
+		
 
     },
 
     // 更新
     update: function (app) {
+        var self = this; // 関数のスコープに入るのでthisを預けておく
+		
         // endFlagが立っていれば終了して次のシーンに移動する
         if (this.endFlag) {
             // トマピコが画面から出たら終わる
@@ -108,9 +111,11 @@ phina.define("GameScene", {
 
         // 上キーを押したらゲームが開始するようにする
         // それ以外の場合は何もしない
+		// すでに開始していた場合は見えない
         if (app.keyboard.getKey("up") || app.keyboard.getKey("space")) {
-			this.label1.tweener.to({alpha:0,y:this.label1.y-30},1000);
-			this.label2.tweener.to({alpha:0,y:this.label2.y-30},1000);
+			// ラベルは1秒かけて透明になりながら上昇する
+			this.label1.tweener.to({alpha:0,y:this.label1.y-30},1000).call(function(){self.label1.remove();});
+			this.label2.tweener.to({alpha:0,y:this.label2.y-30},1000).call(function(){self.label2.remove();});
             this.startFlag = true;
         }
 
@@ -147,21 +152,10 @@ phina.define("GameScene", {
 
         // 画面に存在する全てのアイテムに対して
         this.itemGroup.children.each(function (elm) {
-            // アイテムの移動方向で分岐してそれぞれについて画面から見えなくなったらアイテムをグループから削除する
-            switch (elm.direction) {
-                case UP:
-                    if (elm.bottom === 0) elm.remove();
-					break;
-                case DOWN:
-                    if (elm.top === SCREEN_HEIGHT) elm.remove();
-					break;
-                case RIGHT:
-                    if (elm.left === SCREEN_WIDTH) elm.remove();
-					break;
-                case LEFT:
-                    if (elm.right === 0) elm.remove();
-					break;
-            }
+            // 画面から見えなくなったらアイテムをグループから削除する
+            if (elm.bottom < 0 || elm.top > SCREEN_HEIGHT || elm.left > SCREEN_WIDTH || elm.right < 0) {
+                elm.remove();
+			}
         });
 
 
@@ -292,7 +286,6 @@ phina.define("GameScene", {
             this.changeLevel += 1000;
         }
 
-        var self = this; // 関数のスコープに入るのでthisを預けておく
 
         // トマピコの当たり判定を計算して専用の矩形を作る
         var tomapikoCollision = Circle(this.tomapiko.x, this.tomapiko.y, this.tomapiko.COLLISION.radius);
