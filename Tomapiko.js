@@ -11,7 +11,8 @@ phina.define("Tomapiko", {
 
     init: function () {
         this.superInit('tomapiko', 64, 64);
-        FrameAnimation("tomapikoSS").attachTo(this).gotoAndPlay("start");
+        this.animation = FrameAnimation("tomapikoSS").attachTo(this);
+		this.animation.gotoAndPlay("flap");
         //this.physical.gravity.set(0, 0.1);
 
         this.COLLISION = CircleShape().addChildTo(this);

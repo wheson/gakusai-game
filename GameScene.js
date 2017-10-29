@@ -78,6 +78,19 @@ phina.define("GameScene", {
 
     // 更新
     update: function (app) {
+        // endFlagが立っていれば終了して次のシーンに移動する
+        if (this.endFlag) {
+			// トマピコが画面から出たら終わる
+			if(this.tomapiko.bottom > SCREEN_HEIGHT){
+				this.exit("result", {
+					score: this.socre
+				});
+			}else{
+				var tx = this.tomapiko.x;
+				this.tomapiko.x = tx < SCREEN_WIDTH?(tx>0?tx:0):SCREEN_WIDTH;
+				return;
+			}
+        }
 
         // 上キーを押したらゲームが開始するようにする
         // それ以外の場合は何もしない
@@ -273,6 +286,7 @@ phina.define("GameScene", {
             var enemyCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
             if (Collision.testCircleCircle(tomapikoCollision, enemyCollision)) {
                 self.endFlag = true;
+				self.tomapiko.animation.gotoAndPlay("damage");
             }
         });
 
@@ -301,12 +315,6 @@ phina.define("GameScene", {
             if (DEBUG) console.log("right limit");
         }
 
-        // endFlagが立っていれば終了して次のシーンに移動する
-        if (this.endFlag) {
-            this.exit("result", {
-                score: this.socre
-            });
-        }
     },
 
 });
