@@ -59,6 +59,7 @@ phina.define("Tomapiko", {
          * else velocity.y = -JUMP_SPEED; */
 
         this.physical.velocity.y = -JUMP_SPEED;
+		SoundManager.play("jump");
         /*
                 col = this.getColRect(phina.geom.Vector2(0, -1));
                 blocks.children.some(function (block) {
