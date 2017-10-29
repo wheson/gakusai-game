@@ -59,7 +59,7 @@ phina.define("GameScene", {
         this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
         //ゲームのレベル
-        this.level = 2 ;
+        this.level = 0;
         this.displayLevel = Label("0").addChildTo(this);
         this.displayLevel.fill = 'black';
         this.displayLevel.fontSize = 15;
@@ -68,8 +68,8 @@ phina.define("GameScene", {
         //敵の出現頻度をまとめた配列
         this.frequency = [100, 90, 80, 70, 60, 50, 40, 30]; //frequency[0] ~ [7]
 
-        //レベルの変わるスコアをまとめた配列
-        this.changeLevel = [1000, 3000, 5000, 10000, 20000, 30000, 50000, 100000]; //changeLevel[0] ~ [7]
+        //次にレベルの変わるスコア
+        this.changeLevel = 1000;
 
         this.startFlag = false;
         this.endFlag = false;
@@ -161,7 +161,7 @@ phina.define("GameScene", {
             // アイテムをランダムな方向に動くように出現させる
             // item0: 65%, item1: 20%, item2: 10%, item3: 5%
             if(this.level === 0)
-                var item = Item(Random.randint(0, 3), randint(1, 65)).addChildTo(this.itemGroup);
+                var item = Item(Random.randint(0, 3), Random.randint(1, 65)).addChildTo(this.itemGroup);
             else if(this.level < 2)
                 var item = Item(Random.randint(0, 3), Random.randint(1, 85)).addChildTo(this.itemGroup);
             else if(this.level < 4)
@@ -172,8 +172,9 @@ phina.define("GameScene", {
 
 
         // scoreがchangeLevelに格納された値を越えたらlevelを上げる
-        if (this.level != this.changeLevel.length && this.score >= this.changeLevel[this.level]) {
+        if (this.score >= this.changeLevel) {
             this.level++;
+            this.changeLevel += 1000;
         }
 
         var self = this; // 関数のスコープに入るのでthisを預けておく
