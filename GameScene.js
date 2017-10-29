@@ -48,20 +48,19 @@ phina.define("GameScene", {
         // 都合-1から
         this.frame = -1;
 
-        this.time = -1;
+        this.time = 0;
+        this.score = 0;
+        this.level = 0;
         this.displayTime = Label().addChildTo(this);
         this.displayTime.fill = 'black';
         this.displayTime.fontSize = 15;
         this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
 
-        this.score = 0;
         this.displayScore = Label().addChildTo(this);
         this.displayScore.fill = 'black';
         this.displayScore.fontSize = 15;
         this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
-        //ゲームのレベル
-        this.level = 0;
         this.displayLevel = Label().addChildTo(this);
         this.displayLevel.fill = 'black';
         this.displayLevel.fontSize = 15;
@@ -92,22 +91,20 @@ phina.define("GameScene", {
         if (this.endFlag) {
             // トマピコが画面から出たら終わる
             if (this.tomapiko.bottom > SCREEN_HEIGHT) {
+				// ResultSceneに引数を渡して終了する
                 this.exit("result", {
                     time: this.time,
                     score: this.score,
                     level: this.level,
                 });
             } else {
+				// トマピコが左右からはみ出さないようにする
                 var tx = this.tomapiko.x;
                 this.tomapiko.x = tx < SCREEN_WIDTH ? (tx > 0 ? tx : 0) : SCREEN_WIDTH;
                 return;
             }
         }
 
-        //30frameごとにtimeを+1する(約1秒)
-        if (this.frame % 30 === 0) {
-            this.time++;
-        }
 
         // 上キーを押したらゲームが開始するようにする
         // それ以外の場合は何もしない
@@ -123,6 +120,7 @@ phina.define("GameScene", {
         // startFlagが立っていなければreturnする
         if (this.startFlag) {
             this.frame++;
+			this.time = Math.floor(this.frame/30);
             this.displayTime.text = "time: " + this.time;
             this.displayScore.text = "score: " + this.score;
             this.displayLevel.text = "level: " + this.level;
