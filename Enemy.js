@@ -94,6 +94,7 @@ phina.define("Enemy", {
                     this.animation.gotoAndPlay("LEFT");
                 }
             }
+            this.speed += 0.01;
         } else if (this.enemyNum === 3) {
 
         }

@@ -59,7 +59,7 @@ phina.define("GameScene", {
         this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
         //ゲームのレベル
-        this.level = 0;
+        this.level = 2 ;
         this.displayLevel = Label("0").addChildTo(this);
         this.displayLevel.fill = 'black';
         this.displayLevel.fontSize = 15;
@@ -159,12 +159,15 @@ phina.define("GameScene", {
         //指定フレームごとに
         if (this.frame % 100 == 0 && this.frame !== 0) {
             // アイテムをランダムな方向に動くように出現させる
+            // item0: 65%, item1: 20%, item2: 10%, item3: 5%
             if(this.level === 0)
-                var item = Item(Random.randint(0, 3), 0).addChildTo(this.itemGroup);
-            else if(this.level === 1)
-                var item = Item(Random.randint(0, 3), Random.randint(0, 1)).addChildTo(this.itemGroup);
+                var item = Item(Random.randint(0, 3), randint(1, 65)).addChildTo(this.itemGroup);
+            else if(this.level < 2)
+                var item = Item(Random.randint(0, 3), Random.randint(1, 85)).addChildTo(this.itemGroup);
+            else if(this.level < 4)
+                var item = Item(Random.randint(0, 3), Random.randint(1, 95)).addChildTo(this.itemGroup);
             else
-                var item = Item(Random.randint(0, 3), Random.randint(0, 2)).addChildTo(this.itemGroup);
+                var item = Item(Random.randint(0, 3), Random.randint(1, 100)).addChildTo(this.itemGroup);
         }
 
 
