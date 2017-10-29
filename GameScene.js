@@ -159,12 +159,10 @@ phina.define("GameScene", {
         //指定フレームごとに
         if (this.frame % 100 == 0 && this.frame !== 0) {
             // アイテムをランダムな方向に動くように出現させる
-            if(this.level < 3)
+            if(this.level === 0)
                 var item = Item(Random.randint(0, 3), 0).addChildTo(this.itemGroup);
-            else if(this.level < 6)
+            else if(this.level === 1)
                 var item = Item(Random.randint(0, 3), Random.randint(0, 1)).addChildTo(this.itemGroup);
-            else if(this.level < 10)
-                var item = Item(Random.randint(0, 3), Random.randint(0, 2)).addChildTo(this.itemGroup);
             else
                 var item = Item(Random.randint(0, 3), Random.randint(0, 2)).addChildTo(this.itemGroup);
         }
