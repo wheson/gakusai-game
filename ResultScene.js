@@ -15,11 +15,11 @@ phina.define("ResultScene", {
         this.gameTitle.fontSize = 15;
 
         // frame
-        this.frame = options.frame;
-        this.frameTime = Label("0").addChildTo(this);
-        this.frameTime.fill = 'black';
-        this.frameTime.fontSize = 15;
-        this.frameTime.setPosition(this.gridX.span(14), this.gridY.span(2));
+        this.time = options.time;
+        this.displayTime = Label("0").addChildTo(this);
+        this.displayTime.fill = 'black';
+        this.displayTime.fontSize = 15;
+        this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
 
         this.score = options.score;
         this.displayScore = Label("0").addChildTo(this);
@@ -34,7 +34,7 @@ phina.define("ResultScene", {
         this.displayLevel.fontSize = 15;
         this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
 
-        this.frameTime.text = "time: " + this.frame;
+        this.displayTime.text = "time: " + this.time;
         this.displayScore.text = "score: " + this.score;
         this.displayLevel.text = "level: " + this.level;
 
