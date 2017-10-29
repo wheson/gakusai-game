@@ -89,7 +89,7 @@ phina.define("Enemy", {
 				var newDirection;
 				do{
 					newDirection = Random.randint(0, 3);
-				while(this.direction === newDirection);
+				}while(this.direction === newDirection);
                 this.direction = newDirection;
                 if (this.direction === UP) {
                     this.animation.gotoAndPlay("UP");
