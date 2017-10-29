@@ -12,7 +12,7 @@ phina.define("TitleScene", {
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
 
-        this.gameTitle = Label("テキスト入力");
+        this.gameTitle = Label("PRESS ANY KEY");
         this.gameTitle.addChildTo(this);
         this.gameTitle.x = this.gridX.center();
         this.gameTitle.y = this.gridY.center();
@@ -22,7 +22,12 @@ phina.define("TitleScene", {
         SoundManager.playMusic("bgm");
     },
 
+	
     onclick: function () {
         this.exit();
-    }
+    },
+	
+	onkeydown: function(){
+		this.exit();
+	}
 });

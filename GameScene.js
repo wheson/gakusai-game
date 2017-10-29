@@ -106,8 +106,8 @@ phina.define("GameScene", {
         // 上キーを押したらゲームが開始するようにする
         // それ以外の場合は何もしない
         if (app.keyboard.getKey("up") || app.keyboard.getKey("space")) {
-            this.label1.alpha = 0;
-            this.label2.alpha = 0;
+			this.label1.tweener.to({alpha:0,y:this.label1.y-30},1000);
+			this.label2.tweener.to({alpha:0,y:this.label2.y-30},1000);
             this.startFlag = true;
         }
 
