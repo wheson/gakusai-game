@@ -46,7 +46,8 @@ phina.define("GameScene", {
         this.label2.fill = 'black';
         this.label2.fontSize = 15;
 
-        this.frame = 0;
+		// 都合-1から
+        this.frame = -1;
         this.frameTime = Label("0").addChildTo(this);
         this.frameTime.fill = 'black';
         this.frameTime.fontSize = 15;
