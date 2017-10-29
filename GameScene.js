@@ -287,6 +287,7 @@ phina.define("GameScene", {
             if (Collision.testCircleCircle(tomapikoCollision, enemyCollision)) {
                 self.endFlag = true;
 				self.tomapiko.animation.gotoAndPlay("damage");
+				SoundManager.play("fall");
             }
         });
 
