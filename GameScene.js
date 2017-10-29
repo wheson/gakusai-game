@@ -59,7 +59,7 @@ phina.define("GameScene", {
         this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
         //ゲームのレベル
-        this.level = 0;
+        this.level = 0 ;
         this.displayLevel = Label("0").addChildTo(this);
         this.displayLevel.fill = 'black';
         this.displayLevel.fontSize = 15;
@@ -111,16 +111,9 @@ phina.define("GameScene", {
 
         // 画面に存在する全ての敵に対して
         this.enemyGroup.children.each(function (elm) {
-            // 敵の移動方向で分岐してそれぞれについて画面から見えなくなったら敵をグループから削除する
-            switch (elm.direction) {
-                case UP:
-                    if (elm.bottom === 0) elm.remove();
-                case DOWN:
-                    if (elm.top === SCREEN_HEIGHT) elm.remove();
-                case RIGHT:
-                    if (elm.left === SCREEN_WIDTH) elm.remove();
-                case LEFT:
-                    if (elm.right === 0) elm.remove();
+            // 画面から見えなくなったら敵をグループから削除する
+            if (elm.bottom < 0 || elm.top > SCREEN_HEIGHT || elm.left > SCREEN_WIDTH || elm.right < 0){
+                elm.remove();
             }
         });
 
@@ -144,22 +137,23 @@ phina.define("GameScene", {
         if (this.frame % this.frequency[this.level] === 0) {
             // 敵をランダムな方向に動くように出現させる
             if (this.level === 0)
-                var enemy = Enemy(Random.randint(0, 1), 0, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                var enemy = Enemy(Random.randint(0, 1), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
             else if (this.level === 1)
-                var enemy = Enemy(Random.randint(2, 3), 1, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                var enemy = Enemy(Random.randint(2, 3), 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
             else if (this.level === 2)
-                var enemy = Enemy(Random.randint(0, 3), 2, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                var enemy = Enemy(Random.randint(0, 3), 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
             else if (this.level === 3)
-                var enemy = Enemy(Random.randint(0, 3), 3, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
             else if (this.level === 4)
-
+                var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
             else if (this.level === 5)
-
+                var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
             else if (this.level === 6)
-
+                var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
             else if (this.level === 7)
-
+                var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
             else if (this.level === 8)
+                var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
         }
 
         //指定フレームごとに
@@ -172,6 +166,8 @@ phina.define("GameScene", {
             else if(this.level < 10)
                 var item = Item(Random.randint(0, 3), Random.randint(0, 2)).addChildTo(this.itemGroup);
             else
+                var item = Item(Random.randint(0, 3), Random.randint(0, 2)).addChildTo(this.itemGroup);
+        }
 
 
         // scoreがchangeLevelに格納された値を越えたらlevelを上げる
