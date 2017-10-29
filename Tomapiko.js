@@ -23,6 +23,7 @@ phina.define("Tomapiko", {
         this.COLLISION.radius = 15;
 
         this.falling = false;
+		this.prejump = false;
     },
 
     update: function (dir) {
@@ -39,7 +40,14 @@ phina.define("Tomapiko", {
         else if (dir.x < 0 && this.x >= 0) this.goLeft();
         else this.physical.velocity.x = 0;
 
-        if (dir.y < 0) this.jump();
+        if (dir.y < 0){
+			if(!this.prejump){
+				this.jump();
+				this.prejump = true;
+			}
+		}else{
+			this.prejump = false;
+		}
 
         if (this.y <= 0) {
             this.physical.velocity.y = 0;
