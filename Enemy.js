@@ -13,7 +13,6 @@ phina.define("Enemy", {
 
         this.time = 1;
 
-        //var animation = FrameAnimation("enemySS").attachTo(this);
         this.animation = FrameAnimation("enemySS").attachTo(this);
         this.animation.fit = false;
 

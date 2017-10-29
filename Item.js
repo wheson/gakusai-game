@@ -10,7 +10,8 @@ phina.define("Item", {
         }else{
             this.itemNum = 3;
         }
-        this.superInit("item" + String(this.itemNum),24,24);
+        this.superInit("item" + this.itemNum,24,24);
+		this.setSize(20,20);
         this.direction = dir;
 
         // 方向によって出現位置を設定
@@ -28,8 +29,6 @@ phina.define("Item", {
             this.y = Random.randint(0, SCREEN_HEIGHT);
         }
 
-        //大きさを指定
-       this.setSize(20, 20);
 
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
@@ -38,6 +37,7 @@ phina.define("Item", {
         if(DEBUG)this.COLLISION.strokeWidth = 2;
         this.COLLISION.radius = this.width / 2;
 
+		// アイテムの得点を設定
         if(this.itemNum === 0){
             this.score = 100;
             this.speedLevel = 0;
@@ -59,11 +59,11 @@ phina.define("Item", {
         if (this.direction === UP) {
             this.y -= 1 + this.speedLevel * 0.5;
         } else if (this.direction === DOWN) {
-            this.y += 1 + this.speedLevel * 0.5;;
+            this.y += 1 + this.speedLevel * 0.5;
         } else if (this.direction === RIGHT) {
-            this.x += 1 + this.speedLevel * 0.5;;
+            this.x += 1 + this.speedLevel * 0.5;
         } else if (this.direction === LEFT) {
-            this.x -= 1 + this.speedLevel * 0.5;;
+            this.x -= 1 + this.speedLevel * 0.5;
         }
 
     },
