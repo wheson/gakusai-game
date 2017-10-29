@@ -6,15 +6,20 @@ phina.define("TitleScene", {
             'width': SCREEN_WIDTH,
             'height': SCREEN_HEIGHT
         });
-        this.backgroundColor = '#185674';
-        this.gameTitle = Label("ゲーム");
+        // 背景
+        this.bg = Sprite("bg").addChildTo(this);
+        this.bg.origin.set(0, 0); // 左上基準に変更
+        this.bg.width = SCREEN_WIDTH;
+        this.bg.height = SCREEN_HEIGHT;
+
+        this.gameTitle = Label("テキスト入力");
         this.gameTitle.addChildTo(this);
-        this.gameTitle.x = 50;
-        this.gameTitle.y = 50;
+        this.gameTitle.x = this.gridX.center();
+        this.gameTitle.y = this.gridY.center();
         this.gameTitle.fill = 'black';
-        this.gameTitle.fontSize = 15;
-		
-		SoundManager.playMusic("bgm");
+        this.gameTitle.fontSize = 30;
+
+        SoundManager.playMusic("bgm");
     },
 
     onclick: function () {
