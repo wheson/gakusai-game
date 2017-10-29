@@ -169,105 +169,99 @@ phina.define("GameScene", {
         // 指定フレーム毎に
         if (this.frame % this.frequency === 0) {
             // 敵をランダムな方向に動くように出現させる
+			// 敵の種類を決める乱数
+			var randomNum = Random.randint(1, 100);
+			// 敵が出現する方向
+			var dir = Random.randint(0,3);
             if (this.level === 0) {
                 // enemy0: 100%, enemy1: 0%, enemy2: 0%, enemy3: 0%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 1) {
                 // enemy0: 60%, enemy1: 40%, enemy2: 0%, enemy3: 0%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 60) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 2) {
                 // enemy0: 30%, enemy1: 20%, enemy2: 50%, enemy3: 0%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 30) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 50) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 3) {
                 // enemy0: 30%, enemy1: 10%, enemy2: 50%, enemy3: 10%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 30) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 40) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 90) {
-                    var enemy = Enemy(Random.randint(0, 3), 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 4) {
                 // enemy0: 30%, enemy1: 10%, enemy2: 50%, enemy3: 10%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 30) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 40) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 90) {
-                    var enemy = Enemy(Random.randint(0, 3), 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 5) {
                 // enemy0: 30%, enemy1: 30%, enemy2: 30%, enemy3: 10%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 30) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 60) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 90) {
-                    var enemy = Enemy(Random.randint(0, 3), 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 6) {
                 // enemy0: 0%, enemy1: 70%, enemy2: 0%, enemy3: 30%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 70) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 7) {
                 // enemy0: 0%, enemy1: 70%, enemy2: 0%, enemy3: 30%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 70) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 8) {
                 // enemy0: 30%, enemy1: 30%, enemy2: 30%, enemy3: 10%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 30) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 40) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 90) {
-                    var enemy = Enemy(Random.randint(0, 3), 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 }
             } else {
                 // enemy0: 30%, enemy1: 20%, enemy2: 20%, enemy3: 30%
-                var randomNum = Random.randint(1, 100);
                 if (randomNum <= 30) {
-                    var enemy = Enemy(Random.randint(0, 3), 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 50) {
-                    var enemy = Enemy(Random.randint(0, 3), 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 70) {
-                    var enemy = Enemy(Random.randint(0, 3), 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var enemy = Enemy(Random.randint(0, 3), 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 }
             }
         }
@@ -277,14 +271,16 @@ phina.define("GameScene", {
         if (this.frame % 100 == 0 && this.frame !== 0) {
             // アイテムをランダムな方向に動くように出現させる
             // item0: 65%, item1: 20%, item2: 10%, item3: 5%
+			// アイテムが出現する方向
+			var dir = Random.randint(0,3);
             if (this.level === 0)
-                var item = Item(Random.randint(0, 3), Random.randint(1, 65)).addChildTo(this.itemGroup);
+                var item = Item(dir, Random.randint(1, 65)).addChildTo(this.itemGroup);
             else if (this.level < 2)
-                var item = Item(Random.randint(0, 3), Random.randint(1, 85)).addChildTo(this.itemGroup);
+                var item = Item(dir, Random.randint(1, 85)).addChildTo(this.itemGroup);
             else if (this.level < 4)
-                var item = Item(Random.randint(0, 3), Random.randint(1, 95)).addChildTo(this.itemGroup);
+                var item = Item(dir, Random.randint(1, 95)).addChildTo(this.itemGroup);
             else
-                var item = Item(Random.randint(0, 3), Random.randint(1, 100)).addChildTo(this.itemGroup);
+                var item = Item(dir, Random.randint(1, 100)).addChildTo(this.itemGroup);
         }
 
 
