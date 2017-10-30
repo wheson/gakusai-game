@@ -13,6 +13,7 @@ phina.define("Item", {
         this.superInit("item" + this.itemNum, 24, 24);
         this.setSize(20, 20);
         this.direction = dir;
+        this.speed = 1;
 
         this.frame = -1;
 
@@ -64,25 +65,26 @@ phina.define("Item", {
         //item0の設定
         if (this.itemNum === 0) {
             if (this.direction === UP) {
-                this.y -= 1;
+                this.y -= this.speed;
             } else if (this.direction === DOWN) {
-                this.y += 1;
+                this.y += this.speed;
             } else if (this.direction === RIGHT) {
-                this.x += 1;
+                this.x += this.speed;
             } else if (this.direction === LEFT) {
-                this.x -= 1;
+                this.x -= this.speed;
             }
             //item1の設定
         } else if (this.itemNum === 1) {
             if (this.direction === UP) {
-                this.y -= 1;
+                this.y -= this.speed;
             } else if (this.direction === DOWN) {
-                this.y += 1;
+                this.y += this.speed;
             } else if (this.direction === RIGHT) {
-                this.x += 1;
+                this.x += this.speed;
             } else if (this.direction === LEFT) {
-                this.x -= 1;
+                this.x -= this.speed;
             }
+            this.speed += 0.02;
             //item2の設定
         } else if (this.itemNum === 2) {
             if (this.frame % 90 === 0) {
