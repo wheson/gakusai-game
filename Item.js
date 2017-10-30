@@ -42,16 +42,19 @@ phina.define("Item", {
         // アイテムの得点を設定
         if (this.itemNum === 0) {
             this.score = 100;
-            this.speedLevel = 0;
+            this.removeFrame = 99999;
         } else if (this.itemNum === 1) {
             this.score = 200;
-            this.speedLevel = 1;
+            this.removeFrame = 99999;
         } else if (this.itemNum === 2) {
             this.score = 500;
-            this.speedLevel = 5;
+            this.removeFrame = 600;
+            // 出現場所を変更
+            this.x = Random.randint(0, SCREEN_WIDTH);
+            this.y = Random.randint(0, SCREEN_HEIGHT);
         } else if (this.itemNum === 3) {
             this.score = 1000;
-            this.speedLevel = 10;
+            this.removeFrame = 300;
         }
 
 
@@ -61,47 +64,41 @@ phina.define("Item", {
         //item0の設定
         if (this.itemNum === 0) {
             if (this.direction === UP) {
-                this.y -= 1 + this.speedLevel * 0.5;
+                this.y -= 1;
             } else if (this.direction === DOWN) {
-                this.y += 1 + this.speedLevel * 0.5;
+                this.y += 1;
             } else if (this.direction === RIGHT) {
-                this.x += 1 + this.speedLevel * 0.5;
+                this.x += 1;
             } else if (this.direction === LEFT) {
-                this.x -= 1 + this.speedLevel * 0.5;
+                this.x -= 1;
             }
-        //item1の設定
+            //item1の設定
         } else if (this.itemNum === 1) {
             if (this.direction === UP) {
-                this.y -= 1 + this.speedLevel * 0.5;
+                this.y -= 1;
             } else if (this.direction === DOWN) {
-                this.y += 1 + this.speedLevel * 0.5;
+                this.y += 1;
             } else if (this.direction === RIGHT) {
-                this.x += 1 + this.speedLevel * 0.5;
+                this.x += 1;
             } else if (this.direction === LEFT) {
-                this.x -= 1 + this.speedLevel * 0.5;
+                this.x -= 1;
             }
-        //item2の設定
+            //item2の設定
         } else if (this.itemNum === 2) {
-            if (this.direction === UP) {
-                this.y -= 1 + this.speedLevel * 0.5;
-            } else if (this.direction === DOWN) {
-                this.y += 1 + this.speedLevel * 0.5;
-            } else if (this.direction === RIGHT) {
-                this.x += 1 + this.speedLevel * 0.5;
-            } else if (this.direction === LEFT) {
-                this.x -= 1 + this.speedLevel * 0.5;
+            if (this.frame % 90 === 0) {
+                this.x = Random.randint(0, SCREEN_WIDTH);
+                this.y = Random.randint(0, SCREEN_HEIGHT);
             }
-        //item3の設定
+            // removeFrameをframeが越えると自身を消す
+            if (this.frame >= this.removeFrame) this.remove();
+            //item3の設定
         } else if (this.itemNum === 3) {
-            if (this.direction === UP) {
-                this.y -= 1 + this.speedLevel * 0.5;
-            } else if (this.direction === DOWN) {
-                this.y += 1 + this.speedLevel * 0.5;
-            } else if (this.direction === RIGHT) {
-                this.x += 1 + this.speedLevel * 0.5;
-            } else if (this.direction === LEFT) {
-                this.x -= 1 + this.speedLevel * 0.5;
+            if (this.frame % 60 === 0) {
+                this.x = Random.randint(0, SCREEN_WIDTH);
+                this.y = Random.randint(0, SCREEN_HEIGHT);
             }
+            // removeFrameをframeが越えると自身を消す
+            if (this.frame >= this.removeFrame) this.remove();
         }
 
         this.frame++;
