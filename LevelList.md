@@ -35,34 +35,14 @@
   - level 10 黄玉出現
     - enemy0: 50%, enemy1: 20%, enemy2: 20%, enemy3: 10%
     - 0: 縦横混同, 1: 縦横混同 プレイヤー(x,y), 2: 横縦混同, 3: プレイヤー(x,y)
-## level 11~15
-- 出現頻度 80
-  - level 11
-    - enemy0: 0%, enemy1: 80%, enemy2: 0%, enemy3: 20%
-    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
-  - level 12
-    - enemy0: 0%, enemy1: 60%, enemy2: 0%, enemy3: 40%
-    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
-  - level 13
-    - enemy0: 0%, enemy1: 50%, enemy2: 0%, enemy3: 50%
-    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
-  - level 14
-    - enemy0: 0%, enemy1: 40%, enemy2: 0%, enemy3: 60%
-    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
-  - level 15
-    - enemy0: 0%, enemy1: 20%, enemy2: 0%, enemy3: 80%
-    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
-## level 16~20
-- 出現頻度 70
-
-## level 21~25
-- 出現頻度 60
-
-## level 26~30
-- 出現頻度 50
-
-## level 31~35
-- 出現頻度 40
-
-## level 36~40
-- 出現頻度 30(最小値)
+## level 11~
+- ステージ0 白をappearanceNum分出す(縦横交互)
+- ステージ1 青をappearanceNum分出す(縦横交互)
+- ステージ2 黒をappearanceNum分出す(縦横交互)
+- ステージ3 白60% 青40%で出す
+- ステージ4 白と黒をappearanceNum分出す (縦横交互)
+- ステージ5 白をappearanceNum*2分出す (縦横交互)
+- ステージ6 それぞれ25%ずつでappearanceNum分出す (縦横交互)
+- ステージ7 青をappearanceNum*2分出す(縦横交互)
+- ステージ8 紫をappearanceNum分出す(縦横交互)
+- ステージ9 白20%, 黒50%, 青20%, 紫10% 
