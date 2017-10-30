@@ -1,20 +1,14 @@
 phina.define("Tomapiko", {
-
     superClass: "Sprite",
-
-    FRAME_INDEX_STAY: 0,
-    FRAME_INDEX_WALKING_1: 12,
-    FRAME_INDEX_WALKING_2: 13,
-    FRAME_INDEX_JUMPING_1: 1,
-    FRAME_INDEX_JUMPING_2: 2,
-
-
+	
     init: function () {
         this.superInit('tomapiko', 64, 64);
+		// スプライトシート適用
         this.animation = FrameAnimation("tomapikoSS").attachTo(this);
+		// 羽ばたきアニメーション
 		this.animation.gotoAndPlay("flap");
-        //this.physical.gravity.set(0, 0.1);
 
+		// 当たり判定枠
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'red';
@@ -22,7 +16,12 @@ phina.define("Tomapiko", {
         if(DEBUG)this.COLLISION.strokeWidth = 2;
         this.COLLISION.radius = 15;
 
-        this.falling = false;
+		// 定数
+		this.jumpSpeed = 8;
+		this.walkSpeed = 4;
+		this.gravity = 0.3;
+		
+		// 連続ジャンプ防止用変数
 		this.prejump = false;
     },
 
@@ -34,12 +33,14 @@ phina.define("Tomapiko", {
     },
 
     move: function (dir) {
-
+		// 左右の移動
         if (dir.x > 0 && this.x <= SCREEN_WIDTH) this.goRight();
         else if (dir.x < 0 && this.x >= 0) this.goLeft();
         else this.physical.velocity.x = 0;
 
+		// ジャンプ
         if (dir.y < 0){
+			// 直前にジャンプ入力していなければジャンプする
 			if(!this.prejump){
 				this.jump();
 				this.prejump = true;
@@ -47,79 +48,42 @@ phina.define("Tomapiko", {
 		}else{
 			this.prejump = false;
 		}
-
+		
+		// 天井にぶつかっていればy速度を0にする
         if (this.y <= 0) {
             this.physical.velocity.y = 0;
         }
-
-        if (this.falling === false && dir.x === 0) {
-            this.frameIndex = this.FRAME_INDEX_STAY;
-        }
-
     },
 
     jump: function () {
-        //コメントアウトで無限ジャンプ
-        //if (this.falling === true) return;
-
-        /* if(collide) velocity.y = 0;
-         * else velocity.y = -JUMP_SPEED; */
-
-        this.physical.velocity.y = -JUMP_SPEED;
+		// y速度を上方向にする
+        this.physical.velocity.y = -this.jumpSpeed;
 		SoundManager.play("jump");
     },
 
     goLeft: function () {
-        /* if(collide) velocity.x = 0;
-         * else velocity.x = -WALK_SPEED; */
-
-        this.physical.velocity.x = -WALK_SPEED;
+		// x速度を左方向にする
+        this.physical.velocity.x = -this.walkSpeed;
+		// 横方向の拡大倍率を1にする(左向き)
         this.scaleX = 1;
     },
 
     goRight: function () {
-        /* if(collide) velocity.x = 0;
-         * else velocity.x = WALK_SPEED; */
-
-        this.physical.velocity.x = WALK_SPEED;
+        // x速度を右方向にする
+        this.physical.velocity.x = this.walkSpeed;
+		// 横方向の拡大倍率を-1にする(右向き)
         this.scaleX = -1;
     },
 
     checkFalling: function () {
-        /* if(collide) falling = true;
-         * else falling = false; */
+		// を下方向にする
+        this.physical.gravity.y = this.gravity;
 
-        this.physical.gravity.y = GRAVITY;
-        this.falling = true;
-
-        if (this.y >= SCREEN_HEIGHT) {
-            this.physical.velocity.y = 0;
+		// 下端に触れていればyをSCREEN_HEIGHTにし、gravityを0にする
+		// 画面の下に落ちていくのを防ぐ
+        if (this.y > SCREEN_HEIGHT) {
+			this.y = SCREEN_HEIGHT;
             this.physical.gravity.y = 0;
-            this.falling = false;
         }
     },
-
-    getColRect: function (dir) {
-        rect = RectangleShape();
-
-        var vx = 0;
-        var vy = 0;
-        // ((d>0 && v>0) || (d<0 && v<0))
-        if (dir.x * this.physical.velocity.x > 0) {
-            vx = this.physical.velocity.x;
-        }
-        if (dir.y * this.physical.velocity.y > 0) {
-            vy = this.physical.velocity.y + GRAVITY;
-        } else if (dir.y > 0) {
-            vy = GRAVITY;
-        }
-
-        rect.position.x = this.x + this.COLLISION.x + vx;
-        rect.position.y = this.y + this.COLLISION.y + vy;
-        rect.setSize(this.COLLISION.width, this.COLLISION.height);
-
-        return rect;
-    },
-
-
 });
