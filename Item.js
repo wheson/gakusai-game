@@ -45,7 +45,7 @@ phina.define("Item", {
             this.score = 100;
             this.removeFrame = 99999;
         } else if (this.itemNum === 1) {
-            this.score = 200;
+            this.score = 300;
             this.removeFrame = 99999;
         } else if (this.itemNum === 2) {
             this.score = 500;
