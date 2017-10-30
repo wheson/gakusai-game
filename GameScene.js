@@ -266,7 +266,8 @@ phina.define("GameScene", {
                     } else if (stageNum === 5) {
 
                     } else if (stageNum === 6) {
-
+                        var enemy1 = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                        var enemy2 = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                     } else if (stageNum === 7) {
 
                     } else if (stageNum === 8) {
