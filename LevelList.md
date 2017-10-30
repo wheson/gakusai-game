@@ -38,14 +38,20 @@
 ## level 11~15
 - 出現頻度 80
   - level 11
-
+    - enemy0: 0%, enemy1: 80%, enemy2: 0%, enemy3: 20%
+    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
   - level 12
-
+    - enemy0: 0%, enemy1: 60%, enemy2: 0%, enemy3: 40%
+    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
   - level 13
-
+    - enemy0: 0%, enemy1: 50%, enemy2: 0%, enemy3: 50%
+    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
   - level 14
-
+    - enemy0: 0%, enemy1: 40%, enemy2: 0%, enemy3: 60%
+    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
   - level 15
+    - enemy0: 0%, enemy1: 20%, enemy2: 0%, enemy3: 80%
+    - 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
 ## level 16~20
 - 出現頻度 70
 

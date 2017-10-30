@@ -217,7 +217,7 @@ phina.define("GameScene", {
                 } else if (randomNum <= 100) {
                     var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
-            } else if(this.level >= 10){
+            } else if(this.level === 10){
                 // enemy0: 50%, enemy1: 20%, enemy2: 20%, enemy3: 10% | 0: 縦横混同 プレイヤー(x,y), 1: 縦横混同 プレイヤー(x,y), 2: 横縦混同, 3: 縦横混同
                 if (randomNum <= 50) {
                     var enemy = Enemy(dir, 0, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
@@ -227,6 +227,41 @@ phina.define("GameScene", {
                     var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
                     var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                }
+            }else if(this.level === 11){
+                // enemy0: 0%, enemy1: 80%, enemy2: 0%, enemy3: 20% | 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
+                if (randomNum <= 80) {
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                } else if (randomNum <= 100) {
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                }
+            }else if(this.level === 12){
+                // enemy0: 0%, enemy1: 60%, enemy2: 0%, enemy3: 40% | 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
+                if (randomNum <= 60) {
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                } else if (randomNum <= 100) {
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                }
+            }else if(this.level === 13){
+                // enemy0: 0%, enemy1: 50%, enemy2: 0%, enemy3: 50% | 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
+                if (randomNum <= 50) {
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                } else if (randomNum <= 100) {
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                }
+            }else if(this.level === 14){
+                // enemy0: 0%, enemy1: 40%, enemy2: 0%, enemy3: 60% | 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
+                if (randomNum <= 40) {
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                } else if (randomNum <= 100) {
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                }
+            }else if(this.level >= 15){
+                // enemy0: 0%, enemy1: 20%, enemy2: 0%, enemy3: 80% | 1: 縦横混同 プレイヤー(x,y), 3: 縦横混同 プレイヤー(x,y)
+                if (randomNum <= 20) {
+                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                } else if (randomNum <= 100) {
+                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 }
             }
         }
