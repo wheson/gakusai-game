@@ -20,17 +20,17 @@ phina.define("Item", {
 
         // 方向によって出現位置を設定
         if (this.direction === UP) {
-            this.x = Random.randint(0, SCREEN_WIDTH);
+            this.x = Random.randint(80, SCREEN_WIDTH - 80);
             this.y = SCREEN_HEIGHT;
         } else if (this.direction === DOWN) {
-            this.x = Random.randint(0, SCREEN_WIDTH);
+            this.x = Random.randint(80, SCREEN_WIDTH - 80);
             this.y = 0;
         } else if (this.direction === RIGHT) {
             this.x = 0;
-            this.y = Random.randint(0, SCREEN_HEIGHT);
+            this.y = Random.randint(80, SCREEN_HEIGHT - 80);
         } else if (this.direction === LEFT) {
             this.x = SCREEN_WIDTH;
-            this.y = Random.randint(0, SCREEN_HEIGHT);
+            this.y = Random.randint(80, SCREEN_HEIGHT - 80);
         }
 
 
@@ -43,7 +43,7 @@ phina.define("Item", {
 
         // アイテムの得点を設定
         if (this.itemNum === 0) {
-            this.score = 100;
+            this.score = 80;
             this.removeFrame = -1;
         } else if (this.itemNum === 1) {
             this.score = 300;
@@ -52,7 +52,7 @@ phina.define("Item", {
             this.score = 500;
             this.removeFrame = 600;
         } else if (this.itemNum === 3) {
-            this.score = 1000;
+            this.score = 800;
             this.removeFrame = -1;
         }
 
@@ -102,8 +102,8 @@ phina.define("Item", {
                         self.remove();
                     });
             } else if (this.frame % 90 === 0) {
-                var toX = Random.randint(0, SCREEN_WIDTH);
-                var toY = Random.randint(0, SCREEN_HEIGHT);
+                var toX = Random.randint(80, SCREEN_WIDTH - 80);
+                var toY = Random.randint(80, SCREEN_HEIGHT - 80);
                 // ランダムな位置に高速移動する
                 this.tweener.clear()
                     .to({
