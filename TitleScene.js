@@ -51,6 +51,7 @@ phina.define("TitleScene", {
 	},
 	
 	delayExit: function(){
+		this.onclick = this.onkeydown = null;
 		var changeTime = 2000;
 		
 		var mask = RectangleShape().setSize(SCREEN_WIDTH,SCREEN_HEIGHT).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2).addChildTo(this);
@@ -58,6 +59,8 @@ phina.define("TitleScene", {
 		mask.alpha = 0;
 		mask.strokeWidth = 0;
 		mask.tweener.to({alpha:1},changeTime,"easeInCubic");
+		
+		SoundManager.play("titlese");
 		
 		var self = this;
 		setTimeout(function(){self.exit();},changeTime);
