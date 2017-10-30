@@ -86,22 +86,30 @@ phina.define("Item", {
             //item2の設定
         } else if (this.itemNum === 2) {
             // removeFrameをframeが越えると自身を消す
-            if (this.frame === this.removeFrame){
-				// 画面外の座標
-                var toX = Random.randint(-10, 10)*SCREEN_WIDTH;
-                var toY = Random.randint(-10, 10)*SCREEN_HEIGHT;
-				// callでremoveするためにthisを預ける
-				var self = this;
-				// ランダムな位置に高速移動し、自信をremoveする
-				this.tweener.clear()
-				.to({x:toX,y:toY},500,"easeInOutQuint")
-				.call(function(){self.remove();});
-			}else if (this.frame % 90 === 0) {
+            if (this.frame === this.removeFrame) {
+                // 画面外の座標
+                var toX = Random.randint(-10, 10) * SCREEN_WIDTH;
+                var toY = Random.randint(-10, 10) * SCREEN_HEIGHT;
+                // callでremoveするためにthisを預ける
+                var self = this;
+                // ランダムな位置に高速移動し、自身をremoveする
+                this.tweener.clear()
+                    .to({
+                        x: toX,
+                        y: toY
+                    }, 500, "easeInOutQuint")
+                    .call(function () {
+                        self.remove();
+                    });
+            } else if (this.frame % 90 === 0) {
                 var toX = Random.randint(0, SCREEN_WIDTH);
                 var toY = Random.randint(0, SCREEN_HEIGHT);
-				// ランダムな位置に高速移動する
-				this.tweener.clear()
-				.to({x:toX,y:toY},500,"easeInOutQuint");
+                // ランダムな位置に高速移動する
+                this.tweener.clear()
+                    .to({
+                        x: toX,
+                        y: toY
+                    }, 500, "easeInOutQuint");
             }
             //item3の設定
         } else if (this.itemNum === 3) {
