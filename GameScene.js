@@ -102,8 +102,8 @@ phina.define("GameScene", {
 				// トマピコが左右からはみ出さないようにする
                 var tx = this.tomapiko.x;
                 this.tomapiko.x = tx < SCREEN_WIDTH ? (tx > 0 ? tx : 0) : SCREEN_WIDTH;
-                return;
             }
+			return;
         }
 
 
