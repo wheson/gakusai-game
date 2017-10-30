@@ -92,7 +92,7 @@ phina.define("Item", {
                 var toY = Random.randint(-10, 10)*SCREEN_HEIGHT;
 				// callでremoveするためにthisを預ける
 				var self = this;
-				// ランダムな位置に高速移動し、自信をremoveする
+				// ランダムな位置に高速移動し、自身をremoveする
 				this.tweener.clear()
 				.to({x:toX,y:toY},500,"easeInOutQuint")
 				.call(function(){self.remove();});
