@@ -142,5 +142,5 @@ phina.define("Enemy", {
         } else if (this.direction === LEFT) {
             this.animation.gotoAndPlay("LEFT");
         }
-    }
+    },
 })
