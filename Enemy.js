@@ -84,7 +84,7 @@ phina.define("Enemy", {
                 this.x -= this.speed;
             }
 
-            if (this.frame % 200 === 0) {
+            if (this.frame % 100 === 0) {
 				var newDirection;
 				do{
 					newDirection = Random.randint(0, 3);
