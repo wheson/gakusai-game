@@ -9,7 +9,11 @@ phina.define("Enemy", {
         this.direction = dir;
 
         this.level = level;
-        this.speed = 1 + this.level * 0.4;
+
+        this.speed = 1;
+        // ステージレベルが10以上の時speedを(レベル - 9)*0.4追加する
+        if(this.level >= 10)
+            this.speed += (this.level - 9) * 0.4;
 
         this.frame = 1;
 
