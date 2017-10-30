@@ -10,6 +10,7 @@ phina.define("Item", {
         } else {
             this.itemNum = 3;
         }
+
         this.superInit("item" + this.itemNum, 24, 24);
         this.setSize(20, 20);
         this.direction = dir;
@@ -55,7 +56,7 @@ phina.define("Item", {
             this.y = Random.randint(0, SCREEN_HEIGHT);
         } else if (this.itemNum === 3) {
             this.score = 1000;
-            this.removeFrame = 300;
+            this.removeFrame = 99999;
         }
 
 
@@ -95,12 +96,15 @@ phina.define("Item", {
             if (this.frame >= this.removeFrame) this.remove();
             //item3の設定
         } else if (this.itemNum === 3) {
-            if (this.frame % 60 === 0) {
-                this.x = Random.randint(0, SCREEN_WIDTH);
-                this.y = Random.randint(0, SCREEN_HEIGHT);
+            if (this.direction === UP) {
+                this.y -= this.speed + 5;
+            } else if (this.direction === DOWN) {
+                this.y += this.speed + 5;
+            } else if (this.direction === RIGHT) {
+                this.x += this.speed + 5;
+            } else if (this.direction === LEFT) {
+                this.x -= this.speed + 5;
             }
-            // removeFrameをframeが越えると自身を消す
-            if (this.frame >= this.removeFrame) this.remove();
         }
 
         this.frame++;
