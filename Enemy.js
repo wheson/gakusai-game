@@ -11,7 +11,7 @@ phina.define("Enemy", {
         this.level = level;
         this.speed = 1 + this.level * 0.4;
 
-        this.time = 1;
+        this.frame = 1;
 
         this.animation = FrameAnimation("enemySS").attachTo(this);
         this.animation.fit = false;
@@ -84,7 +84,7 @@ phina.define("Enemy", {
                 this.x -= this.speed;
             }
 
-            if (this.time % 200 === 0) {
+            if (this.frame % 200 === 0) {
 				var newDirection;
 				do{
 					newDirection = Random.randint(0, 3);
@@ -116,6 +116,6 @@ phina.define("Enemy", {
             this.speed += 0.5;
         }
 
-        this.time++;
+        this.frame++;
     },
 })

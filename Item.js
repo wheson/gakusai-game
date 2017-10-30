@@ -68,7 +68,7 @@ phina.define("Item", {
             this.x -= 1 + this.speedLevel * 0.5;
         }
 
-        frame++;
+        this.frame++;
     },
 
     getScore: function () {
