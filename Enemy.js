@@ -15,7 +15,9 @@ phina.define("Enemy", {
         if (this.level >= 10)
             this.speed += (this.level / 10) * 1;
 
-        this.frame = 1;
+        this.distance = 1;
+        this.changeDistance = 300;
+        this.plusDistance = 200;
 
         this.animation = FrameAnimation("enemySS").attachTo(this);
         this.animation.fit = false;
@@ -87,10 +89,13 @@ phina.define("Enemy", {
             } else if (this.direction === LEFT) {
                 this.x -= this.speed;
             }
-            if (this.frame % 200 === 0) {
+            if (this.distance >= this.changeDistance) {
                 this.randomChangeDirection();
+                this.changeDistance += this.plusDistance;
+                this.plusDistance += 50;
             }
             this.speed += 0.01;
+            this.distance += this.speed;
         } else if (this.enemyNum === 3) {
             // 紫のお化け
             // 加速度0.5で直進する
@@ -105,8 +110,6 @@ phina.define("Enemy", {
             }
             this.speed += 0.5;
         }
-
-        this.frame++;
     },
 
     randomChangeDirection: function () {
