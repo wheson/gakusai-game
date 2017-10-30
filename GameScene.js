@@ -244,7 +244,7 @@ phina.define("GameScene", {
 
                 //レベル11以上の時
             } else {
-                var appearanceNum = parseInt((this.level - 1) / 10);
+                var appearanceNum = parseInt((this.level - 1) / 10) + 1;
                 var stageNum = (this.level - 1) % 10;
 
                 for (var i = 0; i < appearanceNum; i++) {
@@ -270,7 +270,7 @@ phina.define("GameScene", {
                     } else if (stageNum === 7) {
 
                     } else if (stageNum === 8) {
-
+                        var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                     } else {
 
                     }
