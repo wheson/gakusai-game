@@ -29,6 +29,18 @@ phina.define("TitleScene", {
 			item.update = null;
 		}
 
+        this.enemyDescriptions = ["普通", "だんだん速く", "ふらふら", "危険!"];
+        this.itemDescriptions = ["100", "300", "500", "1000"];
+        for(var i=0;i<4;i++){
+			var enemyDescription = Label(this.enemyDescriptions[i]).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(11));
+            enemyDescription.fill = 'black';
+            enemyDescription.fontSize = 15;
+
+			var itemDescription = Label(this.itemDescriptions[i]).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12)+25);
+			itemDescription.fill = 'black';
+            itemDescription.fontSize = 15;
+		}
+
         SoundManager.playMusic("bgm");
     },
 
