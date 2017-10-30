@@ -198,16 +198,27 @@ phina.define("GameScene", {
                         var dir = Random.randint(2, 3);
                         var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                     }
-                } else if (this.level === 4 || this.level === 5) {
-                    // enemy0: 70%, enemy1: 30%, enemy2: 0%, enemy3: 0% | 0: 横縦混同, 1: 横縦混同
-                    if (randomNum <= 70) {
+                } else if (this.level === 4) {
+                    // enemy0: 40%, enemy1: 30%, enemy2: 30%, enemy3: 0% | 0:横縦混同, 1: 横縦混同, 2: 横縦混同
+                    if (randomNum <= 40) {
                         var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
-                    } else if (randomNum <= 100) {
+                    } else if (randomNum <= 70) {
                         var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    }else{
+                        var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                     }
-                } else if (this.level === 6) {
-                    // enemy0: 60%, enemy1: 0%, enemy2: 40%, enemy3: 0% | 0: 縦横混同, 2: 横縦混同
-                    if (randomNum <= 60) {
+                }else if (this.level === 5) {
+                    // enemy0: 30%, enemy1: 40%, enemy2: 30%, enemy3: 0% | 0:横縦混同, 1: 横縦混同 プレイヤー(x,y), 2: 横縦混同
+                    if (randomNum <= 30) {
+                        var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    } else if (randomNum <= 70) {
+                        var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
+                    }else{
+                        var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
+                    }
+                }else if (this.level === 6) {
+                    // enemy0: 40%, enemy1: 0%, enemy2: 60%, enemy3: 0% | 0: 縦横混同, 2: 横縦混同
+                    if (randomNum <= 40) {
                         var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                     } else if (randomNum <= 100) {
                         var enemy = Enemy(dir, 2, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);

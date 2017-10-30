@@ -12,16 +12,16 @@
     - enemy0: 70%, enemy1: 30%, enemy2: 0%, enemy3: 0%
     - 0: 横縦混同, 1: 横のみ
   - level 4 
-    - enemy0: 70%, enemy1: 30%, enemy2: 0%, enemy3: 0%
-    - 0:横縦混同, 1: 横縦混同
+    - enemy0: 40%, enemy1: 30%, enemy2: 30%, enemy3: 0%
+    - 0:横縦混同, 1: 横縦混同, 2: 横縦混同
   - level 5 赤玉出現
-    - enemy0: 70%, enemy1: 30%, enemy2: 0%, enemy3: 0%
-    - 0:横縦混同, 1: 横縦混同
+    - enemy0: 30%, enemy1: 40%, enemy2: 30%, enemy3: 0%
+    - 0:横縦混同, 1: 横縦混同 プレイヤー(x,y), 2: 横縦混同
   
 ## level 6~10
 - 出現頻度 90
   - level 6
-    - enemy0: 60%, enemy1: 0%, enemy2: 40%, enemy3: 0%
+    - enemy0: 40%, enemy1: 0%, enemy2: 60%, enemy3: 0%
     - 0: 縦横混同, 2: 横縦混同
   - level 7
     - enemy0: 20%, enemy1: 0%, enemy2: 80%, enemy3: 0%
