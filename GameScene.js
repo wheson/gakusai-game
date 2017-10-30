@@ -73,6 +73,7 @@ phina.define("GameScene", {
 		
         //敵の出現頻度をまとめた配列
         this.frequencyGroup = [100, 90, 80, 70, 60, 50, 40, 30]; //frequency[0] ~ [7]
+        this.currentFrequencyNum = 0;
         this.frequency = this.frequencyGroup[0];
 
         //次にレベルの変わるスコア
@@ -251,8 +252,12 @@ phina.define("GameScene", {
         // scoreがchangeLevelに格納された値を越えたらlevelを上げる
         if (this.score >= this.changeLevel) {
             this.level++;
-            // 出現頻度を更新
-            this.frequency = this.frequencyGroup[Math.min(this.frequencyGroup.length - 1, this.level)];
+            // 出現頻度をレベル5上がるごとに更新
+            if(this.level % 5 === 0){
+                this.currentFrequencyNum = Math.min(this.currentFrequencyNum+1, this.frequencyGroup.length-1);
+                this.frequency = this.frequencyGroup[this.currentFrequencyNum];
+            }
+
             this.changeLevel += 1000;
         }
 
