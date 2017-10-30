@@ -169,7 +169,7 @@ phina.define("GameScene", {
             if (this.level === 1) {
                 // enemy0: 100%, enemy1: 0%, enemy2: 0%, enemy3: 0% | 0: 横のみ
                 if (randomNum <= 100) {
-                    var dir = Random.randint(0,1);
+                    var dir = Random.randint(2,3);
                     var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 2) {
@@ -182,7 +182,7 @@ phina.define("GameScene", {
                 if (randomNum <= 70) {
                     var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
-                    var dir = Random.randint(0,1);
+                    var dir = Random.randint(2,3);
                     var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 4 || this.level === 5) {
