@@ -188,9 +188,9 @@ phina.define("GameScene", {
                 }
             } else if (this.level === 4 || this.level === 5) {
                 // enemy0: 70%, enemy1: 30%, enemy2: 0%, enemy3: 0% | 0: 横縦混同, 1: 横縦混同
-                if (randomNum <= 30) {
+                if (randomNum <= 70) {
                     var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
-                } else if (randomNum <= 40) {
+                } else if (randomNum <= 100) {
                     var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
             } else if (this.level === 6) {
