@@ -43,7 +43,7 @@ phina.define("Item", {
 
         // アイテムの得点を設定
         if (this.itemNum === 0) {
-            this.score = 80;
+            this.score = 100;
             this.removeFrame = -1;
         } else if (this.itemNum === 1) {
             this.score = 300;
@@ -52,7 +52,7 @@ phina.define("Item", {
             this.score = 500;
             this.removeFrame = 600;
         } else if (this.itemNum === 3) {
-            this.score = 800;
+            this.score = 1000;
             this.removeFrame = -1;
         }
 
