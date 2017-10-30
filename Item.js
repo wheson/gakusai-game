@@ -14,6 +14,8 @@ phina.define("Item", {
 		this.setSize(20,20);
         this.direction = dir;
 
+        this.frame = -1;
+
         // 方向によって出現位置を設定
         if (this.direction === UP) {
             this.x = Random.randint(0, SCREEN_WIDTH);
@@ -66,6 +68,7 @@ phina.define("Item", {
             this.x -= 1 + this.speedLevel * 0.5;
         }
 
+        frame++;
     },
 
     getScore: function () {
