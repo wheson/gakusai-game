@@ -15,7 +15,7 @@ phina.define("Item", {
         this.direction = dir;
         this.speed = 1;
 
-        this.frame = -1;
+        this.frame = 1;
 
         // 方向によって出現位置を設定
         if (this.direction === UP) {
