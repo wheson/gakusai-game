@@ -30,10 +30,10 @@
     - enemy0: 0%, enemy1: 100%, enemy2: 0%, enemy3: 0%
     - 1: 縦横混同 プレイヤー(x,y)
   - level 9
-    - enemy0: 0%, enemy1: 90%, enemy2: 0%, enemy3: 10%
+    - enemy0: 0%, enemy1: 70%, enemy2: 0%, enemy3: 30%
     - 1: 縦横混同 プレイヤー(x,y), 3: プレイヤー(x,y)
   - level 10 黄玉出現
-    - enemy0: 50%, enemy1: 20%, enemy2: 20%, enemy3: 10%
+    - enemy0: 40%, enemy1: 20%, enemy2: 20%, enemy3: 20%
     - 0: 縦横混同, 1: 縦横混同 プレイヤー(x,y), 2: 横縦混同, 3: プレイヤー(x,y)
 ## level 11~
 - ステージ0 白をappearanceNum分出す(縦横交互)
