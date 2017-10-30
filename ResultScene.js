@@ -13,6 +13,9 @@ phina.define("ResultScene", {
         this.gameTitle.y = 50;
         this.gameTitle.fill = 'black';
         this.gameTitle.fontSize = 15;
+		
+		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+		tomapiko.animation.gotoAndPlay("down");
 
         // frame
         this.time = options.time;
