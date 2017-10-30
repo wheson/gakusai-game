@@ -14,8 +14,28 @@ phina.define("ResultScene", {
         this.gameTitle.fill = 'black';
         this.gameTitle.fontSize = 15;
 		
+		// やられトマピコ
 		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
 		tomapiko.animation.gotoAndPlay("down");
+		
+		// 敵グループ
+		this.enemyGroup = DisplayElement().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+		// 45度ごとに円状に生成
+		for(var deg=0;deg<360;deg+=45){
+			// 敵番号
+			var i = deg/45;
+			// 左向きの敵を追加する
+			var enemy = Enemy(LEFT,i%4,0,0,0).addChildTo(this.enemyGroup);
+			// 角度と半径を与える
+			enemy.deg = deg;
+			enemy.offset = 150;
+			// Enemyクラスのupdateを書き換える
+			enemy.update = function(){
+				this.x = Math.cos(Math.degToRad(this.deg))*this.offset;
+				this.y = Math.sin(Math.degToRad(this.deg))*this.offset;
+				this.deg--;
+			};
+		}
 
         // frame
         this.time = options.time;
@@ -88,7 +108,10 @@ phina.define("ResultScene", {
             input.focus();
         };
     },
-    
+    update: function(){
+		
+	},
+	
 	onclick: function () {
 		if(USE_COOKIE){
 			this.scoreJSON.name = document.querySelector('#input').value;
