@@ -87,8 +87,7 @@ phina.define("Enemy", {
             } else if (this.direction === LEFT) {
                 this.x -= this.speed;
             }
-
-            if (this.frame % 100 === 0) {
+            if (this.frame % 200 === 0) {
                 this.randomChangeDirection();
             }
             this.speed += 0.01;
@@ -127,11 +126,11 @@ phina.define("Enemy", {
         }
     },
 
-    inversionChangeDirection: function(){
-        if(this.direction === UP) this.direction = DOWN;
-        else if(this.direction === DOWN) this.direction = UP;
-        else if(this.direction === RIGHT) this.direction = LEFT;
-        else if(this.direction === LEFT) this.direction = RIGHT;
+    inversionChangeDirection: function () {
+        if (this.direction === UP) this.direction = DOWN;
+        else if (this.direction === DOWN) this.direction = UP;
+        else if (this.direction === RIGHT) this.direction = LEFT;
+        else if (this.direction === LEFT) this.direction = RIGHT;
 
         if (this.direction === UP) {
             this.animation.gotoAndPlay("UP");
