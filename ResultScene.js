@@ -36,6 +36,25 @@ phina.define("ResultScene", {
 				this.deg--;
 			};
 		}
+		
+		this.retryButton = Button({
+			x:this.gridX.center(),
+			y:this.gridY.span(13.5),
+			width:300,
+			height:80,
+			text:"もういちど",
+			fontColor:"white",
+			cornerRadius:5,
+			fill:"skyblue",
+			stroke:"blue",
+		}).addChildTo(this);
+		
+		
+		var self = this;
+		this.retryButton.onclick = function(){
+			if(DEBUG)console.log("exit");
+			self.exit();
+		};
 
         // frame
         this.time = options.time;
@@ -111,7 +130,7 @@ phina.define("ResultScene", {
     update: function(){
 		
 	},
-	
+	/*
 	onclick: function () {
 		if(USE_COOKIE){
 			this.scoreJSON.name = document.querySelector('#input').value;
@@ -119,6 +138,6 @@ phina.define("ResultScene", {
 			setCookie("ranking",JSON.stringify(this.rankingArray));
 		}
 		this.exit();
-	}
+	}*/
     
 });
