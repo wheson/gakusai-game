@@ -29,7 +29,8 @@ phina.define("GameScene", {
         this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         //this.limit.alpha = 0;
         this.limit.fill = "transparent";
-        this.limit.stroke = "red";
+        if(DEBUG) this.limit.stroke = "red";
+        else this.limit.stroke ="transparent";
 
         // how to operate
         this.label1 = Label("←→キーで移動, ↑キーまたはスペースでジャンプ");
