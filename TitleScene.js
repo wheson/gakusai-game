@@ -21,22 +21,19 @@ phina.define("TitleScene", {
 		
         Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
 		
+        this.enemyDescriptions = ["普通", "だんだん速く", "ふらふら", "危険!"];
 		for(var i=0;i<4;i++){
 			var enemy = Enemy(3,i).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(10));
 			enemy.update = null;
 			
 			var item = Item(i,65+15*i).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12));
 			item.update = null;
-		}
-
-        this.enemyDescriptions = ["普通", "だんだん速く", "ふらふら", "危険!"];
-        this.itemDescriptions = ["100", "300", "500", "1000"];
-        for(var i=0;i<4;i++){
+			
 			var enemyDescription = Label(this.enemyDescriptions[i]).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(11));
             enemyDescription.fill = 'black';
             enemyDescription.fontSize = 15;
 
-			var itemDescription = Label(this.itemDescriptions[i]).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12)+25);
+			var itemDescription = Label(item.getScore()).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12)+25);
 			itemDescription.fill = 'black';
             itemDescription.fontSize = 15;
 		}
