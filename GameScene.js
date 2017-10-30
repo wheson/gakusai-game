@@ -187,17 +187,6 @@ phina.define("GameScene", {
                 } else if (randomNum <= 100) {
                     var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 }
-            } else if (this.level <= 3) {
-                // enemy0: 30%, enemy1: 10%, enemy2: 50%, enemy3: 10%
-                if (randomNum <= 30) {
-                    var enemy = Enemy(dir, 0, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
-                } else if (randomNum <= 40) {
-                    var enemy = Enemy(dir, 1, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
-                } else if (randomNum <= 90) {
-                    var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
-                } else if (randomNum <= 100) {
-                    var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
-                }
             } else if (this.level <= 4) {
                 // enemy0: 30%, enemy1: 10%, enemy2: 50%, enemy3: 10%
                 if (randomNum <= 30) {
@@ -219,13 +208,6 @@ phina.define("GameScene", {
                     var enemy = Enemy(dir, 2, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
                 } else if (randomNum <= 100) {
                     var enemy = Enemy(dir, 3, this.level, Random.randint(0, SCREEN_WIDTH), Random.randint(0, SCREEN_HEIGHT)).addChildTo(this.enemyGroup);
-                }
-            } else if (this.level <= 6) {
-                // enemy0: 0%, enemy1: 70%, enemy2: 0%, enemy3: 30%
-                if (randomNum <= 70) {
-                    var enemy = Enemy(dir, 1, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
-                } else if (randomNum <= 100) {
-                    var enemy = Enemy(dir, 3, this.level, this.tomapiko.x, this.tomapiko.y).addChildTo(this.enemyGroup);
                 }
             } else if (this.level <= 7) {
                 // enemy0: 0%, enemy1: 70%, enemy2: 0%, enemy3: 30%
