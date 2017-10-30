@@ -38,7 +38,7 @@ phina.define("TitleScene", {
             itemDescription.fontSize = 15;
 		}
 
-        SoundManager.playMusic("bgm");
+        if(SoundManager.currentMusic == null)SoundManager.playMusic("bgm");
     },
 
 	
