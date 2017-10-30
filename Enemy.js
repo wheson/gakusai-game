@@ -126,4 +126,21 @@ phina.define("Enemy", {
             this.animation.gotoAndPlay("LEFT");
         }
     },
+
+    inversionChangeDirection: function(){
+        if(this.direction === UP) this.direction = DOWN;
+        else if(this.direction === DOWN) this.direction = UP;
+        else if(this.direction === RIGHT) this.direction = LEFT;
+        else if(this.direction === LEFT) this.direction = RIGHT;
+
+        if (this.direction === UP) {
+            this.animation.gotoAndPlay("UP");
+        } else if (this.direction === DOWN) {
+            this.animation.gotoAndPlay("DOWN");
+        } else if (this.direction === RIGHT) {
+            this.animation.gotoAndPlay("RIGHT");
+        } else if (this.direction === LEFT) {
+            this.animation.gotoAndPlay("LEFT");
+        }
+    }
 })
