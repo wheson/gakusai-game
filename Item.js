@@ -16,7 +16,7 @@ phina.define("Item", {
         this.direction = dir;
         this.speed = 1;
 
-        this.frame = 1;
+        this.frame = 0;
 
         // 方向によって出現位置を設定
         if (this.direction === UP) {
@@ -44,19 +44,16 @@ phina.define("Item", {
         // アイテムの得点を設定
         if (this.itemNum === 0) {
             this.score = 100;
-            this.removeFrame = 99999;
+            this.removeFrame = -1;
         } else if (this.itemNum === 1) {
             this.score = 300;
-            this.removeFrame = 99999;
+            this.removeFrame = -1;
         } else if (this.itemNum === 2) {
             this.score = 500;
             this.removeFrame = 600;
-            // 出現場所を変更
-            this.x = Random.randint(0, SCREEN_WIDTH);
-            this.y = Random.randint(0, SCREEN_HEIGHT);
         } else if (this.itemNum === 3) {
             this.score = 1000;
-            this.removeFrame = 99999;
+            this.removeFrame = -1;
         }
 
 
@@ -88,12 +85,24 @@ phina.define("Item", {
             this.speed += 0.02;
             //item2の設定
         } else if (this.itemNum === 2) {
-            if (this.frame % 90 === 0) {
-                this.x = Random.randint(0, SCREEN_WIDTH);
-                this.y = Random.randint(0, SCREEN_HEIGHT);
-            }
             // removeFrameをframeが越えると自身を消す
-            if (this.frame >= this.removeFrame) this.remove();
+            if (this.frame === this.removeFrame){
+				// 画面外の座標
+                var toX = Random.randint(-10, 10)*SCREEN_WIDTH;
+                var toY = Random.randint(-10, 10)*SCREEN_HEIGHT;
+				// callでremoveするためにthisを預ける
+				var self = this;
+				// ランダムな位置に高速移動し、自信をremoveする
+				this.tweener.clear()
+				.to({x:toX,y:toY},500,"easeInOutQuint")
+				.call(function(){self.remove();});
+			}else if (this.frame % 90 === 0) {
+                var toX = Random.randint(0, SCREEN_WIDTH);
+                var toY = Random.randint(0, SCREEN_HEIGHT);
+				// ランダムな位置に高速移動する
+				this.tweener.clear()
+				.to({x:toX,y:toY},500,"easeInOutQuint");
+            }
             //item3の設定
         } else if (this.itemNum === 3) {
             if (this.direction === UP) {
