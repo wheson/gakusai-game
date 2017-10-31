@@ -49,7 +49,6 @@ phina.define("ResultScene", {
 			stroke:"blue",
 		}).addChildTo(this);
 		
-		
 		var self = this;
 		this.retryButton.onclick = function(){
 			if(DEBUG)console.log("exit");
