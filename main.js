@@ -24,8 +24,6 @@ phina.main(function () {
 		],
     });
 
-    app.enableStats();
-
     //app.replaceScene(SceneSequence());
     // 実行
     app.run();
