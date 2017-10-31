@@ -58,11 +58,6 @@ phina.define("TitleScene", {
         if(SoundManager.currentMusic == null || SoundManager.currentMusic.src != ASSETS.sound.bgm)SoundManager.playMusic("bgm");
     },
 
-	
-    onclick: function () {
-		this.delayExit();
-    },
-	
 	onkeydown: function(){
 		// キーが押されたら遅延してGameSceneに切り替える関数を呼び出す
 		this.delayExit();
@@ -70,7 +65,7 @@ phina.define("TitleScene", {
 	
 	delayExit: function(){
 		// キー入力を受け付けなくする
-		this.onclick = this.onkeydown = null;
+		this.onkeydown = null;
 		// 切り替わる時間
 		var changeTime = 2000;
 		
