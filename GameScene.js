@@ -60,7 +60,7 @@ phina.define("GameScene", {
 
         this.time = 0;
         this.score = 0;
-        this.level = 10;
+        this.level = 1;
 		
 		this.displayStatusBG = RectangleShape().addChildTo(this);
 		this.displayStatusBG.fill = "white";
