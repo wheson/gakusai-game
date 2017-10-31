@@ -17,7 +17,7 @@ phina.define("GameScene", {
 		this.firstBG.height = SCREEN_HEIGHT;
 		
 		this.bg = [];
-		for(var i=0;i<10;i++){
+		for(var i=0;i<8;i++){
 			this.bg[i] = Sprite("bg" + (i+1)).addChildTo(this);
 			this.bg[i].origin.set(0, 0); // 左上基準に変更
 			this.bg[i].width = SCREEN_WIDTH;
@@ -359,9 +359,9 @@ phina.define("GameScene", {
 				//////////
 			}else if(this.level >= 11){
 				// レベル11以上の時、ステージ番号に対応する背景の画像を表示する
-				this.bg[(this.level-1)%10].alpha = 1;
+				this.bg[(this.level-1)%8].alpha = 1;
 				// ひとつ前の画像を透明にする
-				this.bg[(this.level-2)%10].alpha = 0;
+				this.bg[(this.level-2)%8].alpha = 0;
 			}
             this.changeLevel += 1000;
         }
