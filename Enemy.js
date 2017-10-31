@@ -1,28 +1,40 @@
 phina.define("Enemy", {
     superClass: "Sprite",
     init: function (dir, enemyNum, level, x, y) {
+		// 敵番号を設定
         this.enemyNum = enemyNum;
-        this.superInit("enemy" + String(this.enemyNum), 32, 32);
+		// 敵の画像を読み込む
+        this.superInit("enemy" + this.enemyNum, 32, 32);
+		// サイズ変更
         this.width = 64;
         this.height = 64;
-
+		// 方向を設定する
         this.direction = dir;
-
+		// レベルを設定する
         this.level = level;
 
+		// 敵が動くスピードの初期値
         this.speed = 1;
+		
         // ステージレベルが10以上の時speedを(レベル - 9)*0.4追加する
-        if (this.level >= 10)
+        if (this.level >= 10){
             this.speed += (this.level / 10) * 1;
+		}
+		
+		// 黒いお化けの場合は移動距離、方向転換距離を設定する
+		if(this.enemyNum === 2){
+			this.distance = 1;
+			this.changeDistance = 300;
+			this.plusDistance = 200;
+		}
 
-        this.distance = 1;
-        this.changeDistance = 300;
-        this.plusDistance = 200;
-
+		// スプライトシートを適用する
         this.animation = FrameAnimation("enemySS").attachTo(this);
+		// サイズを変更しない
         this.animation.fit = false;
 
         // 方向によって出現位置を設定
+		// アニメーションを設定する
         if (this.direction === UP) {
             this.x = x;
             this.y = SCREEN_HEIGHT;
@@ -41,6 +53,7 @@ phina.define("Enemy", {
             this.animation.gotoAndPlay("LEFT");
         }
 
+		// 当たり判定枠
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'yellow';
@@ -89,6 +102,7 @@ phina.define("Enemy", {
             } else if (this.direction === LEFT) {
                 this.x -= this.speed;
             }
+			// 移動距離が方向転換距離以上になったら方向転換し、次回の方向転換距離を更新する
             if (this.distance >= this.changeDistance) {
                 this.randomChangeDirection();
                 this.changeDistance += this.plusDistance;
@@ -113,6 +127,7 @@ phina.define("Enemy", {
     },
 
     randomChangeDirection: function () {
+		// 現在の移動方向以外の方向に変更し、アニメーションを変更する
         var newDirection;
         do {
             newDirection = Random.randint(0, 3);
@@ -130,6 +145,7 @@ phina.define("Enemy", {
     },
 
     inversionChangeDirection: function () {
+		// 後ろを向く
         if (this.direction === UP) this.direction = DOWN;
         else if (this.direction === DOWN) this.direction = UP;
         else if (this.direction === RIGHT) this.direction = LEFT;
@@ -145,4 +161,4 @@ phina.define("Enemy", {
             this.animation.gotoAndPlay("LEFT");
         }
     },
-})
+});
