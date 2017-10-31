@@ -11,20 +11,15 @@ phina.define("GameScene", {
         });
 		
         // 背景
-		this.firstBG = Sprite("bg0").addChildTo(this);
-		this.firstBG.origin.set(0,0);
-		this.firstBG.width = SCREEN_WIDTH;
-		this.firstBG.height = SCREEN_HEIGHT;
-		
 		this.bg = [];
-		for(var i=0;i<8;i++){
-			this.bg[i] = Sprite("bg" + (i+1)).addChildTo(this);
+		for(var i=0;i<BG_NUM;i++){
+			this.bg[i] = Sprite("bg" + (1+i)).addChildTo(this);
 			this.bg[i].origin.set(0, 0); // 左上基準に変更
 			this.bg[i].width = SCREEN_WIDTH;
 			this.bg[i].height = SCREEN_HEIGHT;
 			this.bg[i].alpha = 0;
 		}
-		
+		this.bg[0].alpha = 1;
 		
 		this.displayStatusBG = RectangleShape().addChildTo(this);
 		this.displayStatusBG.fill = "white";
@@ -345,8 +340,7 @@ phina.define("GameScene", {
             else
                 var item = Item(dir, Random.randint(1, 100)).addChildTo(this.itemGroup);
         }
-
-
+		
         // scoreがchangeLevelに格納された値を越えたらlevelを上げる
         if (this.score >= this.changeLevel) {
             this.level++;
@@ -355,13 +349,10 @@ phina.define("GameScene", {
                 this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
                 this.frequency = this.frequencyGroup[this.currentFrequencyNum];
             }
-			if(this.level === 50){
-				//////////
-			}else if(this.level >= 11){
-				// レベル11以上の時、ステージ番号に対応する背景の画像を表示する
-				this.bg[(this.level-1)%8].alpha = 1;
-				// ひとつ前の画像を透明にする
-				this.bg[(this.level-2)%8].alpha = 0;
+			if(this.level === 31){
+				SoundManager.playMusic("bgmSpace");
+			}else if(this.level % 10 === 1 && (this.level-1)/10 < BG_NUM){
+				this.bg[(this.level-1) / 10].alpha = 1;
 			}
             this.changeLevel += 1000;
         }
