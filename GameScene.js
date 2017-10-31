@@ -86,7 +86,7 @@ phina.define("GameScene", {
         this.displayLevel.text = "level: " + 1;
 
         //敵の出現頻度をまとめた配列
-        this.frequencyGroup = [200, 200, 150, 100, 80, 60];
+        this.frequencyGroup = [200, 200, 180, 160, 140, 120, 100];
         this.currentFrequencyNum = 0;
         this.frequency = this.frequencyGroup[0];
 
