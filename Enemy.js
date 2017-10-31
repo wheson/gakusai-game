@@ -16,7 +16,7 @@ phina.define("Enemy", {
 		// 敵が動くスピードの初期値
         this.speed = 1;
 		
-        // ステージレベルが10以上の時speedを(レベル - 9)*0.4追加する
+        // ステージレベルがn*10+1以上の時speedをn*0.2追加する
         if (this.level >= 11){
             this.speed += ((this.level - 1) / 10) * 0.2;
 		}
@@ -164,8 +164,8 @@ phina.define("Enemy", {
 
     removeEnemy: function(){
         var self = this; // 関数のスコープに入るのでthisを預けておく
-        // ラベルは1秒かけて透明になりながら上昇する
-            this.tweener.to({
+        // enemyを1秒かけて透明にし，removeする
+        this.tweener.to({
                 alpha: 0,
             }, 1000).call(function () {
                 self.remove();
