@@ -281,14 +281,14 @@ phina.define("GameScene", {
                     if (stageNum === 0) {
                         var enemy1 = Enemy(dirLW[i%2], 0, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
                     } else if (stageNum === 1) {
-                        var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                        var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                     } else if (stageNum === 2) {
                         var enemy1 = Enemy(dirLW[i%2], 2, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
                     } else if (stageNum === 3) {
                         if(randomNum <= 60){
                             var enemy1 = Enemy(dirLW[i%2], 0, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
                         }else{
-                            var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                            var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                         }
                     } else if (stageNum === 4) {
                         var enemy1 = Enemy(dirLW[i%2], (i%2)*2, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
@@ -299,26 +299,26 @@ phina.define("GameScene", {
                          if(randomNum <= 25){
                             var enemy1 = Enemy(dirLW[i%2], 0, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
                         }else if(randomNum <= 50){
-                            var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                            var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                         }else if(randomNum <= 75){
                             var enemy1 = Enemy(dirLW[i%2], 2, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
                         }else{
-                            var enemy1 = Enemy(dirLW[i%2], 3, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                            var enemy1 = Enemy(dirLW[i%2], 3, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                         }
                     } else if (stageNum === 7) {
-                        var enemy1 = Enemy(i%4, 1, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
-                        var enemy2 = Enemy((i+2)%4, 1, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                        var enemy1 = Enemy(i%4, 1, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
+                        var enemy2 = Enemy((i+2)%4, 1, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                     } else if (stageNum === 8) {
-                        var enemy1 = Enemy(dirLW[i%2], 3, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                        var enemy1 = Enemy(dirLW[i%2], 3, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                     } else {
                         if(randomNum <= 20){
                             var enemy1 = Enemy(dirLW[i%2], 0, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
                         }else if(randomNum <= 40){
-                            var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                            var enemy1 = Enemy(dirLW[i%2], 1, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                         }else if(randomNum <= 90){
                             var enemy1 = Enemy(dirLW[i%2], 2, this.level, Random.randint(32, SCREEN_WIDTH-32), Random.randint(32, SCREEN_HEIGHT-32)).addChildTo(this.enemyGroup);
                         }else{
-                            var enemy1 = Enemy(dirLW[i%2], 3, this.level, this.tomapiko.x + (i/2)*100, this.tomapiko.y + (i/2)*100).addChildTo(this.enemyGroup);
+                            var enemy1 = Enemy(dirLW[i%2], 3, this.level, this.tomapiko.x + (i/2)*140, this.tomapiko.y + (i/2)*140).addChildTo(this.enemyGroup);
                         }
                     }
                 }
