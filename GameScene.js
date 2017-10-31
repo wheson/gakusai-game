@@ -25,6 +25,14 @@ phina.define("GameScene", {
 			this.bg[i].alpha = 0;
 		}
 		
+		
+		this.displayStatusBG = RectangleShape().addChildTo(this);
+		this.displayStatusBG.fill = "white";
+		this.displayStatusBG.stroke = "gray";
+		this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
+		this.displayStatusBG.setSize(100,150);
+		this.displayStatusBG.alpha = 0.8;
+		
         //アイテムの管理
         this.itemGroup = DisplayElement().addChildTo(this);
 
@@ -61,12 +69,6 @@ phina.define("GameScene", {
         this.time = 0;
         this.score = 0;
         this.level = 1;
-		
-		this.displayStatusBG = RectangleShape().addChildTo(this);
-		this.displayStatusBG.fill = "white";
-		this.displayStatusBG.stroke = "gray";
-		this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
-		this.displayStatusBG.setSize(100,150);
 		
         this.displayTime = Label().addChildTo(this);
         this.displayTime.fill = 'black';
