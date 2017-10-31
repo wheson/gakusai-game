@@ -376,7 +376,7 @@ phina.define("GameScene", {
         this.itemGroup.children.each(function (elm) {
             var itemCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
             if (Collision.testCircleCircle(tomapikoCollision, itemCollision)) {
-                self.score += elm.getScore();
+                self.score += elm.score;
                 if (DEBUG) console.log("item hit!");
                 elm.remove();
                 SoundManager.play("get");

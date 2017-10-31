@@ -47,7 +47,7 @@ phina.define("TitleScene", {
             enemyDescription.fontSize = 15;
 
 			// アイテムの説明
-			var itemDescription = Label(item.getScore()).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12)+25);
+			var itemDescription = Label(item.score).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12)+25);
 			itemDescription.fill = 'black';
             itemDescription.fontSize = 15;
 		}

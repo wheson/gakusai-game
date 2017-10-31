@@ -1,6 +1,7 @@
 phina.define("Item", {
     superClass: "Sprite",
     init: function (dir, randomNum) {
+		// randomNumの値によってアイテムの種類を決定する
         if (randomNum <= 65) {
             this.itemNum = 0;
         } else if (randomNum <= 85) {
@@ -11,11 +12,14 @@ phina.define("Item", {
             this.itemNum = 3;
         }
 
+		// アイテムの画像を読み込む
         this.superInit("item" + this.itemNum, 24, 24);
-        this.setSize(20, 20);
+		// 方向を設定する
         this.direction = dir;
+		// アイテムが動くスピードの初期値
         this.speed = 1;
 
+		// アイテムが表示されたフレーム数
         this.frame = 0;
 
         // 方向によって出現位置を設定
@@ -33,7 +37,7 @@ phina.define("Item", {
             this.y = Random.randint(80, SCREEN_HEIGHT - 80);
         }
 
-
+		// 当たり判定枠
         this.COLLISION = CircleShape().addChildTo(this);
         this.COLLISION.fill = 'transparent';
         this.COLLISION.stroke = 'yellow';
@@ -44,24 +48,22 @@ phina.define("Item", {
         // アイテムの得点を設定
         if (this.itemNum === 0) {
             this.score = 100;
-            this.removeFrame = -1;
         } else if (this.itemNum === 1) {
             this.score = 300;
-            this.removeFrame = -1;
         } else if (this.itemNum === 2) {
             this.score = 500;
+			// 表示されてから消滅するまでのフレーム数
             this.removeFrame = 600;
         } else if (this.itemNum === 3) {
             this.score = 1000;
-            this.removeFrame = -1;
         }
 
 
     },
 
     update: function () {
-        //item0の設定
-        if (this.itemNum === 0) {
+        if (this.itemNum === 0) { //item0の設定
+			// 変位1で直進する
             if (this.direction === UP) {
                 this.y -= this.speed;
             } else if (this.direction === DOWN) {
@@ -71,8 +73,8 @@ phina.define("Item", {
             } else if (this.direction === LEFT) {
                 this.x -= this.speed;
             }
-            //item1の設定
-        } else if (this.itemNum === 1) {
+        } else if (this.itemNum === 1) { //item1の設定
+			// 加速度0.02で直進する
             if (this.direction === UP) {
                 this.y -= this.speed;
             } else if (this.direction === DOWN) {
@@ -83,9 +85,8 @@ phina.define("Item", {
                 this.x -= this.speed;
             }
             this.speed += 0.02;
-            //item2の設定
-        } else if (this.itemNum === 2) {
-            // removeFrameをframeが越えると自身を消す
+        } else if (this.itemNum === 2) { //item2の設定
+            // frameがremoveFrameになったら自身を消す
             if (this.frame === this.removeFrame) {
                 // 画面外の座標
                 var toX = Random.randint(-10, 10) * SCREEN_WIDTH;
@@ -101,7 +102,7 @@ phina.define("Item", {
                     .call(function () {
                         self.remove();
                     });
-            } else if (this.frame % 90 === 0) {
+            } else if (this.frame % 90 === 0) { // 90フレーム経過で高速移動する
                 var toX = Random.randint(80, SCREEN_WIDTH - 80);
                 var toY = Random.randint(80, SCREEN_HEIGHT - 80);
                 // ランダムな位置に高速移動する
@@ -111,8 +112,8 @@ phina.define("Item", {
                         y: toY
                     }, 500, "easeInOutQuint");
             }
-            //item3の設定
-        } else if (this.itemNum === 3) {
+        } else if (this.itemNum === 3) { //item3の設定
+			// 変位5で直進する
             if (this.direction === UP) {
                 this.y -= this.speed + 5;
             } else if (this.direction === DOWN) {
@@ -123,11 +124,7 @@ phina.define("Item", {
                 this.x -= this.speed + 5;
             }
         }
-
+		// フレームを更新する
         this.frame++;
     },
-
-    getScore: function () {
-        return this.score;
-    }
-})
+});
