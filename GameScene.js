@@ -64,7 +64,7 @@ phina.define("GameScene", {
 
         this.time = 0;
         this.score = 0;
-        this.level = 11;
+        this.level = 1;
 		
         this.displayTime = Label().addChildTo(this);
         this.displayTime.fill = 'black';
