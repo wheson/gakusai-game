@@ -12,6 +12,9 @@ phina.define("TitleScene", {
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
 
+		this.logo = Sprite("logo").addChildTo(this);
+		this.logo.setPosition(this.gridX.center(),this.gridY.span(4));
+		
         this.gameTitle = Label("PRESS ANY KEY");
         this.gameTitle.addChildTo(this);
         this.gameTitle.x = this.gridX.center();
