@@ -20,6 +20,7 @@ phina.define("GameScene", {
 			this.bg[i].alpha = 0;
 		}
 		this.bg[0].alpha = 1;
+		this.bgChangeFreq = 2;
 		
 		this.displayStatusBG = RectangleShape().addChildTo(this);
 		this.displayStatusBG.fill = "white";
@@ -340,7 +341,6 @@ phina.define("GameScene", {
             else
                 var item = Item(dir, Random.randint(1, 100)).addChildTo(this.itemGroup);
         }
-		
         // scoreがchangeLevelに格納された値を越えたらlevelを上げる
         if (this.score >= this.changeLevel) {
             this.level++;
@@ -352,8 +352,8 @@ phina.define("GameScene", {
 			if(this.level === 31){
 				SoundManager.playMusic("bgmSpace");
 			}
-			if(this.level % 10 === 1 && (this.level-1)/10 < BG_NUM){
-				this.bg[(this.level-1) / 10].alpha = 1;
+			if((this.level + 1) % this.bgChangeFreq === 0 && (this.level-1)/this.bgChangeFreq < BG_NUM){
+				this.bg[(this.level-1) / this.bgChangeFreq].alpha = 1;
 			}
             this.changeLevel += 1000;
         }
