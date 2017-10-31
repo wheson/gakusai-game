@@ -1,7 +1,7 @@
 #学祭ゲーム
 
-## level 1~5
-- 出現頻度 100
+## level 1~10
+- 出現頻度 200
   - level 1 
     - enemy0: 100%, enemy1: 0%, enemy2: 0%, enemy3: 0%
     - 横のみ
@@ -17,9 +17,6 @@
   - level 5 赤玉出現
     - enemy0: 30%, enemy1: 40%, enemy2: 30%, enemy3: 0%
     - 0:横縦混同, 1: 横縦混同 プレイヤー(x,y), 2: 横縦混同
-  
-## level 6~10
-- 出現頻度 90
   - level 6
     - enemy0: 40%, enemy1: 0%, enemy2: 60%, enemy3: 0%
     - 0: 縦横混同, 2: 横縦混同
@@ -35,7 +32,9 @@
   - level 10 黄玉出現
     - enemy0: 40%, enemy1: 20%, enemy2: 20%, enemy3: 20%
     - 0: 縦横混同, 1: 縦横混同 プレイヤー(x,y), 2: 横縦混同, 3: プレイヤー(x,y)
+    
 ## level 11~
+- 出現頻度 200 -> 150 -> 100 -> 80 -> 60
 - ステージ0 白をappearanceNum分出す(縦横交互)
 - ステージ1 青をappearanceNum分出す(縦横交互)
 - ステージ2 黒をappearanceNum分出す(縦横交互)
