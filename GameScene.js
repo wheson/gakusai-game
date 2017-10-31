@@ -344,8 +344,8 @@ phina.define("GameScene", {
         // scoreがchangeLevelに格納された値を越えたらlevelを上げる
         if (this.score >= this.changeLevel) {
             this.level++;
-            // 出現頻度をレベル5上がるごとに更新
-            if (this.level % 5 === 0) {
+            // 出現頻度をレベル10上がるごとに更新
+            if ((this.level - 1) % 10 === 0) {
                 this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
                 this.frequency = this.frequencyGroup[this.currentFrequencyNum];
             }
