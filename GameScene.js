@@ -351,7 +351,8 @@ phina.define("GameScene", {
             }
 			if(this.level === 31){
 				SoundManager.playMusic("bgmSpace");
-			}else if(this.level % 10 === 1 && (this.level-1)/10 < BG_NUM){
+			}
+			if(this.level % 10 === 1 && (this.level-1)/10 < BG_NUM){
 				this.bg[(this.level-1) / 10].alpha = 1;
 			}
             this.changeLevel += 1000;
