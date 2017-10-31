@@ -61,6 +61,13 @@ phina.define("GameScene", {
         this.time = 0;
         this.score = 0;
         this.level = 10;
+		
+		this.displayStatusBG = RectangleShape().addChildTo(this);
+		this.displayStatusBG.fill = "white";
+		this.displayStatusBG.stroke = "gray";
+		this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
+		this.displayStatusBG.setSize(100,150);
+		
         this.displayTime = Label().addChildTo(this);
         this.displayTime.fill = 'black';
         this.displayTime.fontSize = 15;
