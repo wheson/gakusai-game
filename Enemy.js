@@ -161,4 +161,15 @@ phina.define("Enemy", {
             this.animation.gotoAndPlay("LEFT");
         }
     },
+
+    removeEnemy: function(){
+        var self = this; // 関数のスコープに入るのでthisを預けておく
+        // ラベルは1秒かけて透明になりながら上昇する
+            this.tweener.to({
+                alpha: 0,
+            }, 1000).call(function () {
+                self.remove();
+            });
+    },
+
 });
