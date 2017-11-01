@@ -222,7 +222,9 @@ phina.define("GameScene", {
             });
 
             this.level++;
-			
+			// レベルアップ音を流す
+			SoundManager.play("levelUp");
+			// レベルアップラベルを表示する
 			this.levelLabel.tweener.clear()
 			.set({x:this.tomapiko.x,y:this.tomapiko.y,alpha:1})
 			.by({y:-20,alpha:-1},500);
