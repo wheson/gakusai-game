@@ -62,7 +62,11 @@ phina.define("GameScene", {
         // 都合-1から
         this.frame = -1;
 
+        //ゲーム全体の時間(1sec)
         this.time = 0;
+
+        //現在ステージ時間(1sec)
+        this.stageTime = 0;
         this.score = 0;
         this.level = 1;
 		
