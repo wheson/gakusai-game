@@ -37,6 +37,11 @@ phina.define("GameScene", {
 
         // トマピコ
         this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
+		
+		// レベルアップ時に表示されるラベル
+		this.levelLabel = Label("Lv.UP!").addChildTo(this);
+		this.levelLabel.fill = "red";
+		this.levelLabel.alpha = 0;
 
         // 画面端当たり判定オブジェクト
         this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -217,6 +222,12 @@ phina.define("GameScene", {
             });
 
             this.level++;
+			
+			this.levelLabel.tweener.clear()
+			.set({x:this.tomapiko.x,y:this.tomapiko.y,alpha:1})
+			.by({y:-20,alpha:-1},500);
+			
+			
             // 出現頻度をレベル10上がるごとに更新
             if ((this.level - 1) % 10 === 0) {
                 this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
