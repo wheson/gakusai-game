@@ -183,6 +183,68 @@ phina.define("GameScene", {
         });
 
 
+        this.createEnemy();
+
+        // アイテム
+        //指定フレームごとに
+        if (this.frame % 100 == 0 && this.frame !== 0) {
+            // アイテムをランダムな方向に動くように出現させる
+            // item0: 65%, item1: 20%, item2: 10%, item3: 5%
+            // アイテムが出現する方向
+            var dir = Random.randint(0, 3);
+            if (this.level < 3)
+                var item = Item(dir, Random.randint(1, 65)).addChildTo(this.itemGroup);
+            else if (this.level < 5)
+                var item = Item(dir, Random.randint(1, 85)).addChildTo(this.itemGroup);
+            else if (this.level < 10)
+                var item = Item(dir, Random.randint(1, 95)).addChildTo(this.itemGroup);
+            else
+                var item = Item(dir, Random.randint(1, 100)).addChildTo(this.itemGroup);
+        }
+        // scoreがchangeLevelに格納された値を越えたらlevelを上げる
+        if (this.score >= this.changeLevel) {
+            this.level++;
+            // 出現頻度をレベル10上がるごとに更新
+            if ((this.level - 1) % 10 === 0) {
+                this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
+                this.frequency = this.frequencyGroup[this.currentFrequencyNum];
+            }
+			if(this.level === 31){
+				SoundManager.playMusic("bgmSpace");
+			}
+			if((this.level + 1) % this.bgChangeFreq === 0 && (this.level-1)/this.bgChangeFreq < BG_NUM){
+				this.bg[(this.level-1) / this.bgChangeFreq].alpha = 1;
+			}
+            this.changeLevel += 1000;
+        }
+
+
+        // トマピコの当たり判定を計算して専用の矩形を作る
+        var tomapikoCollision = Circle(this.tomapiko.x, this.tomapiko.y, this.tomapiko.COLLISION.radius);
+
+        // トマピコが敵と当たったらendFlagを立てる
+        this.enemyGroup.children.each(function (elm) {
+            var enemyCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
+            if (Collision.testCircleCircle(tomapikoCollision, enemyCollision)) {
+                self.endFlag = true;
+                self.tomapiko.animation.gotoAndPlay("damage");
+                SoundManager.play("fall");
+            }
+        });
+
+        // トマピコがアイテムと当たったらthis.scoreにアイテムの持つscoreを追加する
+        this.itemGroup.children.each(function (elm) {
+            var itemCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
+            if (Collision.testCircleCircle(tomapikoCollision, itemCollision)) {
+                self.score += elm.score;
+                if (DEBUG) console.log("item hit!");
+                elm.remove();
+                SoundManager.play("get");
+            }
+        });
+    },
+
+    createEnemy: function(){
         // 敵
         // 指定フレーム毎に
         if (this.frame % this.frequency === 0) {
@@ -324,64 +386,6 @@ phina.define("GameScene", {
                 }
             }
         }
-
-        // アイテム
-        //指定フレームごとに
-        if (this.frame % 100 == 0 && this.frame !== 0) {
-            // アイテムをランダムな方向に動くように出現させる
-            // item0: 65%, item1: 20%, item2: 10%, item3: 5%
-            // アイテムが出現する方向
-            var dir = Random.randint(0, 3);
-            if (this.level < 3)
-                var item = Item(dir, Random.randint(1, 65)).addChildTo(this.itemGroup);
-            else if (this.level < 5)
-                var item = Item(dir, Random.randint(1, 85)).addChildTo(this.itemGroup);
-            else if (this.level < 10)
-                var item = Item(dir, Random.randint(1, 95)).addChildTo(this.itemGroup);
-            else
-                var item = Item(dir, Random.randint(1, 100)).addChildTo(this.itemGroup);
-        }
-        // scoreがchangeLevelに格納された値を越えたらlevelを上げる
-        if (this.score >= this.changeLevel) {
-            this.level++;
-            // 出現頻度をレベル10上がるごとに更新
-            if ((this.level - 1) % 10 === 0) {
-                this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
-                this.frequency = this.frequencyGroup[this.currentFrequencyNum];
-            }
-			if(this.level === 31){
-				SoundManager.playMusic("bgmSpace");
-			}
-			if((this.level + 1) % this.bgChangeFreq === 0 && (this.level-1)/this.bgChangeFreq < BG_NUM){
-				this.bg[(this.level-1) / this.bgChangeFreq].alpha = 1;
-			}
-            this.changeLevel += 1000;
-        }
-
-
-        // トマピコの当たり判定を計算して専用の矩形を作る
-        var tomapikoCollision = Circle(this.tomapiko.x, this.tomapiko.y, this.tomapiko.COLLISION.radius);
-
-        // トマピコが敵と当たったらendFlagを立てる
-        this.enemyGroup.children.each(function (elm) {
-            var enemyCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
-            if (Collision.testCircleCircle(tomapikoCollision, enemyCollision)) {
-                self.endFlag = true;
-                self.tomapiko.animation.gotoAndPlay("damage");
-                SoundManager.play("fall");
-            }
-        });
-
-        // トマピコがアイテムと当たったらthis.scoreにアイテムの持つscoreを追加する
-        this.itemGroup.children.each(function (elm) {
-            var itemCollision = Circle(elm.x, elm.y, elm.width / 2); // 同じく敵の当たり判定を取り出す
-            if (Collision.testCircleCircle(tomapikoCollision, itemCollision)) {
-                self.score += elm.score;
-                if (DEBUG) console.log("item hit!");
-                elm.remove();
-                SoundManager.play("get");
-            }
-        });
     },
 
 });
