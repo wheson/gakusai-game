@@ -7,7 +7,7 @@ phina.define("ResultScene", {
             'height': SCREEN_HEIGHT
         });
         // 背景
-        this.bg = Sprite("bg" + options.bgNum ).addChildTo(this);
+        this.bg = Sprite("bg" + prompt() ).addChildTo(this);
         this.bg.origin.set(0, 0); // 左上基準に変更
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
@@ -20,11 +20,11 @@ phina.define("ResultScene", {
         this.gameTitle.fontSize = 15;
 		
 		// やられトマピコ
-		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
 		tomapiko.animation.gotoAndPlay("down");
 		
 		// 敵グループ
-		this.enemyGroup = DisplayElement().addChildTo(this).setPosition(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+		this.enemyGroup = DisplayElement().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
 		// 45度ごとに円状に生成
 		for(var deg=0;deg<360;deg+=45){
 			// 敵番号
@@ -42,24 +42,15 @@ phina.define("ResultScene", {
 			};
 		}
 		
-		this.retryButton = Button({
-			x:this.gridX.center(),
-			y:this.gridY.span(13.5),
-			width:300,
-			height:80,
-			text:"もういちど",
-			fontColor:"white",
-			cornerRadius:5,
-			fill:"skyblue",
-			stroke:"darkslateblue",
-		}).addChildTo(this);
-		
-		var self = this;
-		this.retryButton.onclick = function(){
-			if(DEBUG)console.log("exit");
-			self.exit();
-		};
 
+		// ステータスの白い背景
+        this.displayStatusBG = RectangleShape().addChildTo(this);
+        this.displayStatusBG.fill = "white";
+        this.displayStatusBG.stroke = "gray";
+        this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
+        this.displayStatusBG.setSize(100, 150);
+        this.displayStatusBG.alpha = 0.8;
+		
         // frame
         this.time = options.time;
         this.displayTime = Label("0").addChildTo(this);
@@ -83,11 +74,6 @@ phina.define("ResultScene", {
         this.displayTime.text = "time: " + this.time;
         this.displayScore.text = "score: " + this.score;
         this.displayLevel.text = "level: " + this.level;
-
-        var input = document.querySelector('#input');
-        input.oninput = function () {
-            label.text = input.value;
-        };
 		
 		if(USE_COOKIE){
 			// 端末にランキングを保存する
@@ -118,18 +104,58 @@ phina.define("ResultScene", {
 			
 		}
 		
-        var label = Label('名前を入力してね').addChildTo(this);
-        label.x = this.gridX.center();
-        label.y = this.gridY.center();
-        label.fontSize = 64;
-        label.setInteractive(true);
-        label.width = 400;
-        label.height = 80;
+		var self = this;
+		
+		this.retryButton = Button({
+			x:this.gridX.center(),
+			y:this.gridY.span(14),
+			width:300,
+			height:80,
+			text:"もういちど",
+			fontColor:"white",
+			cornerRadius:5,
+			fill:"skyblue",
+			stroke:"darkslateblue",
+		}).addChildTo(this).onclick = function(){
+			if(DEBUG)console.log("exit");
+			self.exit();
+		};
+		
+		this.submitButton = Button({
+			x:this.gridX.center(),
+			y:this.gridY.span(12),
+			width:300,
+			height:60,
+			text:"登録する",
+			fontColor:"white",
+			cornerRadius:5,
+			fill:"skyblue",
+			stroke:"darkslateblue",
+		}).addChildTo(this).onclick = function(){
+			if(DEBUG)console.log("submit");
+			self.exit();
+		};
+		
+		var label=[];
+		for(var i=0;i<2;i++){
+			label[i] = Label('名前を入力してね').addChildTo(this);
+			label[i].x = this.gridX.center()+i;
+			label[i].y = this.gridY.span(10)+i;
+			label[i].fontSize = 60;
+			label[i].setInteractive(true);
+			label[i].width = 400;
+			label[i].height = 80;
+			label[i].fill = i===1?"white":"black";
+		}
+		var input = document.querySelector('#input');
+		input.oninput = function () {
+			label[0].text = label[1].text = input.value;
+		};
+		input.focus();
+		label[1].onpointstart = function () {
+			input.focus();
+		};
 
-        input.focus();
-        label.onpointstart = function () {
-            input.focus();
-        };
     },
     update: function(){
 		

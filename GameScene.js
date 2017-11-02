@@ -23,6 +23,7 @@ phina.define("GameScene", {
         }
         this.bg[0].alpha = 1;
 
+		// ステータスの白い背景
         this.displayStatusBG = RectangleShape().addChildTo(this);
         this.displayStatusBG.fill = "white";
         this.displayStatusBG.stroke = "gray";
