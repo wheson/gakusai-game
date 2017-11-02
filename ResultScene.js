@@ -113,24 +113,20 @@ phina.define("ResultScene", {
 			label[i].x = this.gridX.center()+i;
 			label[i].y = this.gridY.span(10)+i;
 			label[i].fontSize = 60;
-			label[i].setInteractive(true);
 			label[i].width = 400;
 			label[i].height = 80;
 			label[i].fill = i===1?"white":"black";
 		}
-		var input = document.querySelector('#input');
-		input.oninput = function () {
+		this.input = document.querySelector('#input');
+		this.input.value = "";
+		this.input.oninput = function () {
 			label[0].text = label[1].text = input.value;
-		};
-		input.focus();
-		label[1].onpointstart = function () {
-			input.focus();
 		};
 
 		// マウスカーソルを表示する
 		$("body").css("cursor","default");
     },
     update: function(){
-		
+		input.focus();
 	},
 });
