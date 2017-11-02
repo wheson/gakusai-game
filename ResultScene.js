@@ -7,7 +7,7 @@ phina.define("ResultScene", {
             'height': SCREEN_HEIGHT
         });
         // 背景
-        this.bg = Sprite("bg" + prompt() ).addChildTo(this);
+        this.bg = Sprite("bg" + options.bgNum ).addChildTo(this);
         this.bg.origin.set(0, 0); // 左上基準に変更
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
