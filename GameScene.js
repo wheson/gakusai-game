@@ -122,6 +122,7 @@ phina.define("GameScene", {
                     time: this.time,
                     score: this.score,
                     level: this.level,
+					bgNum: this.bgNum,
                 });
             } else {
                 // トマピコが左右からはみ出さないようにする
