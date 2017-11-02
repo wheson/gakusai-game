@@ -42,6 +42,42 @@ phina.define("ResultScene", {
 			};
 		}
 		
+		// ランキング表示グリッド
+		this.rankGridY = Grid({
+			width: SCREEN_HEIGHT/2,
+			columns: 10,
+			offset: 10,
+		});
+		
+		// ランキング表示領域
+		this.rankingGroup = DisplayElement().addChildTo(this);
+		
+		// ランキング表示領域の背景
+		var rankBG = RectangleShape().addChildTo(this.rankingGroup);
+		rankBG.fill = "white";
+		rankBG.stroke = "gray";
+		rankBG.alpha = 0.8;
+		rankBG.setOrigin(0,0);
+		rankBG.setSize(500,this.rankGridY.width);
+		
+		// ランク10位まで
+		this.recode = [];
+		for(var i=0;i<10;i++){
+			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.rankingGroup)
+			.setOrigin(0,0)
+			.setPosition(5,this.rankGridY.span(i));
+			rank.fontSize = 20;
+			
+			var I = Label("　 位：").addChildTo(this.rankingGroup)
+			.setOrigin(0,0)
+			.setPosition(5,this.rankGridY.span(i));
+			I.fontSize = 20;
+			
+			this.recode[i] = Label(""+((2+i)*10000)+"点 ななしななしななしななしななしあ").addChildTo(this.rankingGroup).setOrigin(0,0)
+			.setPosition(70,this.rankGridY.span(i));
+			this.recode[i].fontSize = 20;
+		}
+		this.rankingGroup.alpha = 0;
 
 		// ステータスの白い背景
         this.displayStatusBG = RectangleShape().addChildTo(this);
@@ -107,6 +143,28 @@ phina.define("ResultScene", {
 			self.exit();
 		};
 		
+		this.rankingShowingButton = Button({
+			x:this.gridX.span(14),
+			y:this.gridY.span(15),
+			width:200,
+			height:30,
+			text:"ランキングを見る",
+			fontColor:"white",
+			fontSize: 24,
+			cornerRadius:5,
+			fill:"orangered",
+			stroke:"darkslateblue",
+		}).addChildTo(this).onclick = function(){
+			// ランキングを表示する
+			if(self.rankingGroup.alpha === 0){
+				self.rankingGroup.alpha = 1;
+				this.text = "ランキングを隠す";
+			}else{
+				self.rankingGroup.alpha = 0;
+				this.text = "ランキングを見る";
+			}
+		};
+		
 		var label=[];
 		for(var i=0;i<2;i++){
 			label[i] = Label('名前を入力してね').addChildTo(this);
@@ -122,6 +180,8 @@ phina.define("ResultScene", {
 			label[0].text = label[1].text = this.value;
 		};
 
+		
+		
 		// マウスカーソルを表示する
 		$("body").css("cursor","default");
     },
