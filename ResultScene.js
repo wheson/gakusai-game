@@ -49,6 +49,30 @@ phina.define("ResultScene", {
 			offset: 10,
 		});
 		
+		// スコアをjsonオブジェクトにする
+		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"name":"あなた"};
+		// 一人かいないJSONを作る
+		this.rankingArray = [];
+		
+		// cookieを使うようになっていれば
+		if(USE_COOKIE){
+			// 端末にランキングを保存する
+			var rawJSON = getCookie("ranking");
+			if(rawJSON !== ""){
+				// cookieからjsonを取得する
+				this.rankingArray = JSON.parse(rawJSON);
+			}
+		}
+		// ランキングに自分の今回のスコアを追加する
+		this.rankingArray.push(this.scoreJSON);
+		// ランキングをソートする
+		// クッキーを使わない場合やクッキーがからの場合は何もしないような感じ
+		this.rankingArray.sort(function(a,b){
+			return b.score - a.score;
+		});
+		
+		
+		
 		// ランキング表示領域
 		this.rankingGroup = DisplayElement().addChildTo(this);
 		
@@ -61,8 +85,7 @@ phina.define("ResultScene", {
 		rankBG.setSize(500,this.rankGridY.width);
 		
 		// ランク10位まで
-		this.recode = [];
-		for(var i=0;i<10;i++){
+		for(var i=0;i<10 && i<this.rankingArray.length;i++){
 			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.rankingGroup)
 			.setOrigin(0,0)
 			.setPosition(5,this.rankGridY.span(i));
@@ -73,9 +96,9 @@ phina.define("ResultScene", {
 			.setPosition(5,this.rankGridY.span(i));
 			I.fontSize = 20;
 			
-			this.recode[i] = Label(""+((2+i)*10000)+"点 ななしななしななしななしななしあ").addChildTo(this.rankingGroup).setOrigin(0,0)
+			var recode = Label(""+this.rankingArray[i].score+"点 "+this.rankingArray[i].name).addChildTo(this.rankingGroup).setOrigin(0,0)
 			.setPosition(70,this.rankGridY.span(i));
-			this.recode[i].fontSize = 20;
+			recode.fontSize = 20;
 		}
 		this.rankingGroup.alpha = 0;
 
@@ -140,7 +163,16 @@ phina.define("ResultScene", {
 			stroke:"darkslateblue",
 		}).addChildTo(this).onclick = function(){
 			if(DEBUG)console.log("submit");
-			self.exit();
+			if(USE_COOKIE){
+				var name = $("#input")[0].value;
+				self.scoreJSON.name = (name === ""?"名無し":name);
+				setCookie("ranking",JSON.stringify(self.rankingArray));
+				this.fill = "gray";
+				this.text = "登録しました";
+				this.onclick = null;
+			}else{
+				alert("cookieが有効になっていないのでランキングに登録できません\nconsoleで有効にしてください");
+			}
 		};
 		
 		this.rankingShowingButton = Button({
