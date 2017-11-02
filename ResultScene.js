@@ -75,35 +75,6 @@ phina.define("ResultScene", {
         this.displayScore.text = "score: " + this.score;
         this.displayLevel.text = "level: " + this.level;
 		
-		if(USE_COOKIE){
-			// 端末にランキングを保存する
-			// スコアをjsonオブジェクトにする
-			this.scoreJSON = {"time":this.time,"score":this.score,"level":this.level,"name":"あなた"};
-			
-			// クッキーがからの場合は名無しさんを追加する
-			if(getCookie("ranking") == ""){
-				setCookie("ranking",'[{"time":0,"score":0,"level":0,"name":"名無しさん"}]');
-			}
-			
-			// cookieからjsonを取得する
-			this.rankingArray = JSON.parse(getCookie("ranking"));
-
-			this.rankingArray.push(this.scoreJSON);
-			this.rankingArray.sort(function(a,b){
-				if(a.score==b.score){
-					return b.time - a.time;
-				}
-				return b.score - a.score;
-			});
-			
-			// 表示する
-			for(var i = 0;i < this.rankingArray.length && i < 10; i++){
-				var elm = this.rankingArray[i];
-				var label = Label(JSON.stringify(elm)).addChildTo(this).setPosition(this.gridX.center(),this.gridY.span(3+i));
-			}
-			
-		}
-		
 		var self = this;
 		
 		this.retryButton = Button({
@@ -160,14 +131,4 @@ phina.define("ResultScene", {
     update: function(){
 		
 	},
-	/*
-	onclick: function () {
-		if(USE_COOKIE){
-			this.scoreJSON.name = document.querySelector('#input').value;
-			// クッキーに保存する
-			setCookie("ranking",JSON.stringify(this.rankingArray));
-		}
-		this.exit();
-	}*/
-    
 });
