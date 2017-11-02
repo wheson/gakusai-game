@@ -51,7 +51,7 @@ phina.define("ResultScene", {
 			fontColor:"white",
 			cornerRadius:5,
 			fill:"skyblue",
-			stroke:"blue",
+			stroke:"darkslateblue",
 		}).addChildTo(this);
 		
 		var self = this;
