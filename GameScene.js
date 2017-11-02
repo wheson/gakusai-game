@@ -66,14 +66,14 @@ phina.define("GameScene", {
         this.label2.fill = 'black';
         this.label2.fontSize = 15;
 
-        // 都合-1から
+        // ゲーム開始時からのフレーム数
         this.frame = -1;
+		// レベル開始時からのフレーム数
+		this.levelFrame = -1;
 
-        //ゲーム全体の時間(1sec)
+        //ゲーム全体の時間(sec)
         this.time = 0;
 
-        //現在ステージ時間(1sec)
-        this.stageTime = 0;
         this.score = 0;
         this.level = 1;
 
@@ -158,9 +158,9 @@ phina.define("GameScene", {
         // startFlagが立っていなければreturnする
         if (this.startFlag) {
             this.frame++;
+			this.levelFrame++;
             //this.time = Math.floor(this.frame / 30);
             if (this.frame % 30 === 0 && this.frame !== 0) {
-                this.stageTime++;
                 this.time++;
             }
             this.displayTime.text = "time: " + this.time;
@@ -251,9 +251,8 @@ phina.define("GameScene", {
 
             //レベルの変更数値を更新
             this.changeLevel += 1000;
-
-            //ステージ時間をリセット
-            this.stageTime = 0;
+			
+			this.levelFrame = -1;
         }
 
 
@@ -285,7 +284,7 @@ phina.define("GameScene", {
     createEnemy: function () {
         // 敵
         // 指定フレーム毎に
-        if (this.frame % this.frequency === 0) {
+        if (this.levelFrame % this.frequency === 0) {
             // 敵をランダムな方向に動くように出現させる
             //レベル10以下の時
             if (this.level <= 10) {
