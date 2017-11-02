@@ -99,7 +99,10 @@ phina.define("GameScene", {
         //敵の出現頻度をまとめた配列
         this.frequencyGroup = [200, 200, 180, 160, 140, 120, 100];
         this.currentFrequencyNum = 0;
-        this.frequency = this.frequencyGroup[0];
+        this.enemyFrequency= this.frequencyGroup[0];
+		
+		// アイテムの出現頻度
+		this.itemFrequency = 90;
 
         //次にレベルの変わるスコア
         this.changeLevel = 1000;
@@ -203,7 +206,7 @@ phina.define("GameScene", {
 
         // アイテム
         //指定フレームごとに
-        if (this.frame % 100 == 0 && this.frame !== 0) {
+        if (this.frame % this.itemFrequency == 0 && this.frame !== 0) {
             // アイテムをランダムな方向に動くように出現させる
             // item0: 65%, item1: 20%, item2: 10%, item3: 5%
             // アイテムが出現する方向
@@ -236,7 +239,7 @@ phina.define("GameScene", {
             // 出現頻度をレベル10上がるごとに更新
             if ((this.level - 1) % 10 === 0) {
                 this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
-                this.frequency = this.frequencyGroup[this.currentFrequencyNum];
+                this.enemyFrequency= this.frequencyGroup[this.currentFrequencyNum];
             }
             //レベルが31になったらbgmを"bgmSpace"に変更
             if (this.level === 31) {
@@ -284,7 +287,7 @@ phina.define("GameScene", {
     createEnemy: function () {
         // 敵
         // 指定フレーム毎に
-        if (this.levelFrame % this.frequency === 0) {
+        if (this.levelFrame % this.enemyFrequency=== 0) {
             // 敵をランダムな方向に動くように出現させる
             //レベル10以下の時
             if (this.level <= 10) {
