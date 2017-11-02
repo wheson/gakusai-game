@@ -13,14 +13,14 @@ phina.define("GameScene", {
         // 背景
         this.bg = [];
         for (var i = 0; i < BG_NUM; i++) {
-            this.bg[i] = Sprite("bg" + (1 + i)).addChildTo(this);
+            this.bg[i] = Sprite("bg" + i).addChildTo(this);
             this.bg[i].origin.set(0, 0); // 左上基準に変更
             this.bg[i].width = SCREEN_WIDTH;
             this.bg[i].height = SCREEN_HEIGHT;
             this.bg[i].alpha = 0;
         }
         this.bg[0].alpha = 1;
-        this.bgChangeFreq = 2;
+        //this.bgChangeFreq = 3;
 
         this.displayStatusBG = RectangleShape().addChildTo(this);
         this.displayStatusBG.fill = "white";
@@ -238,10 +238,10 @@ phina.define("GameScene", {
             //レベルが31を越えたらbgmを"bgmSpace"に変更
             if (this.level === 31) {
                 SoundManager.playMusic("bgmSpace");
-            }
-            if ((this.level + 1) % this.bgChangeFreq === 0 && (this.level - 1) / this.bgChangeFreq < BG_NUM) {
+            }/*
+            if ((this.level + 1) % this.bgChangeFreq === 0 && (this.level - 1)  this.bgChangeFreq < BG_NUM) {
                 this.bg[(this.level - 1) / this.bgChangeFreq].alpha = 1;
-            }
+            }*/
 
             //レベルの変更数値を更新
             this.changeLevel += 1000;
