@@ -11,6 +11,8 @@ phina.define("GameScene", {
         });
 
         // 背景
+		this.bgNum = 0;
+		this.bgChangeFrequency = 10;
         this.bg = [];
         for (var i = 0; i < BG_NUM; i++) {
             this.bg[i] = Sprite("bg" + i).addChildTo(this);
@@ -20,7 +22,6 @@ phina.define("GameScene", {
             this.bg[i].alpha = 0;
         }
         this.bg[0].alpha = 1;
-        //this.bgChangeFreq = 3;
 
         this.displayStatusBG = RectangleShape().addChildTo(this);
         this.displayStatusBG.fill = "white";
@@ -235,13 +236,16 @@ phina.define("GameScene", {
                 this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
                 this.frequency = this.frequencyGroup[this.currentFrequencyNum];
             }
-            //レベルが31を越えたらbgmを"bgmSpace"に変更
+            //レベルが31になったらbgmを"bgmSpace"に変更
             if (this.level === 31) {
                 SoundManager.playMusic("bgmSpace");
-            }/*
-            if ((this.level + 1) % this.bgChangeFreq === 0 && (this.level - 1)  this.bgChangeFreq < BG_NUM) {
-                this.bg[(this.level - 1) / this.bgChangeFreq].alpha = 1;
-            }*/
+            }
+			// レベルが10上がるごとに背景を変更する
+			// 次の背景番号が用意している背景数を超えるなら何もしない
+            if (this.level % this.bgChangeFrequency === 1 && this.bgNum + 1 < BG_NUM ){
+				this.bgNum++;
+				this.bg[this.bgNum].tweener.to({alpha:1},1000);
+			}
 
             //レベルの変更数値を更新
             this.changeLevel += 1000;
