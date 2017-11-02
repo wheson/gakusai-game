@@ -49,13 +49,13 @@ phina.define("Item", {
         if (this.itemNum === 0) {
             this.score = 100;
         } else if (this.itemNum === 1) {
-            this.score = 300;
+            this.score = 200;
         } else if (this.itemNum === 2) {
-            this.score = 500;
+            this.score = 300;
 			// 表示されてから消滅するまでのフレーム数
             this.removeFrame = 600;
         } else if (this.itemNum === 3) {
-            this.score = 1000;
+            this.score = 500;
         }
 
 

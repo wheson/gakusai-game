@@ -102,7 +102,7 @@ phina.define("GameScene", {
         this.enemyFrequency= this.frequencyGroup[0];
 		
 		// アイテムの出現頻度
-		this.itemFrequency = 90;
+		this.itemFrequency = 70;
 
         //次にレベルの変わるスコア
         this.changeLevel = 1000;
