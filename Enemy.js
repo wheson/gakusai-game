@@ -167,7 +167,7 @@ phina.define("Enemy", {
         // enemyを1秒かけて透明にし，removeする
         this.tweener.to({
                 alpha: 0,
-            }, 1000).call(function () {
+            }, 500).call(function () {
                 self.remove();
             });
     },
