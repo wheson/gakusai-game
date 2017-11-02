@@ -127,6 +127,8 @@ phina.define("ResultScene", {
 			input.focus();
 		};
 
+		// マウスカーソルを表示する
+		$("body").css("cursor","default");
     },
     update: function(){
 		

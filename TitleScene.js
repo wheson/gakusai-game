@@ -55,7 +55,12 @@ phina.define("TitleScene", {
 		// BGMを流す
 		// SoundManager.currentMusicがnullなのはBGMが掛かっていない起動直後
 		// SoundManager.currentMusic.srcがASSETS.sound.bgmと異なるのは基本BGM以外がかかっているとき
-        if(SoundManager.currentMusic == null || SoundManager.currentMusic.src != ASSETS.sound.bgm)SoundManager.playMusic("bgm");
+        if(SoundManager.currentMusic == null || SoundManager.currentMusic.src != ASSETS.sound.bgm){
+			SoundManager.playMusic("bgm");
+		}
+		
+		// マウスカーソルを非表示
+		$("body").css("cursor","none");
     },
 
 	onkeydown: function(){
