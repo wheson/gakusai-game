@@ -287,7 +287,7 @@ phina.define("GameScene", {
     createEnemy: function () {
         // 敵
         // 指定フレーム毎に
-        if (this.levelFrame % this.enemyFrequency=== 0) {
+        if (this.levelFrame % this.enemyFrequency === this.enemyFrequency / 10) {
             // 敵をランダムな方向に動くように出現させる
             //レベル10以下の時
             if (this.level <= 10) {
