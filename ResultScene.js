@@ -112,21 +112,20 @@ phina.define("ResultScene", {
 			label[i] = Label('名前を入力してね').addChildTo(this);
 			label[i].x = this.gridX.center()+i;
 			label[i].y = this.gridY.span(10)+i;
-			label[i].fontSize = 60;
+			label[i].fontSize = 56;
 			label[i].width = 400;
 			label[i].height = 80;
 			label[i].fill = i===1?"white":"black";
 		}
-		this.input = document.querySelector('#input');
-		this.input.value = "";
-		this.input.oninput = function () {
-			label[0].text = label[1].text = input.value;
+		$("input")[0].value = "";
+		$("input")[0].oninput = function () {
+			label[0].text = label[1].text = this.value;
 		};
 
 		// マウスカーソルを表示する
 		$("body").css("cursor","default");
     },
     update: function(){
-		input.focus();
+		$("input")[0].focus();
 	},
 });
