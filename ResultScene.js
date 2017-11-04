@@ -43,7 +43,7 @@ phina.define("ResultScene", {
 		});
 		
 		// スコアをjsonオブジェクトにする
-		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"name":"あなた"};
+		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"username":"あなた"};
 		// 一人かいないJSONを作る
 		this.rankingArray = [];
 		
@@ -154,7 +154,8 @@ phina.define("ResultScene", {
 			if(DEBUG)console.log("submit");
 			if(USE_COOKIE){
 				var name = $("#input")[0].value;
-				self.scoreJSON.name = (name === ""?"名無し":name);
+				if(name === "")return;
+				self.scoreJSON.username = name;
 				setCookie("ranking",JSON.stringify(self.rankingArray));
 				this.fill = "gray";
 				this.text = "登録しました";
@@ -211,7 +212,7 @@ phina.define("ResultScene", {
 	printRecode: function(rankingArray){
 		// ランク10位まで
 		for(var i=0;i<10 && i<rankingArray.length;i++){
-			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].name).addChildTo(this.rankingGroup).setOrigin(0,0)
+			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].username).addChildTo(this.rankingGroup).setOrigin(0,0)
 			.setPosition(70,this.rankGridY.span(i));
 			recode.fontSize = 20;
 		}
