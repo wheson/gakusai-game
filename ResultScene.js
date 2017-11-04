@@ -78,7 +78,7 @@ phina.define("ResultScene", {
 		rankBG.setSize(500,this.rankGridY.width);
 		
 		// ランク10位まで
-		for(var i=0;i<10 && i<this.rankingArray.length;i++){
+		for(var i=0;i<10;i++){
 			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.rankingGroup)
 			.setOrigin(0,0)
 			.setPosition(5,this.rankGridY.span(i));
@@ -88,10 +88,6 @@ phina.define("ResultScene", {
 			.setOrigin(0,0)
 			.setPosition(5,this.rankGridY.span(i));
 			I.fontSize = 20;
-			
-			var recode = Label(""+this.rankingArray[i].score+"点 "+this.rankingArray[i].name).addChildTo(this.rankingGroup).setOrigin(0,0)
-			.setPosition(70,this.rankGridY.span(i));
-			recode.fontSize = 20;
 		}
 		this.rankingGroup.alpha = 0;
 
@@ -209,7 +205,17 @@ phina.define("ResultScene", {
 		
 		// マウスカーソルを表示する
 		$("body").css("cursor","default");
+		
+		this.printRecode(this.rankingArray);
     },
+	printRecode: function(rankingArray){
+		// ランク10位まで
+		for(var i=0;i<10 && i<rankingArray.length;i++){
+			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].name).addChildTo(this.rankingGroup).setOrigin(0,0)
+			.setPosition(70,this.rankGridY.span(i));
+			recode.fontSize = 20;
+		}
+	},
     update: function(){
 		$("input")[0].focus();
 	},
