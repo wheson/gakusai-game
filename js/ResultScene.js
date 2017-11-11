@@ -1,7 +1,7 @@
 phina.define("ResultScene", {
     superClass: 'DisplayScene',
-	getURL: "?callback=?",
-	postURL: "",
+	getURL: "https://pikopiko-184802.appspot.com/import?callback=?",
+	postURL: "https://pikopiko-184802.appspot.com/export",
     init: function (options) {
         this.superInit({
             'width': SCREEN_WIDTH,
@@ -142,11 +142,11 @@ phina.define("ResultScene", {
 			
 			// アップロードする
 			// 結果をコンソールに表示する
-			/*$.post(this.postURL,
+			$.post(this.postURL,
 			{
 				"username": self.scoreJSON.username,
 				"score": self.scoreJSON.score
-			},console.log);*/
+			},console.log);
 			this.fill = "gray";
 			this.text = "登録しました";
 			$("#input")[0].oninput = null;
