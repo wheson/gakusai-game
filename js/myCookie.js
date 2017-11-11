@@ -13,4 +13,4 @@ function getCookie(key){
         return(decodeURIComponent(tmp.substring(start+1,end)));
     }
     return("");
-} 
+}

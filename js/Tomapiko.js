@@ -1,6 +1,6 @@
 phina.define("Tomapiko", {
     superClass: "Sprite",
-	
+
     init: function () {
         this.superInit('tomapiko', 64, 64);
 		// スプライトシート適用
@@ -20,7 +20,7 @@ phina.define("Tomapiko", {
 		this.jumpSpeed = 8;
 		this.walkSpeed = 4;
 		this.gravity = 0.3;
-		
+
 		// 連続ジャンプ防止用変数
 		this.prejump = false;
     },
@@ -48,7 +48,7 @@ phina.define("Tomapiko", {
 		}else{
 			this.prejump = false;
 		}
-		
+
 		// 天井にぶつかっていればy速度を0にする
         if (this.y <= 0) {
             this.physical.velocity.y = 0;

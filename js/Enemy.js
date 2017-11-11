@@ -15,12 +15,12 @@ phina.define("Enemy", {
 
 		// 敵が動くスピードの初期値
         this.speed = 1;
-		
+
         // ステージレベルがn*10+1以上の時speedをn*0.2追加する
         if (this.level >= 11){
             this.speed += ((this.level - 1) / 10) * 0.2;
 		}
-		
+
 		// 黒いお化けの場合は移動距離、方向転換距離を設定する
 		if(this.enemyNum === 2){
 			this.distance = 1;

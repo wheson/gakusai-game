@@ -39,7 +39,7 @@ phina.define("GameScene", {
 
         // トマピコ
         this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
-		
+
 		// レベルアップ時に表示されるラベル
 		this.levelLabel = Label("Lv.UP!").addChildTo(this);
 		this.levelLabel.fill = "red";
@@ -100,7 +100,7 @@ phina.define("GameScene", {
         this.frequencyGroup = [200, 200, 180, 160, 140, 120, 100];
         this.currentFrequencyNum = 0;
         this.enemyFrequency= this.frequencyGroup[0];
-		
+
 		// アイテムの出現頻度
 		this.itemFrequency = 70;
 
@@ -234,8 +234,8 @@ phina.define("GameScene", {
 			this.levelLabel.tweener.clear()
 			.set({x:this.tomapiko.x,y:this.tomapiko.y,alpha:1})
 			.by({y:-20,alpha:-1},500);
-			
-			
+
+
             // 出現頻度をレベル10上がるごとに更新
             if ((this.level - 1) % 10 === 0) {
                 this.currentFrequencyNum = Math.min(this.currentFrequencyNum + 1, this.frequencyGroup.length - 1);
@@ -254,7 +254,7 @@ phina.define("GameScene", {
 
             //レベルの変更数値を更新
             this.changeLevel += 1000;
-			
+
 			this.levelFrame = -1;
         }
 
