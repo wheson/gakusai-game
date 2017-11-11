@@ -1,6 +1,7 @@
 phina.define("ResultScene", {
     superClass: 'DisplayScene',
-
+	getURL: "?callback=?",
+	postURL: "",
     init: function (options) {
         this.superInit({
             'width': SCREEN_WIDTH,
@@ -11,11 +12,11 @@ phina.define("ResultScene", {
         this.bg.origin.set(0, 0); // 左上基準に変更
         this.bg.width = SCREEN_WIDTH;
         this.bg.height = SCREEN_HEIGHT;
-
+		
 		// やられトマピコ
 		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
 		tomapiko.animation.gotoAndPlay("down");
-
+		
 		// 敵グループ
 		this.enemyGroup = DisplayElement().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
 		// 45度ごとに円状に生成
@@ -34,7 +35,7 @@ phina.define("ResultScene", {
 				this.deg--;
 			};
 		}
-
+		
 		// ランキング表示グリッド
 		this.rankGridY = Grid({
 			width: SCREEN_HEIGHT/2,
@@ -42,33 +43,9 @@ phina.define("ResultScene", {
 			offset: 10,
 		});
 
-		// スコアをjsonオブジェクトにする
-		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"username":"あなた"};
-		// 一人かいないJSONを作る
-		this.rankingArray = [];
-
-		// cookieを使うようになっていれば
-		if(USE_COOKIE){
-			// 端末にランキングを保存する
-			var rawJSON = getCookie("ranking");
-			if(rawJSON !== ""){
-				// cookieからjsonを取得する
-				this.rankingArray = JSON.parse(rawJSON);
-			}
-		}
-		// ランキングに自分の今回のスコアを追加する
-		this.rankingArray.push(this.scoreJSON);
-		// ランキングをソートする
-		// クッキーを使わない場合やクッキーがからの場合は何もしないような感じ
-		this.rankingArray.sort(function(a,b){
-			return b.score - a.score;
-		});
-
-
-
 		// ランキング表示領域
 		this.rankingGroup = DisplayElement().addChildTo(this);
-
+		
 		// ランキング表示領域の背景
 		var rankBG = RectangleShape().addChildTo(this.rankingGroup);
 		rankBG.fill = "white";
@@ -76,14 +53,14 @@ phina.define("ResultScene", {
 		rankBG.alpha = 0.8;
 		rankBG.setOrigin(0,0);
 		rankBG.setSize(500,this.rankGridY.width);
-
+		
 		// ランク10位まで
 		for(var i=0;i<10;i++){
 			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.rankingGroup)
 			.setOrigin(0,0)
 			.setPosition(5,this.rankGridY.span(i));
 			rank.fontSize = 20;
-
+			
 			var I = Label("　 位：").addChildTo(this.rankingGroup)
 			.setOrigin(0,0)
 			.setPosition(5,this.rankGridY.span(i));
@@ -91,6 +68,7 @@ phina.define("ResultScene", {
 		}
 		this.rankingGroup.alpha = 0;
 
+		// スコアなどの表示領域
 		// ステータスの白い背景
         this.displayStatusBG = RectangleShape().addChildTo(this);
         this.displayStatusBG.fill = "white";
@@ -98,7 +76,7 @@ phina.define("ResultScene", {
         this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
         this.displayStatusBG.setSize(100, 150);
         this.displayStatusBG.alpha = 0.8;
-
+		
         // frame
         this.time = options.time;
         this.displayTime = Label("0").addChildTo(this);
@@ -122,9 +100,13 @@ phina.define("ResultScene", {
         this.displayTime.text = "time: " + this.time;
         this.displayScore.text = "score: " + this.score;
         this.displayLevel.text = "level: " + this.level;
-
+		
+		
 		var self = this;
-
+		
+		// ボタン類
+		// 用途は変数名を見て
+		
 		this.retryButton = Button({
 			x:this.gridX.center(),
 			y:this.gridY.span(14),
@@ -139,7 +121,7 @@ phina.define("ResultScene", {
 			if(DEBUG)console.log("exit");
 			self.exit();
 		};
-
+		
 		this.submitButton = Button({
 			x:this.gridX.center(),
 			y:this.gridY.span(12),
@@ -152,19 +134,25 @@ phina.define("ResultScene", {
 			stroke:"darkslateblue",
 		}).addChildTo(this).onclick = function(){
 			if(DEBUG)console.log("submit");
-			if(USE_COOKIE){
-				var name = $("#input")[0].value;
-				if(name === "")return;
-				self.scoreJSON.username = name;
-				setCookie("ranking",JSON.stringify(self.rankingArray));
-				this.fill = "gray";
-				this.text = "登録しました";
-				this.onclick = null;
-			}else{
-				alert("cookieが有効になっていないのでランキングに登録できません\nconsoleで有効にしてください");
-			}
+			// 名前が入力されていなければ何もしない
+			var name = $("#input")[0].value;
+			if(name === "")return;
+			
+			self.scoreJSON.username = name;
+			
+			// アップロードする
+			// 結果をコンソールに表示する
+			/*$.post(this.postURL,
+			{
+				"username": self.scoreJSON.username,
+				"score": self.scoreJSON.score
+			},console.log);*/
+			this.fill = "gray";
+			this.text = "登録しました";
+			$("#input")[0].oninput = null;
+			this.onclick = null;
 		};
-
+		
 		this.rankingShowingButton = Button({
 			x:this.gridX.span(14),
 			y:this.gridY.span(15),
@@ -186,7 +174,8 @@ phina.define("ResultScene", {
 				this.text = "ランキングを見る";
 			}
 		};
-
+		
+		// 名前入力エリア表示
 		var label=[];
 		for(var i=0;i<2;i++){
 			label[i] = Label('名前を入力してね').addChildTo(this);
@@ -197,18 +186,34 @@ phina.define("ResultScene", {
 			label[i].height = 80;
 			label[i].fill = i===1?"white":"black";
 		}
-		$("input")[0].value = "";
-		$("input")[0].oninput = function () {
+		$("#input")[0].value = "";
+		$("#input")[0].oninput = function () {
 			label[0].text = label[1].text = this.value;
 		};
 
-
-
 		// マウスカーソルを表示する
 		$("body").css("cursor","default");
-
+		
+		// スコアをjsonオブジェクトにする
+		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"username":"あなた"};
+		// 配列に入れる
+		this.rankingArray = [this.scoreJSON];
+		
+		// ランキングを表示
 		this.printRecode(this.rankingArray);
+		
+		// ランキングを取得する
+		$.getJSON(this.getURL,{},this.getJSON);
     },
+	getJSON: function(data) {
+		// 取得したランキングに今回のスコアをプッシュする
+		data.push(this.scoreJSON);
+		// ランキングをソートする
+		data.sort(function(a,b){
+			return b.score - a.score;
+		});
+		this.printRecode(data);
+	},
 	printRecode: function(rankingArray){
 		// ランク10位まで
 		for(var i=0;i<10 && i<rankingArray.length;i++){
@@ -218,6 +223,6 @@ phina.define("ResultScene", {
 		}
 	},
     update: function(){
-		$("input")[0].focus();
+		$("#input")[0].focus();
 	},
 });
