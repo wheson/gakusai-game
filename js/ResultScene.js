@@ -188,7 +188,7 @@ phina.define("ResultScene", {
 		}
 		$("#input")[0].value = "";
 		$("#input")[0].oninput = function () {
-			label[0].text = label[1].text = this.value;
+			label[0].text = label[1].text = this.value === "" ? '名前を入力してね':this.value;
 		};
 
 		// マウスカーソルを表示する
@@ -229,5 +229,7 @@ phina.define("ResultScene", {
 	},
 	update: function(){
 		$("#input")[0].focus();
+		var pos = $("#input")[0].value.length;
+		$("#input")[0].setSelectionRange(pos,pos);
 	},
 });
