@@ -1,17 +1,17 @@
 phina.define("ResultScene", {
-    superClass: 'DisplayScene',
+	superClass: 'DisplayScene',
 	getURL: "http://pikopiko-184802.appspot.com/import?callback=?",
 	postURL: "http://pikopiko-184802.appspot.com/export",
-    init: function (options) {
-        this.superInit({
-            'width': SCREEN_WIDTH,
-            'height': SCREEN_HEIGHT
-        });
-        // 背景
-        this.bg = Sprite("bg" + options.bgNum ).addChildTo(this);
-        this.bg.origin.set(0, 0); // 左上基準に変更
-        this.bg.width = SCREEN_WIDTH;
-        this.bg.height = SCREEN_HEIGHT;
+	init: function (options) {
+		this.superInit({
+			'width': SCREEN_WIDTH,
+			'height': SCREEN_HEIGHT
+		});
+		// 背景
+		this.bg = Sprite("bg" + options.bgNum ).addChildTo(this);
+		this.bg.origin.set(0, 0); // 左上基準に変更
+		this.bg.width = SCREEN_WIDTH;
+		this.bg.height = SCREEN_HEIGHT;
 		
 		// やられトマピコ
 		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
@@ -70,36 +70,36 @@ phina.define("ResultScene", {
 
 		// スコアなどの表示領域
 		// ステータスの白い背景
-        this.displayStatusBG = RectangleShape().addChildTo(this);
-        this.displayStatusBG.fill = "white";
-        this.displayStatusBG.stroke = "gray";
-        this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
-        this.displayStatusBG.setSize(100, 150);
-        this.displayStatusBG.alpha = 0.8;
+		this.displayStatusBG = RectangleShape().addChildTo(this);
+		this.displayStatusBG.fill = "white";
+		this.displayStatusBG.stroke = "gray";
+		this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
+		this.displayStatusBG.setSize(100, 150);
+		this.displayStatusBG.alpha = 0.8;
 		
-        // frame
-        this.time = options.time;
-        this.displayTime = Label("0").addChildTo(this);
-        this.displayTime.fill = 'black';
-        this.displayTime.fontSize = 15;
-        this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
+		// frame
+		this.time = options.time;
+		this.displayTime = Label("0").addChildTo(this);
+		this.displayTime.fill = 'black';
+		this.displayTime.fontSize = 15;
+		this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
 
-        this.score = options.score;
-        this.displayScore = Label("0").addChildTo(this);
-        this.displayScore.fill = 'black';
-        this.displayScore.fontSize = 15;
-        this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
+		this.score = options.score;
+		this.displayScore = Label("0").addChildTo(this);
+		this.displayScore.fill = 'black';
+		this.displayScore.fontSize = 15;
+		this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
-        //ゲームのレベル
-        this.level = options.level;
-        this.displayLevel = Label("0").addChildTo(this);
-        this.displayLevel.fill = 'black';
-        this.displayLevel.fontSize = 15;
-        this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
+		//ゲームのレベル
+		this.level = options.level;
+		this.displayLevel = Label("0").addChildTo(this);
+		this.displayLevel.fill = 'black';
+		this.displayLevel.fontSize = 15;
+		this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
 
-        this.displayTime.text = "time: " + this.time;
-        this.displayScore.text = "score: " + this.score;
-        this.displayLevel.text = "level: " + this.level;
+		this.displayTime.text = "time: " + this.time;
+		this.displayScore.text = "score: " + this.score;
+		this.displayLevel.text = "level: " + this.level;
 		
 		
 		var self = this;
@@ -203,16 +203,17 @@ phina.define("ResultScene", {
 		this.printRecode(this.rankingArray);
 		
 		// ランキングを取得する
-		$.getJSON(this.getURL,{},this.getJSON);
-    },
-	getJSON: function(data) {
-		// 取得したランキングに今回のスコアをプッシュする
-		data.push(this.scoreJSON);
-		// ランキングをソートする
-		data.sort(function(a,b){
-			return b.score - a.score;
+		$.getJSON(this.getURL,
+		{},
+		function(data) {
+			// 取得したランキングに今回のスコアをプッシュする
+			data.push(self.scoreJSON);
+			// ランキングをソートする
+			data.sort(function(a,b){
+				return b.score - a.score;
+			});
+			self.printRecode(data);
 		});
-		this.printRecode(data);
 	},
 	printRecode: function(rankingArray){
 		// ランク10位まで
@@ -222,7 +223,7 @@ phina.define("ResultScene", {
 			recode.fontSize = 20;
 		}
 	},
-    update: function(){
+	update: function(){
 		$("#input")[0].focus();
 	},
 });
