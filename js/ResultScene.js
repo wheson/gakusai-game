@@ -142,11 +142,11 @@ phina.define("ResultScene", {
 			
 			// アップロードする
 			// 結果をコンソールに表示する
-			$.post(this.postURL,
+			$.post(self.postURL,
 			{
 				"username": self.scoreJSON.username,
 				"score": self.scoreJSON.score
-			},console.log);
+			},console.log)
 			this.fill = "gray";
 			this.text = "登録しました";
 			$("#input")[0].oninput = null;
