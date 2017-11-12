@@ -199,6 +199,8 @@ phina.define("ResultScene", {
 		// 配列に入れる
 		this.rankingArray = [this.scoreJSON];
 		
+		// 記録を表示するラベルグループ
+		this.recodeLabels = DisplayElement().addChildTo(this.rankingGroup);
 		// ランキングを表示
 		this.printRecode(this.rankingArray);
 		
@@ -216,9 +218,11 @@ phina.define("ResultScene", {
 		});
 	},
 	printRecode: function(rankingArray){
+		// データが読み込まれていなかった時のラベルを削除してから描画する必要があるため
+		this.recodeLabels.children.clear();
 		// ランク10位まで
 		for(var i=0;i<10 && i<rankingArray.length;i++){
-			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].username).addChildTo(this.rankingGroup).setOrigin(0,0)
+			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].username).addChildTo(this.recodeLabels).setOrigin(0,0)
 			.setPosition(70,this.rankGridY.span(i));
 			recode.fontSize = 20;
 		}
