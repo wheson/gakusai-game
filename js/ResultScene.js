@@ -39,7 +39,7 @@ phina.define("ResultScene", {
 		// ランキング表示グリッド
 		this.rankGridY = Grid({
 			width: SCREEN_HEIGHT/2,
-			columns: 10,
+			columns: 11,
 			offset: 10,
 		});
 
@@ -54,16 +54,30 @@ phina.define("ResultScene", {
 		rankBG.setOrigin(0,0);
 		rankBG.setSize(500,this.rankGridY.width);
 		
+		this.openRankingWindowButton = Button({
+			width:170,
+			height:24,
+			text:"全てのランキング",
+			fontColor:"white",
+			fontSize: 20,
+			cornerRadius:5,
+			fill:"orangered",
+			stroke:"darkslateblue",
+		}).addChildTo(this.rankingGroup)
+		.setOrigin(1,0)
+		.setPosition(500,this.rankGridY.span(0))
+		.onclick = openRankingWindow;
+		
 		// ランク10位まで
 		for(var i=0;i<10;i++){
 			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.rankingGroup)
 			.setOrigin(0,0)
-			.setPosition(5,this.rankGridY.span(i));
+			.setPosition(5,this.rankGridY.span(i+1));
 			rank.fontSize = 20;
 			
 			var I = Label("　 位：").addChildTo(this.rankingGroup)
 			.setOrigin(0,0)
-			.setPosition(5,this.rankGridY.span(i));
+			.setPosition(5,this.rankGridY.span(i+1));
 			I.fontSize = 20;
 		}
 		this.rankingGroup.alpha = 0;
@@ -190,9 +204,6 @@ phina.define("ResultScene", {
 		$("#input")[0].oninput = function () {
 			label[0].text = label[1].text = this.value === "" ? '名前を入力してね':this.value;
 		};
-
-		// マウスカーソルを表示する
-		$("body").css("cursor","default");
 		
 		// スコアをjsonオブジェクトにする
 		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"username":"あなた"};
@@ -220,10 +231,16 @@ phina.define("ResultScene", {
 	printRecode: function(rankingArray){
 		// データが読み込まれていなかった時のラベルを削除してから描画する必要があるため
 		this.recodeLabels.children.clear();
+		
+		var yourRecode = Label("■あなたは"+ (rankingArray.indexOf(this.scoreJSON)+1) +"位でした！■").addChildTo(this.recodeLabels)
+		.setOrigin(0,0)
+		.setPosition(5,this.rankGridY.span(0));
+		yourRecode.fontSize = 20;
+		
 		// ランク10位まで
 		for(var i=0;i<10 && i<rankingArray.length;i++){
 			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].username).addChildTo(this.recodeLabels).setOrigin(0,0)
-			.setPosition(70,this.rankGridY.span(i));
+			.setPosition(70,this.rankGridY.span(i+1));
 			recode.fontSize = 20;
 		}
 	},

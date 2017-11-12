@@ -52,15 +52,26 @@ phina.define("TitleScene", {
             itemDescription.fontSize = 15;
 		}
 
+		this.openRankingWindowButton = Button({
+			x:this.gridX.span(14),
+			y:this.gridY.span(15),
+			width:200,
+			height:30,
+			text:"全てのランキング",
+			fontColor:"white",
+			fontSize: 24,
+			cornerRadius:5,
+			fill:"coral",
+			stroke:"forestgreen",
+		}).addChildTo(this).onclick = openRankingWindow;
+		
+		
 		// BGMを流す
 		// SoundManager.currentMusicがnullなのはBGMが掛かっていない起動直後
 		// SoundManager.currentMusic.srcがASSETS.sound.bgmと異なるのは基本BGM以外がかかっているとき
         if(SoundManager.currentMusic == null || SoundManager.currentMusic.src != ASSETS.sound.bgm){
 			SoundManager.playMusic("bgm");
 		}
-
-		// マウスカーソルを非表示
-		$("body").css("cursor","none");
     },
 
 	onkeydown: function(){
@@ -81,14 +92,12 @@ phina.define("TitleScene", {
 		mask.strokeWidth = 0;
 
 		// changeTimeかけてだんだん白くなる
-		mask.tweener.to({alpha:1},changeTime,"easeInCubic");
+		// changeTime経ってから切り替える
+		var self = this;
+		mask.tweener.to({alpha:1},changeTime,"easeInCubic")
+		.call(function(){self.exit();});
 
 		// キーを押したときの効果音を鳴らす
 		SoundManager.play("titlese");
-
-		// changeTime経ってから切り替える
-		var self = this;
-		setTimeout(function(){self.exit();},changeTime);
-
 	},
 });
