@@ -55,7 +55,7 @@ phina.define("Enemy", {
 
 		// 当たり判定枠
         this.COLLISION = CircleShape().addChildTo(this);
-        this.COLLISION.fill = 'transparent';
+        this.COLLISION.alpha = 0;
         this.COLLISION.stroke = 'yellow';
         this.COLLISION.strokeWidth = 0;
         if (DEBUG) this.COLLISION.strokeWidth = 2;
