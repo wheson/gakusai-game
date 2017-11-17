@@ -1,11 +1,16 @@
 phina.main(function () {
     // アプリケーションを生成
     var app = GameApp({
-        startLabel: 'title', // MainScene から開始
+        startLabel: 'mySplash', // スプラッシュシーン から開始
         width: SCREEN_WIDTH, // 画面幅
         height: SCREEN_HEIGHT, // 画面高さ
         assets: ASSETS, // アセット読み込み
         scenes: [
+            {
+                label: "mySplash",
+                className: "MySplashScene",
+                nextLabel: "title"
+			},
             {
                 label: "title",
                 className: "TitleScene",
