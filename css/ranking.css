@@ -1,0 +1,30 @@
+table thead{
+    width: 100%;
+}
+
+table tr th,
+table tr td {
+    padding: 0 20px;
+    text-align: center;
+    border: 1px solid #DDD;
+    vertical-align: middle;
+}
+
+table tr th {
+    font-weight: bold;
+}
+
+
+table tr:nth-child(odd) td {
+    background: #f2f2f2;
+}
+
+.rank{
+    width: 40px;
+}
+.username{
+    width: 270px;
+}
+.score{
+    width: 80px;
+}
