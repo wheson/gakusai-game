@@ -1,7 +1,7 @@
 phina.define("ResultScene", {
 	superClass: 'DisplayScene',
-	getURL: "http://pikopiko-184802.appspot.com/import?callback=?",
-	postURL: "http://pikopiko-184802.appspot.com/export",
+	getURL: "//pikopiko-184802.appspot.com/import?callback=?",
+	postURL: "//pikopiko-184802.appspot.com/export",
 	init: function (options) {
 		this.superInit({
 			'width': SCREEN_WIDTH,

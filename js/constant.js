@@ -2,6 +2,7 @@
 phina.globalize();
 
 // 定数
+// デバッグで困るので相対パスを使用
 var ASSETS = {
 	"image": {
 		"logo": "image/pikopiko.png",
@@ -109,5 +110,5 @@ var playerName = {};
 
 // 全ランキングを表示する関数
 function openRankingWindow(){
-	window.open("http://pikopiko-184802.appspot.com/ranking","_blank");
+	window.open("//pikopiko-184802.appspot.com/ranking","_blank");
 }
