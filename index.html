@@ -10,8 +10,9 @@
     <title>Getting started | phina.js</title>
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- phina.js を読み込む -->
-    <script src='https://rawgit.com/phi-jp/phina.js/v0.2.1/build/phina.js'></script>
+    <script src='js/phina.0.2.1.min.js'></script>
     <!-- メイン処理 -->
     <script>
         // グローバルに展開
@@ -20,34 +21,34 @@
         // 定数
         var ASSETS = {
             image: {
-				logo: "https://pikopiko-184802.appspot.com/image/pikopiko.png",
-				titleBg: "https://pikopiko-184802.appspot.com/image/aG5YD.png",
-                bg0: "https://pikopiko-184802.appspot.com/image/pipo-bg001.jpg",
-                bg1: "https://pikopiko-184802.appspot.com/image/pipo-bg002.jpg",
-                bg2: "https://pikopiko-184802.appspot.com/image/pipo-bg003a.jpg",
-                bg3: "https://pikopiko-184802.appspot.com/image/pipo-bg005a.jpg",
-                bg4: "https://pikopiko-184802.appspot.com/image/pipo-bg005c.jpg",
-                bg5: "https://pikopiko-184802.appspot.com/image/pipo-bg005b.jpg",
-                bg6: "https://pikopiko-184802.appspot.com/image/pipo-bg004.jpg",
-                bg7: "https://pikopiko-184802.appspot.com/image/pipo-bg004b.jpg",
-				tomapiko: 'https://pikopiko-184802.appspot.com/image/tomapiko_ss.png',
-				enemy0: "https://pikopiko-184802.appspot.com/image/sample041.png",
-				enemy1: "https://pikopiko-184802.appspot.com/image/sample043.png",
-				enemy2: "https://pikopiko-184802.appspot.com/image/sample042.png",
-				enemy3: "https://pikopiko-184802.appspot.com/image/sample044.png",
-				item0: "https://pikopiko-184802.appspot.com/image/jewel2s-5.png",
-				item1: "https://pikopiko-184802.appspot.com/image/jewel2d-5.png",
-				item2: "https://pikopiko-184802.appspot.com/image/jewel2l-5.png",
-				item3: "https://pikopiko-184802.appspot.com/image/jewel2i-5.png",
+				logo: "image/pikopiko.png",
+				titleBg: "image/aG5YD.png",
+                bg0: "image/pipo-bg001.jpg",
+                bg1: "image/pipo-bg002.jpg",
+                bg2: "image/pipo-bg003a.jpg",
+                bg3: "image/pipo-bg005a.jpg",
+                bg4: "image/pipo-bg005c.jpg",
+                bg5: "image/pipo-bg005b.jpg",
+                bg6: "image/pipo-bg004.jpg",
+                bg7: "image/pipo-bg004b.jpg",
+				tomapiko: 'image/tomapiko_ss.png',
+				enemy0: "image/sample041.png",
+				enemy1: "image/sample043.png",
+				enemy2: "image/sample042.png",
+				enemy3: "image/sample044.png",
+				item0: "image/jewel2s-5.png",
+				item1: "image/jewel2d-5.png",
+				item2: "image/jewel2l-5.png",
+				item3: "image/jewel2i-5.png",
             },
 			sound: {
-				fall: "https://pikopiko-184802.appspot.com/sound/fall.wav",
-                get: "https://pikopiko-184802.appspot.com/sound/power21.wav",
-				jump: "https://pikopiko-184802.appspot.com/sound/jump00.wav",
-				bgm: "https://pikopiko-184802.appspot.com/sound/o12.mp3",
-                bgmSpace: "https://pikopiko-184802.appspot.com/sound/5730_2.mp3",
-				titlese: "https://pikopiko-184802.appspot.com/sound/pyoro57_a.wav",
-				levelUp: "https://pikopiko-184802.appspot.com/sound/pyoro68.wav",
+				fall: "sound/fall.wav",
+                get: "sound/power21.wav",
+				jump: "sound/jump00.wav",
+				bgm: "sound/o12.mp3",
+                bgmSpace: "sound/5730_2.mp3",
+				titlese: "sound/pyoro57_a.wav",
+				levelUp: "sound/pyoro68.wav",
 			},
             spritesheet: {
                 tomapikoSS: {
@@ -129,7 +130,6 @@
 		}
 		
     </script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src='js/Tomapiko.js'></script>
     <script src='js/Enemy.js'></script>
     <script src='js/Item.js'></script>
