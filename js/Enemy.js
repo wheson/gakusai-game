@@ -54,7 +54,7 @@ phina.define("Enemy", {
         }
 
 		// 当たり判定枠
-        this.COLLISION = CircleShape().addChildTo(this);
+        this.COLLISION = CircleShape();
         if(DEBUG){
 			this.COLLISION.fill = 'transparent';
 			this.COLLISION.stroke = 'yellow';
@@ -63,7 +63,7 @@ phina.define("Enemy", {
 			this.COLLISION.alpha = 0;
 		}
         this.COLLISION.radius = this.width / 3;
-
+		this.COLLISION.addChildTo(this);
     },
 
     update: function () {

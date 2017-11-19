@@ -38,7 +38,7 @@ phina.define("Item", {
         }
 
 		// 当たり判定枠
-        this.COLLISION = CircleShape().addChildTo(this);
+        this.COLLISION = CircleShape();
 		if(DEBUG){
 			this.COLLISION.fill = 'transparent';
 			this.COLLISION.stroke = 'yellow';
@@ -47,6 +47,7 @@ phina.define("Item", {
 			this.COLLISION.alpha = 0;
 		}
         this.COLLISION.radius = this.width / 2;
+		this.COLLISION.addChildTo(this);
 
         // アイテムの得点を設定
         if (this.itemNum === 0) {
