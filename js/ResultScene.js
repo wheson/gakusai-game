@@ -8,14 +8,16 @@ phina.define("ResultScene", {
 			'height': SCREEN_HEIGHT
 		});
 		// 背景
-		this.bg = Sprite("bg" + options.bgNum ).addChildTo(this);
+		this.bg = Sprite("bg" + options.bgNum );
 		this.bg.origin.set(0, 0); // 左上基準に変更
 		this.bg.width = SCREEN_WIDTH;
 		this.bg.height = SCREEN_HEIGHT;
+		this.bg.addChildTo(this);
 		
 		// やられトマピコ
-		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
+		var tomapiko = Tomapiko().setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
 		tomapiko.animation.gotoAndPlay("down");
+		tomapiko.addChildTo(this);
 		
 		// 敵グループ
 		this.enemyGroup = DisplayElement().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
@@ -24,7 +26,7 @@ phina.define("ResultScene", {
 			// 敵番号
 			var i = deg/45;
 			// 左向きの敵を追加する
-			var enemy = Enemy(LEFT,i%4,0,0,0).addChildTo(this.enemyGroup);
+			var enemy = Enemy(LEFT,i%4,0,0,0);
 			// 角度と半径を与える
 			enemy.deg = deg;
 			enemy.offset = 150;
@@ -34,6 +36,7 @@ phina.define("ResultScene", {
 				this.y = Math.sin(Math.degToRad(this.deg))*this.offset;
 				this.deg--;
 			};
+			enemy.addChildTo(this.enemyGroup);
 		}
 		
 		// ランキング表示グリッド
@@ -44,7 +47,7 @@ phina.define("ResultScene", {
 		});
 
 		// ランキング表示領域
-		this.rankingGroup = DisplayElement().addChildTo(this);
+		this.rankingGroup = DisplayElement();
 		
 		// ランキング表示領域の背景
 		var rankBG = RectangleShape().addChildTo(this.rankingGroup);
@@ -81,32 +84,34 @@ phina.define("ResultScene", {
 			I.fontSize = 20;
 		}
 		this.rankingGroup.alpha = 0;
+		this.rankingGroup.addChildTo(this);
 
 		// スコアなどの表示領域
 		// ステータスの白い背景
-		this.displayStatusBG = RectangleShape().addChildTo(this);
+		this.displayStatusBG = RectangleShape();
 		this.displayStatusBG.fill = "white";
 		this.displayStatusBG.stroke = "gray";
 		this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
 		this.displayStatusBG.setSize(100, 150);
 		this.displayStatusBG.alpha = 0.8;
+		this.displayStatusBG.addChildTo(this);
 		
 		// frame
 		this.time = options.time;
-		this.displayTime = Label("0").addChildTo(this);
+		this.displayTime = Label("0");
 		this.displayTime.fill = 'black';
 		this.displayTime.fontSize = 15;
 		this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
 
 		this.score = options.score;
-		this.displayScore = Label("0").addChildTo(this);
+		this.displayScore = Label("0");
 		this.displayScore.fill = 'black';
 		this.displayScore.fontSize = 15;
 		this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
 		//ゲームのレベル
 		this.level = options.level;
-		this.displayLevel = Label("0").addChildTo(this);
+		this.displayLevel = Label("0");
 		this.displayLevel.fill = 'black';
 		this.displayLevel.fontSize = 15;
 		this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
@@ -115,6 +120,9 @@ phina.define("ResultScene", {
 		this.displayScore.text = "score: " + this.score;
 		this.displayLevel.text = "level: " + this.level;
 		
+		this.displayTime.addChildTo(this);
+		this.displayScore.addChildTo(this);
+		this.displayLevel.addChildTo(this);
 		
 		var self = this;
 		
@@ -192,13 +200,14 @@ phina.define("ResultScene", {
 		// 名前入力エリア表示
 		var label=[];
 		for(var i=0;i<2;i++){
-			label[i] = Label('名前を入力してね').addChildTo(this);
+			label[i] = Label('名前を入力してね');
 			label[i].x = this.gridX.center()+i;
 			label[i].y = this.gridY.span(10)+i;
 			label[i].fontSize = 56;
 			label[i].width = 400;
 			label[i].height = 80;
 			label[i].fill = i===1?"white":"black";
+			label[i].addChildTo(this);
 		}
 		$("#input")[0].value = "";
 		$("#input")[0].oninput = function () {
