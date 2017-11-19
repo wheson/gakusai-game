@@ -2,6 +2,7 @@ phina.define("ResultScene", {
 	superClass: 'DisplayScene',
 	getURL: "//pikopiko-184802.appspot.com/import?callback=?",
 	postURL: "//pikopiko-184802.appspot.com/export",
+	MAX_NAME_LENGTH: 16,
 	init: function (options) {
 		this.superInit({
 			'width': SCREEN_WIDTH,
@@ -156,9 +157,24 @@ phina.define("ResultScene", {
 			stroke:"darkslateblue",
 		}).addChildTo(this).onclick = function(){
 			if(DEBUG)console.log("submit");
-			// 名前が入力されていなければ何もしない
 			var name = $("#input")[0].value;
-			if(name === "")return;
+			
+			// 名前が入力されていなければ何もしない
+			if(name === ""){
+				this.tweener.clear()
+				.set({text:"入力してください"})
+				.wait(2000)
+				.set({text:"登録する"});
+				return;
+			}
+			// 名前が長すぎれば何もしない
+			if(name.length > self.MAX_NAME_LENGTH){
+				this.tweener.clear()
+				.set({text:"16文字までです"})
+				.wait(2000)
+				.set({text:"登録する"});
+				return;
+			}
 			
 			self.scoreJSON.username = name;
 			
@@ -169,10 +185,16 @@ phina.define("ResultScene", {
 				"username": self.scoreJSON.username,
 				"score": self.scoreJSON.score
 			},console.log)
-			this.fill = "gray";
-			this.text = "登録しました";
-			$("#input")[0].oninput = null;
-			this.onclick = null;
+			// ボタンを押せない感じにする
+			this.tweener.clear()
+			.set({
+				fill:"gray",
+				text:"登録しました",
+				onclick:null,
+			});
+			
+			self.update({frame:0});
+			self.update = null;
 		};
 		
 		this.rankingShowingButton = Button({
@@ -198,21 +220,18 @@ phina.define("ResultScene", {
 		};
 		
 		// 名前入力エリア表示
-		var label=[];
+		this.nameLabel = [];
 		for(var i=0;i<2;i++){
-			label[i] = Label('名前を入力してね');
-			label[i].x = this.gridX.center()+i;
-			label[i].y = this.gridY.span(10)+i;
-			label[i].fontSize = 56;
-			label[i].width = 400;
-			label[i].height = 80;
-			label[i].fill = i===1?"white":"black";
-			label[i].addChildTo(this);
+			this.nameLabel[i] = Label('名前を入力してね');
+			this.nameLabel[i].x = this.gridX.center()+i;
+			this.nameLabel[i].y = this.gridY.span(10)+i;
+			this.nameLabel[i].fontSize = 56;
+			this.nameLabel[i].width = 400;
+			this.nameLabel[i].height = 80;
+			this.nameLabel[i].fill = i===1?"white":"black";
+			this.nameLabel[i].addChildTo(this);
 		}
 		$("#input")[0].value = "";
-		$("#input")[0].oninput = function () {
-			label[0].text = label[1].text = this.value === "" ? '名前を入力してね':this.value;
-		};
 		
 		// スコアをjsonオブジェクトにする
 		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"username":"あなた"};
@@ -253,9 +272,15 @@ phina.define("ResultScene", {
 			recode.fontSize = 20;
 		}
 	},
-	update: function(){
+	update: function(app){
+		// 入力エリア右端にカーソルを合わせる
 		$("#input")[0].focus();
 		var pos = $("#input")[0].value.length;
 		$("#input")[0].setSelectionRange(pos,pos);
+		
+		// 右端に|を点滅させる
+		var value = $("#input")[0].value;
+		this.nameLabel[0].text = this.nameLabel[1].text = (value === "" ? "名前を入力してね":value) + (app.frame%30 < 15 ? " ":"|");
+		
 	},
 });
