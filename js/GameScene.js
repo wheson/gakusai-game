@@ -129,7 +129,7 @@ phina.define("GameScene", {
             // トマピコが画面から出たら終わる
             if (this.tomapiko.bottom > SCREEN_HEIGHT) {
                 // ResultSceneに引数を渡して終了する
-                this.exit("result", {
+                this.exit({
                     time: this.time,
                     score: this.score,
                     level: this.level,
