@@ -72,18 +72,6 @@
 		.setPosition(500,this.rankGridY.span(0))
 		.onclick = openRankingWindow;
 		
-		// ランク10位まで
-		for(var i=0;i<10;i++){
-			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.rankingGroup)
-			.setOrigin(0,0)
-			.setPosition(5,this.rankGridY.span(i+1));
-			rank.fontSize = 20;
-			
-			var I = Label("　 位：").addChildTo(this.rankingGroup)
-			.setOrigin(0,0)
-			.setPosition(5,this.rankGridY.span(i+1));
-			I.fontSize = 20;
-		}
 		this.rankingGroup.alpha = 0;
 		this.rankingGroup.addChildTo(this);
 
@@ -267,9 +255,25 @@
 		
 		// ランク10位まで
 		for(var i=0;i<10 && i<rankingArray.length;i++){
-			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].username).addChildTo(this.recodeLabels).setOrigin(0,0)
+			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
+			.setPosition(5,this.rankGridY.span(i+1));
+			var I = Label("位：").addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
+			.setPosition(30,this.rankGridY.span(i+1));
+			var recode = Label(""+ rankingArray[i].score +"点").addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
 			.setPosition(70,this.rankGridY.span(i+1));
-			recode.fontSize = 20;
+			var name = Label(rankingArray[i].username).addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
+			.setPosition(170,this.rankGridY.span(i+1));
+
+
+			rank.fontSize = I.fontSize = recode.fontSize = name.fontSize = 20;
+
+			if(rankingArray[i] === this.scoreJSON){
+				rank.fill = I.fill = recode.fill = name.fill = "red";
+			}
 		}
 	},
 	update: function(app){
