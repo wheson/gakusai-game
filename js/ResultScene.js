@@ -229,10 +229,10 @@
 		// 記録を表示するラベルグループ
 		this.recodeLabels = DisplayElement().addChildTo(this.rankingGroup);
 		// ランキングを表示する前に読み込み中であることを知らせる
-		var yourRecode = Label("ランキングを読み込み中です").addChildTo(this.recodeLabels)
+		var rankingLoadingInfo = Label("ランキングを読み込み中です...").addChildTo(this.recodeLabels)
 		.setOrigin(0,0)
 		.setPosition(5,this.rankGridY.span(0));
-		yourRecode.fontSize = 20;
+		rankingLoadingInfo.fontSize = 20;
 		
 		// ランキングを取得する
 		$.getJSON(this.getURL,
@@ -249,6 +249,7 @@
 	},
 	printRecode: function(rankingArray){
 		// データが読み込まれていなかった時のラベルを削除してから描画する必要があるため
+		// rankingGroupに描画されているrecodeLabelsの要素をクリアする
 		this.recodeLabels.children.clear();
 		
 		var yourRecode = Label("■あなたは"+ (rankingArray.indexOf(this.scoreJSON)+1) +"位でした！■").addChildTo(this.recodeLabels)
