@@ -228,8 +228,11 @@
 		
 		// 記録を表示するラベルグループ
 		this.recodeLabels = DisplayElement().addChildTo(this.rankingGroup);
-		// ランキングを表示
-		this.printRecode(this.rankingArray);
+		// ランキングを表示する前に読み込み中であることを知らせる
+		var yourRecode = Label("ランキングを読み込み中です").addChildTo(this.recodeLabels)
+		.setOrigin(0,0)
+		.setPosition(5,this.rankGridY.span(0));
+		yourRecode.fontSize = 20;
 		
 		// ランキングを取得する
 		$.getJSON(this.getURL,
