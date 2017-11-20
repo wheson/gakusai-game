@@ -1,4 +1,4 @@
-// グローバルに展開
+﻿// グローバルに展開
 phina.globalize();
 
 // 定数
@@ -92,7 +92,6 @@ var SCREEN_WIDTH = 960; // スクリーン幅
 var SCREEN_HEIGHT = 720; // スクリーン高さ
 
 var DEBUG = false;
-var USE_COOKIE = true;
 
 //方向定数
 var DOWN = 0;
@@ -102,11 +101,6 @@ var LEFT = 3;
 
 // 背景画像の数
 var BG_NUM = 8;
-
-//色配列
-var enemyColors = ["red", "green", "blue", "pink"];
-
-var playerName = {};
 
 // 全ランキングを表示する関数
 function openRankingWindow(){
