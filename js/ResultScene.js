@@ -1,4 +1,4 @@
-phina.define("ResultScene", {
+﻿phina.define("ResultScene", {
 	superClass: 'DisplayScene',
 	getURL: "//pikopiko-184802.appspot.com/import?callback=?",
 	postURL: "//pikopiko-184802.appspot.com/export",
@@ -170,7 +170,7 @@ phina.define("ResultScene", {
 			// 名前が長すぎれば何もしない
 			if(name.length > self.MAX_NAME_LENGTH){
 				this.tweener.clear()
-				.set({text:"16文字までです"})
+				.set({text:""+ self.MAX_NAME_LENGTH +"文字までです"})
 				.wait(2000)
 				.set({text:"登録する"});
 				return;
