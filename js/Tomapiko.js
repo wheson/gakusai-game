@@ -9,7 +9,7 @@ phina.define("Tomapiko", {
 		this.animation.gotoAndPlay("flap");
 
 		// 当たり判定枠
-        this.COLLISION = CircleShape().addChildTo(this);
+        this.COLLISION = CircleShape();
         if(DEBUG){
 			this.COLLISION.fill = 'transparent';
 			this.COLLISION.stroke = 'yellow';
@@ -18,6 +18,7 @@ phina.define("Tomapiko", {
 			this.COLLISION.alpha = 0;
 		}
         this.COLLISION.radius = 15;
+		this.COLLISION.addChildTo(this);
 
 		// 定数
 		this.jumpSpeed = 8;

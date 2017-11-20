@@ -1,21 +1,24 @@
-phina.define("ResultScene", {
+﻿phina.define("ResultScene", {
 	superClass: 'DisplayScene',
-	getURL: "http://pikopiko-184802.appspot.com/import?callback=?",
-	postURL: "http://pikopiko-184802.appspot.com/export",
+	getURL: "//pikopiko-184802.appspot.com/import?callback=?",
+	postURL: "//pikopiko-184802.appspot.com/export",
+	MAX_NAME_LENGTH: 16,
 	init: function (options) {
 		this.superInit({
 			'width': SCREEN_WIDTH,
 			'height': SCREEN_HEIGHT
 		});
 		// 背景
-		this.bg = Sprite("bg" + options.bgNum ).addChildTo(this);
+		this.bg = Sprite("bg" + options.bgNum );
 		this.bg.origin.set(0, 0); // 左上基準に変更
 		this.bg.width = SCREEN_WIDTH;
 		this.bg.height = SCREEN_HEIGHT;
+		this.bg.addChildTo(this);
 		
 		// やられトマピコ
-		var tomapiko = Tomapiko().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
+		var tomapiko = Tomapiko().setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
 		tomapiko.animation.gotoAndPlay("down");
+		tomapiko.addChildTo(this);
 		
 		// 敵グループ
 		this.enemyGroup = DisplayElement().addChildTo(this).setPosition(SCREEN_WIDTH/2,this.gridY.span(5));
@@ -24,7 +27,7 @@ phina.define("ResultScene", {
 			// 敵番号
 			var i = deg/45;
 			// 左向きの敵を追加する
-			var enemy = Enemy(LEFT,i%4,0,0,0).addChildTo(this.enemyGroup);
+			var enemy = Enemy(LEFT,i%4,0,0,0);
 			// 角度と半径を与える
 			enemy.deg = deg;
 			enemy.offset = 150;
@@ -34,6 +37,7 @@ phina.define("ResultScene", {
 				this.y = Math.sin(Math.degToRad(this.deg))*this.offset;
 				this.deg--;
 			};
+			enemy.addChildTo(this.enemyGroup);
 		}
 		
 		// ランキング表示グリッド
@@ -44,7 +48,7 @@ phina.define("ResultScene", {
 		});
 
 		// ランキング表示領域
-		this.rankingGroup = DisplayElement().addChildTo(this);
+		this.rankingGroup = DisplayElement();
 		
 		// ランキング表示領域の背景
 		var rankBG = RectangleShape().addChildTo(this.rankingGroup);
@@ -68,45 +72,35 @@ phina.define("ResultScene", {
 		.setPosition(500,this.rankGridY.span(0))
 		.onclick = openRankingWindow;
 		
-		// ランク10位まで
-		for(var i=0;i<10;i++){
-			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.rankingGroup)
-			.setOrigin(0,0)
-			.setPosition(5,this.rankGridY.span(i+1));
-			rank.fontSize = 20;
-			
-			var I = Label("　 位：").addChildTo(this.rankingGroup)
-			.setOrigin(0,0)
-			.setPosition(5,this.rankGridY.span(i+1));
-			I.fontSize = 20;
-		}
 		this.rankingGroup.alpha = 0;
+		this.rankingGroup.addChildTo(this);
 
 		// スコアなどの表示領域
 		// ステータスの白い背景
-		this.displayStatusBG = RectangleShape().addChildTo(this);
+		this.displayStatusBG = RectangleShape();
 		this.displayStatusBG.fill = "white";
 		this.displayStatusBG.stroke = "gray";
 		this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
 		this.displayStatusBG.setSize(100, 150);
 		this.displayStatusBG.alpha = 0.8;
+		this.displayStatusBG.addChildTo(this);
 		
 		// frame
 		this.time = options.time;
-		this.displayTime = Label("0").addChildTo(this);
+		this.displayTime = Label("0");
 		this.displayTime.fill = 'black';
 		this.displayTime.fontSize = 15;
 		this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
 
 		this.score = options.score;
-		this.displayScore = Label("0").addChildTo(this);
+		this.displayScore = Label("0");
 		this.displayScore.fill = 'black';
 		this.displayScore.fontSize = 15;
 		this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
 		//ゲームのレベル
 		this.level = options.level;
-		this.displayLevel = Label("0").addChildTo(this);
+		this.displayLevel = Label("0");
 		this.displayLevel.fill = 'black';
 		this.displayLevel.fontSize = 15;
 		this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
@@ -115,6 +109,9 @@ phina.define("ResultScene", {
 		this.displayScore.text = "score: " + this.score;
 		this.displayLevel.text = "level: " + this.level;
 		
+		this.displayTime.addChildTo(this);
+		this.displayScore.addChildTo(this);
+		this.displayLevel.addChildTo(this);
 		
 		var self = this;
 		
@@ -148,9 +145,24 @@ phina.define("ResultScene", {
 			stroke:"darkslateblue",
 		}).addChildTo(this).onclick = function(){
 			if(DEBUG)console.log("submit");
-			// 名前が入力されていなければ何もしない
 			var name = $("#input")[0].value;
-			if(name === "")return;
+			
+			// 名前が入力されていなければ何もしない
+			if(name === ""){
+				this.tweener.clear()
+				.set({text:"入力してください"})
+				.wait(2000)
+				.set({text:"登録する"});
+				return;
+			}
+			// 名前が長すぎれば何もしない
+			if(name.length > self.MAX_NAME_LENGTH){
+				this.tweener.clear()
+				.set({text:""+ self.MAX_NAME_LENGTH +"文字までです"})
+				.wait(2000)
+				.set({text:"登録する"});
+				return;
+			}
 			
 			self.scoreJSON.username = name;
 			
@@ -161,10 +173,16 @@ phina.define("ResultScene", {
 				"username": self.scoreJSON.username,
 				"score": self.scoreJSON.score
 			},console.log)
-			this.fill = "gray";
-			this.text = "登録しました";
-			$("#input")[0].oninput = null;
-			this.onclick = null;
+			// ボタンを押せない感じにする
+			this.tweener.clear()
+			.set({
+				fill:"gray",
+				text:"登録しました",
+				onclick:null,
+			});
+			
+			self.update({frame:0});
+			self.update = null;
 		};
 		
 		this.rankingShowingButton = Button({
@@ -190,20 +208,18 @@ phina.define("ResultScene", {
 		};
 		
 		// 名前入力エリア表示
-		var label=[];
+		this.nameLabel = [];
 		for(var i=0;i<2;i++){
-			label[i] = Label('名前を入力してね').addChildTo(this);
-			label[i].x = this.gridX.center()+i;
-			label[i].y = this.gridY.span(10)+i;
-			label[i].fontSize = 56;
-			label[i].width = 400;
-			label[i].height = 80;
-			label[i].fill = i===1?"white":"black";
+			this.nameLabel[i] = Label('名前を入力してね');
+			this.nameLabel[i].x = this.gridX.center()+i;
+			this.nameLabel[i].y = this.gridY.span(10)+i;
+			this.nameLabel[i].fontSize = 56;
+			this.nameLabel[i].width = 400;
+			this.nameLabel[i].height = 80;
+			this.nameLabel[i].fill = i===1?"white":"black";
+			this.nameLabel[i].addChildTo(this);
 		}
 		$("#input")[0].value = "";
-		$("#input")[0].oninput = function () {
-			label[0].text = label[1].text = this.value === "" ? '名前を入力してね':this.value;
-		};
 		
 		// スコアをjsonオブジェクトにする
 		this.scoreJSON = {"time":options.time,"score":options.score,"level":options.level,"username":"あなた"};
@@ -212,8 +228,11 @@ phina.define("ResultScene", {
 		
 		// 記録を表示するラベルグループ
 		this.recodeLabels = DisplayElement().addChildTo(this.rankingGroup);
-		// ランキングを表示
-		this.printRecode(this.rankingArray);
+		// ランキングを表示する前に読み込み中であることを知らせる
+		var rankingLoadingInfo = Label("ランキングを読み込み中です...").addChildTo(this.recodeLabels)
+		.setOrigin(0,0)
+		.setPosition(5,this.rankGridY.span(0));
+		rankingLoadingInfo.fontSize = 20;
 		
 		// ランキングを取得する
 		$.getJSON(this.getURL,
@@ -230,6 +249,7 @@ phina.define("ResultScene", {
 	},
 	printRecode: function(rankingArray){
 		// データが読み込まれていなかった時のラベルを削除してから描画する必要があるため
+		// rankingGroupに描画されているrecodeLabelsの要素をクリアする
 		this.recodeLabels.children.clear();
 		
 		var yourRecode = Label("■あなたは"+ (rankingArray.indexOf(this.scoreJSON)+1) +"位でした！■").addChildTo(this.recodeLabels)
@@ -239,14 +259,36 @@ phina.define("ResultScene", {
 		
 		// ランク10位まで
 		for(var i=0;i<10 && i<rankingArray.length;i++){
-			var recode = Label(""+rankingArray[i].score+"点 "+rankingArray[i].username).addChildTo(this.recodeLabels).setOrigin(0,0)
+			var rank = Label((i===9?"":" ")+(i+1)).addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
+			.setPosition(5,this.rankGridY.span(i+1));
+			var I = Label("位：").addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
+			.setPosition(30,this.rankGridY.span(i+1));
+			var recode = Label(""+ rankingArray[i].score +"点").addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
 			.setPosition(70,this.rankGridY.span(i+1));
-			recode.fontSize = 20;
+			var name = Label(rankingArray[i].username).addChildTo(this.recodeLabels)
+			.setOrigin(0,0)
+			.setPosition(170,this.rankGridY.span(i+1));
+
+
+			rank.fontSize = I.fontSize = recode.fontSize = name.fontSize = 20;
+
+			if(rankingArray[i] === this.scoreJSON){
+				rank.fill = I.fill = recode.fill = name.fill = "red";
+			}
 		}
 	},
-	update: function(){
+	update: function(app){
+		// 入力エリア右端にカーソルを合わせる
 		$("#input")[0].focus();
 		var pos = $("#input")[0].value.length;
 		$("#input")[0].setSelectionRange(pos,pos);
+		
+		// 右端に|を点滅させる
+		var value = $("#input")[0].value;
+		this.nameLabel[0].text = this.nameLabel[1].text = (value === "" ? "名前を入力してね":value) + (app.frame%30 < 15 ? " ":"|");
+		
 	},
 });

@@ -1,3 +1,15 @@
+﻿// 矢印キー入力によるスクロールの無効化
+window.addEventListener("keydown",
+function( event ) {
+	switch(event.keyCode) {
+		case 37: // ←
+		case 38: // ↑
+		case 39: // →
+		case 40: // ↓
+		event.preventDefault();
+	}
+}, true);
+
 phina.main(function () {
     // アプリケーションを生成
     var app = GameApp({

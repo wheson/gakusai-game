@@ -13,16 +13,15 @@ phina.define("TitleScene", {
         this.bg.height = SCREEN_HEIGHT;
 
 		// ロゴ
-		this.logo = Sprite("logo").addChildTo(this);
-		this.logo.setPosition(this.gridX.center(),this.gridY.span(4));
+		this.logo = Sprite("logo").setPosition(this.gridX.center(),this.gridY.span(4)).addChildTo(this);
 
 		// ナビ
         this.gameTitle = Label("PRESS ANY KEY");
-        this.gameTitle.addChildTo(this);
         this.gameTitle.x = this.gridX.center();
         this.gameTitle.y = this.gridY.center();
         this.gameTitle.fill = 'black';
         this.gameTitle.fontSize = 30;
+        this.gameTitle.addChildTo(this);
 
 		// トマピコ
         Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
@@ -32,24 +31,28 @@ phina.define("TitleScene", {
 		for(var i=0;i<4;i++){
 			// 左向きの敵を表示する
 			// 4匹が中央に並ぶようにする
-			var enemy = Enemy(3,i).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(10));
+			var enemy = Enemy(3,i).setPosition(this.gridX.span(5+i*2),this.gridY.span(10));
 			// Enemy.updateの処理を消して動かないようにする
 			enemy.update = null;
+			enemy.addChildTo(this);
 
 			// Enemyに同じく
 			// 65+15*iにするといい感じに4種類表示される
-			var item = Item(i,65+15*i).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12));
+			var item = Item(i,65+15*i).setPosition(this.gridX.span(5+i*2),this.gridY.span(12));
 			item.update = null;
+			item.addChildTo(this);
 
 			// 敵の説明
-			var enemyDescription = Label(this.enemyDescriptions[i]).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(11));
+			var enemyDescription = Label(this.enemyDescriptions[i]).setPosition(this.gridX.span(5+i*2),this.gridY.span(11));
             enemyDescription.fill = 'black';
             enemyDescription.fontSize = 15;
+			enemyDescription.addChildTo(this);
 
 			// アイテムの説明
-			var itemDescription = Label(item.score).addChildTo(this).setPosition(this.gridX.span(5+i*2),this.gridY.span(12)+25);
+			var itemDescription = Label(item.score).setPosition(this.gridX.span(5+i*2),this.gridY.span(12)+25);
 			itemDescription.fill = 'black';
             itemDescription.fontSize = 15;
+			itemDescription.addChildTo(this);
 		}
 
 		this.openRankingWindowButton = Button({

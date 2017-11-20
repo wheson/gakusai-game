@@ -10,7 +10,7 @@ phina.define("MySplashScene", {
 		// ナビ
 		(function(self){
 			Label({
-				text:"wheson\n&\nvividorange",
+				text:"wheson\n&\nvividorange\n",
 				x:self.gridX.center(),
 				y:self.gridY.center(),
 				fill:'black',

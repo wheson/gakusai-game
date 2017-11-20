@@ -24,12 +24,13 @@ phina.define("GameScene", {
         this.bg[0].alpha = 1;
 
 		// ステータスの白い背景
-        this.displayStatusBG = RectangleShape().addChildTo(this);
+        this.displayStatusBG = RectangleShape();
         this.displayStatusBG.fill = "white";
         this.displayStatusBG.stroke = "gray";
         this.displayStatusBG.setPosition(this.gridX.span(14), this.gridY.span(3));
         this.displayStatusBG.setSize(100, 150);
         this.displayStatusBG.alpha = 0.8;
+		this.displayStatusBG.addChildTo(this);
 
         //アイテムの管理
         this.itemGroup = DisplayElement().addChildTo(this);
@@ -38,25 +39,25 @@ phina.define("GameScene", {
         this.enemyGroup = DisplayElement().addChildTo(this);
 
         // トマピコ
-        this.tomapiko = Tomapiko().addChildTo(this).setPosition(this.gridX.center(), this.gridY.center() - 64);
+        this.tomapiko = Tomapiko().setPosition(this.gridX.center(), this.gridY.center() - 64).addChildTo(this);
 
 		// レベルアップ時に表示されるラベル
-		this.levelLabel = Label("Lv.UP!").addChildTo(this);
+		this.levelLabel = Label("Lv.UP!");
 		this.levelLabel.fill = "red";
 		this.levelLabel.alpha = 0;
+		this.levelLabel.addChildTo(this);
 
         // 画面端当たり判定オブジェクト
-        this.limit = RectangleShape().addChildTo(this).setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-        //this.limit.alpha = 0;
+        this.limit = RectangleShape().setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         this.limit.fill = "transparent";
-        if (DEBUG) this.limit.stroke = "red";
-        else this.limit.stroke = "transparent";
-
+        this.limit.stroke = "red";
+		if(DEBUG){
+			this.limit.addChildTo(this);
+		}
+		
         // how to operate
         this.label1 = Label("←→キーで移動, ↑キーまたはスペースでジャンプ");
-        this.label1.addChildTo(this);
         this.label2 = Label("ジャンプでゲームスタート");
-        this.label2.addChildTo(this);
         this.label1.x = this.gridX.center();
         this.label1.y = this.gridY.center();
         this.label2.x = this.gridX.center();
@@ -65,6 +66,8 @@ phina.define("GameScene", {
         this.label1.fontSize = 15;
         this.label2.fill = 'black';
         this.label2.fontSize = 15;
+        this.label1.addChildTo(this);
+        this.label2.addChildTo(this);
 
         // ゲーム開始時からのフレーム数
         this.frame = -1;
@@ -77,17 +80,17 @@ phina.define("GameScene", {
         this.score = 0;
         this.level = 1;
 
-        this.displayTime = Label().addChildTo(this);
+        this.displayTime = Label();
         this.displayTime.fill = 'black';
         this.displayTime.fontSize = 15;
         this.displayTime.setPosition(this.gridX.span(14), this.gridY.span(2));
 
-        this.displayScore = Label().addChildTo(this);
+        this.displayScore = Label();
         this.displayScore.fill = 'black';
         this.displayScore.fontSize = 15;
         this.displayScore.setPosition(this.gridX.span(14), this.gridY.span(3));
 
-        this.displayLevel = Label().addChildTo(this);
+        this.displayLevel = Label();
         this.displayLevel.fill = 'black';
         this.displayLevel.fontSize = 15;
         this.displayLevel.setPosition(this.gridX.span(14), this.gridY.span(4));
@@ -95,6 +98,10 @@ phina.define("GameScene", {
         this.displayTime.text = "time: " + 0;
         this.displayScore.text = "score: " + 0;
         this.displayLevel.text = "level: " + 1;
+		
+		this.displayTime.addChildTo(this);
+		this.displayScore.addChildTo(this);
+		this.displayLevel.addChildTo(this);
 
         //敵の出現頻度をまとめた配列
         this.frequencyGroup = [200, 200, 180, 160, 140, 120, 100];
@@ -122,7 +129,7 @@ phina.define("GameScene", {
             // トマピコが画面から出たら終わる
             if (this.tomapiko.bottom > SCREEN_HEIGHT) {
                 // ResultSceneに引数を渡して終了する
-                this.exit("result", {
+                this.exit({
                     time: this.time,
                     score: this.score,
                     level: this.level,
