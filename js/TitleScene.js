@@ -78,7 +78,7 @@ phina.define("TitleScene", {
 		
 		// モバイルならキーダウン時の動作をクリック時に行う
 		if(phina.isMobile()){
-			this.onclick = this.onkeydown;
+			this.onpointstart = this.onkeydown;
 		}
     },
 	onkeydown: function(){
