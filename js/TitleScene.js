@@ -74,6 +74,8 @@ phina.define("TitleScene", {
 		// SoundManager.currentMusic.srcがASSETS.sound.bgmと異なるのは基本BGM以外がかかっているとき
         if(SoundManager.currentMusic == null || SoundManager.currentMusic.src != ASSETS.sound.bgm){
 			SoundManager.playMusic("bgm");
+			SoundManager.setVolumeMusic(0.5);
+			SoundManager.setVolume(0.5);
 		}
     },
 
