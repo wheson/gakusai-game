@@ -75,8 +75,12 @@ phina.define("TitleScene", {
         if(SoundManager.currentMusic == null || SoundManager.currentMusic.src != ASSETS.sound.bgm){
 			SoundManager.playMusic("bgm");
 		}
+		
+		// モバイルならキーダウン時の動作をクリック時に行う
+		if(phina.isMobile()){
+			this.onclick = this.onkeydown;
+		}
     },
-
 	onkeydown: function(){
 		// キーが押されたら遅延してGameSceneに切り替える関数を呼び出す
 		this.delayExit();

@@ -145,9 +145,13 @@ phina.define("GameScene", {
 
 
         // 上キーを押したらゲームが開始するようにする
+		// またはモバイルの時にクリックしたら
         // それ以外の場合は何もしない
         // すでに開始していた場合は見えない
-        if (app.keyboard.getKey("up") || app.keyboard.getKey("space")) {
+        if (!this.startFlag&&(
+			app.keyboard.getKey("up") || app.keyboard.getKey("space")||
+			phina.isMobile() && app.pointer.getPointingStart()
+		)) {
             // ラベルは1秒かけて透明になりながら上昇する
             this.label1.tweener.to({
                 alpha: 0,
@@ -188,6 +192,24 @@ phina.define("GameScene", {
         if (app.keyboard.getKey("space")) {
             dir.y = -1;
         }
+		
+		// モバイルの時の操作
+		if(phina.isMobile()){
+			// タッチしているとき
+			if(app.pointer.getPointing()){
+				this.preDirX = app.pointer.x;
+				dir.x = this.preDirX - this.tomapiko.x;
+			}else{
+				dir.x = this.preDirX - this.tomapiko.x;
+			}
+			if(Math.abs(dir.x)<=1.0){
+				dir.x = 0;
+			}
+			// タッチした時
+			if(app.pointer.getPointingStart()){
+				dir.y = app.pointer.y - this.tomapiko.y;
+			}
+		}
 
         // トマピコを矢印キーの方向に基づいて移動させる
         this.tomapiko.move(dir);
